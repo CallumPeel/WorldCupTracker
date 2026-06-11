@@ -63,18 +63,18 @@ export function Home() {
         </div>
       </div>
 
-      <div className="page-shell page-stack space-y-4">
+      <div className="page-shell page-stack">
         <div className="home-dashboard-grid">
           {/* Next Match Section */}
           {nextMatch && <NextMatchCard fixture={nextMatch} onClick={() => setSelectedFixture(nextMatch)} />}
 
           {/* Next 5 Matches */}
           {upcomingFive.length > 0 && (
-            <div className="min-w-0">
+            <section className="min-w-0 h-full flex flex-col">
               <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-1">
                 Next {upcomingFive.length} Matches
               </h2>
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 flex-1">
                 {upcomingFive.map((fixture) => (
                   <UltraCompactMatchRow
                     key={fixture.id}
@@ -83,13 +83,11 @@ export function Home() {
                   />
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
-          <div className="home-secondary-grid md:col-span-2 lg:col-span-2">
-            <TournamentStats fixtures={fixtures} scores={userData.scores} />
-            <FinalCountdown />
-          </div>
+          <TournamentStats fixtures={fixtures} scores={userData.scores} />
+          <FinalCountdown />
         </div>
 
         {/* Empty state */}

@@ -83,6 +83,8 @@ export interface KnockoutMatch {
   fixtureId?: number;
   homeTeam?: Team;
   awayTeam?: Team;
+  homeLabel?: string;
+  awayLabel?: string;
   winner?: Team;
   score?: MatchScore;
 }

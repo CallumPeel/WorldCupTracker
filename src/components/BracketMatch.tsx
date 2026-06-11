@@ -12,6 +12,8 @@ export function BracketMatch({ match, onClick }: BracketMatchProps) {
   const hasScore = !!match.score;
   const homeColors = match.homeTeam ? getTeamColors(match.homeTeam.code) : undefined;
   const awayColors = match.awayTeam ? getTeamColors(match.awayTeam.code) : undefined;
+  const homeLabel = getDisplayLabel(match.homeTeam?.code, match.homeLabel);
+  const awayLabel = getDisplayLabel(match.awayTeam?.code, match.awayLabel);
 
   return (
     <button
@@ -48,7 +50,7 @@ export function BracketMatch({ match, onClick }: BracketMatchProps) {
             )}
           </>
         ) : (
-          <span className="text-xs text-gray-600 italic">TBD</span>
+          <span className="text-xs text-gray-500 italic truncate">{homeLabel}</span>
         )}
       </div>
 
@@ -77,9 +79,21 @@ export function BracketMatch({ match, onClick }: BracketMatchProps) {
             )}
           </>
         ) : (
-          <span className="text-xs text-gray-600 italic">TBD</span>
+          <span className="text-xs text-gray-500 italic truncate">{awayLabel}</span>
         )}
       </div>
     </button>
   );
+}
+
+function getDisplayLabel(teamCode?: string, fallbackLabel?: string): string {
+  if (!teamCode || isInternalPlaceholderCode(teamCode)) {
+    return fallbackLabel || 'TBD';
+  }
+
+  return teamCode;
+}
+
+function isInternalPlaceholderCode(code: string): boolean {
+  return /^(WINNER|RUNNER_UP|THIRD_PLACE)_GROUP_[A-L]_?$|^WINNER_MATCH_\d+$/i.test(code);
 }

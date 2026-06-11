@@ -7,7 +7,7 @@ export function FinalCountdown() {
 
   if (timeRemaining.isPast) {
     return (
-      <div className="border border-dark-border rounded-xl p-4 bg-dark-surface">
+      <div className="h-full border border-dark-border rounded-xl p-4 bg-dark-surface">
         <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
           Countdown to Final
         </h3>
@@ -20,11 +20,11 @@ export function FinalCountdown() {
   }
 
   return (
-    <div className="border border-dark-border rounded-xl p-4 bg-dark-surface">
+    <div className="h-full border border-dark-border rounded-xl p-4 bg-dark-surface flex flex-col">
       <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
         Countdown to Final
       </h3>
-      <div className="flex items-baseline justify-center gap-2">
+      <div className="flex flex-1 items-center justify-center gap-2">
         <div className="text-center">
           <div className="text-3xl font-bold tabular-nums text-primary">{timeRemaining.days}</div>
           <div className="text-xs text-gray-500">days</div>

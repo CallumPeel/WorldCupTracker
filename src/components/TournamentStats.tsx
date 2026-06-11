@@ -45,7 +45,7 @@ export function TournamentStats({ fixtures, scores }: TournamentStatsProps) {
   }, [fixtures, scores]);
 
   return (
-    <div className="border border-dark-border rounded-xl p-4 bg-dark-surface">
+    <div className="h-full border border-dark-border rounded-xl p-4 bg-dark-surface">
       <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
         Tournament Progress
       </h3>
