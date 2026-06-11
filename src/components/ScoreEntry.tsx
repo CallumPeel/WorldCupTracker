@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Fixture, MatchScore } from '../types';
+import { CountryFlag } from './CountryFlag';
 
 interface ScoreEntryProps {
   fixture: Fixture;
@@ -81,7 +82,7 @@ export function ScoreEntry({
           <div className="grid grid-cols-[1fr_auto_1fr] gap-4 items-center mb-8">
             {/* Home Team */}
             <div className="flex flex-col items-center gap-2">
-              <span className="text-5xl">{fixture.homeTeam.flag}</span>
+              <CountryFlag countryCode={fixture.homeTeam.code} size="xl" />
               <div className="text-center">
                 <div className="font-semibold text-lg">{fixture.homeTeam.name}</div>
                 <div className="text-xs text-gray-500">{fixture.homeTeam.code}</div>
@@ -102,7 +103,7 @@ export function ScoreEntry({
 
             {/* Away Team */}
             <div className="flex flex-col items-center gap-2">
-              <span className="text-5xl">{fixture.awayTeam.flag}</span>
+              <CountryFlag countryCode={fixture.awayTeam.code} size="xl" />
               <div className="text-center">
                 <div className="font-semibold text-lg">{fixture.awayTeam.name}</div>
                 <div className="text-xs text-gray-500">{fixture.awayTeam.code}</div>

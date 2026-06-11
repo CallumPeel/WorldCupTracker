@@ -4,8 +4,12 @@ export interface Team {
   id: number;
   name: string;
   code: string; // FIFA code (e.g., "BRA", "ARG")
-  flag: string; // URL or emoji
+  flag: string; // URL or emoji (kept for backward compatibility)
   group?: string; // Group letter (A-L for 2026)
+  colors?: {
+    primary: string; // Hex color
+    secondary: string; // Hex color
+  };
 }
 
 export interface Venue {

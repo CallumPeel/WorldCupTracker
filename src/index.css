@@ -2,7 +2,8 @@
 
 @layer base {
   body {
-    background-color: #000000;
+    background: linear-gradient(to bottom, #000000 0%, #0a0a0f 50%, #000000 100%);
+    background-attachment: fixed;
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

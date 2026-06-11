@@ -3,6 +3,8 @@ import type { Fixture } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
 import { formatCountdown } from '../utils/timezone';
 import { getPerthTimeOnly } from '../utils/timezone';
+import { CountryFlag } from './CountryFlag';
+import { getTeamColors, getGroupColor } from '../utils/teamColors';
 
 interface HeroMatchCardProps {
   fixture: Fixture;
@@ -18,6 +20,9 @@ export function HeroMatchCard({
   onCardClick,
 }: HeroMatchCardProps) {
   const timeRemaining = useCountdown(fixture.date);
+  const homeColors = getTeamColors(fixture.homeTeam.code);
+  const awayColors = getTeamColors(fixture.awayTeam.code);
+  const groupColor = fixture.group ? getGroupColor(fixture.group) : undefined;
 
   return (
     <motion.div
@@ -25,7 +30,13 @@ export function HeroMatchCard({
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
       onClick={onCardClick}
-      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-dark-elevated via-dark-surface to-dark-elevated border border-dark-border p-6 cursor-pointer hover:border-primary/50 transition-all"
+      className="relative overflow-hidden rounded-3xl border p-6 cursor-pointer transition-all"
+      style={{
+        background: groupColor 
+          ? `linear-gradient(135deg, ${groupColor}15 0%, #1c1c1e 50%, ${groupColor}15 100%)`
+          : 'linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 50%, #2c2c2e 100%)',
+        borderColor: groupColor || '#38383a',
+      }}
     >
       {/* Next Match Label */}
       <div className="flex items-center justify-between mb-4">
@@ -36,7 +47,10 @@ export function HeroMatchCard({
           </span>
         </div>
         {fixture.group && (
-          <span className="px-3 py-1 text-xs font-bold bg-dark-elevated rounded-full border border-dark-border">
+          <span 
+            className="px-3 py-1 text-xs font-bold rounded-full text-white"
+            style={{ backgroundColor: groupColor }}
+          >
             Group {fixture.group}
           </span>
         )}
@@ -45,17 +59,27 @@ export function HeroMatchCard({
       {/* Teams */}
       <div className="flex items-center justify-center gap-6 mb-6">
         <div className="flex-1 flex flex-col items-end">
-          <span className="text-5xl mb-2">{fixture.homeTeam.flag}</span>
+          <div 
+            className="p-2 rounded-xl mb-2"
+            style={{ backgroundColor: `${homeColors.primary}15` }}
+          >
+            <CountryFlag countryCode={fixture.homeTeam.code} size="xl" />
+          </div>
           <h3 className="text-2xl font-bold text-right">{fixture.homeTeam.name}</h3>
-          <span className="text-sm text-gray-500">{fixture.homeTeam.code}</span>
+          <span className="text-sm font-semibold" style={{ color: homeColors.primary }}>{fixture.homeTeam.code}</span>
         </div>
 
-        <div className="text-3xl font-bold text-gray-600">vs</div>
+        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">vs</div>
 
         <div className="flex-1 flex flex-col items-start">
-          <span className="text-5xl mb-2">{fixture.awayTeam.flag}</span>
+          <div 
+            className="p-2 rounded-xl mb-2"
+            style={{ backgroundColor: `${awayColors.primary}15` }}
+          >
+            <CountryFlag countryCode={fixture.awayTeam.code} size="xl" />
+          </div>
           <h3 className="text-2xl font-bold">{fixture.awayTeam.name}</h3>
-          <span className="text-sm text-gray-500">{fixture.awayTeam.code}</span>
+          <span className="text-sm font-semibold" style={{ color: awayColors.primary }}>{fixture.awayTeam.code}</span>
         </div>
       </div>
 
@@ -63,7 +87,17 @@ export function HeroMatchCard({
       {!timeRemaining.isPast && (
         <div className="text-center mb-6">
           <div className="text-sm text-gray-400 mb-2">Starts in</div>
-          <div className="text-4xl font-bold text-primary tabular-nums">
+          <div 
+            className="text-4xl font-bold tabular-nums"
+            style={{ 
+              background: groupColor 
+                ? `linear-gradient(135deg, ${groupColor} 0%, ${homeColors.primary} 50%, ${awayColors.primary} 100%)`
+                : `linear-gradient(135deg, ${homeColors.primary} 0%, #0a84ff 50%, ${awayColors.primary} 100%)`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
             {formatCountdown(timeRemaining)}
           </div>
         </div>

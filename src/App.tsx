@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { BottomNav } from './components/BottomNav';
-import { Today } from './pages/Today';
+import { Home } from './pages/Home';
 import { Schedule } from './pages/Schedule';
 import { Groups } from './pages/Groups';
 import { Knockout } from './pages/Knockout';
@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-dark-bg text-white">
         <Routes>
-          <Route path="/" element={<Today />} />
+          <Route path="/" element={<Home />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/groups" element={<Groups />} />
           <Route path="/knockout" element={<Knockout />} />

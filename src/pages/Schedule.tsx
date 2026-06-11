@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
-import { CompactMatchCard } from '../components/CompactMatchCard';
+import { DateHeader } from '../components/DateHeader';
+import { ScheduleMatchCard } from '../components/ScheduleMatchCard';
 import { ScoreEntry } from '../components/ScoreEntry';
 import { useFixtures } from '../hooks/useFixtures';
 import { useUserData } from '../hooks/useUserData';
@@ -9,23 +10,31 @@ export function Schedule() {
   const { fixtures, loading, error } = useFixtures();
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
-  const [filter, setFilter] = useState<'all' | 'upcoming' | 'watched'>('all');
 
-  const filteredFixtures = useMemo(() => {
-    let filtered = [...fixtures];
+  // Group fixtures by date
+  const groupedByDate = useMemo(() => {
+    const groups = new Map<string, Fixture[]>();
+    
+    fixtures.forEach((fixture) => {
+      const date = new Date(fixture.date);
+      // Use date string as key (YYYY-MM-DD)
+      const dateKey = date.toISOString().split('T')[0];
+      
+      if (!groups.has(dateKey)) {
+        groups.set(dateKey, []);
+      }
+      groups.get(dateKey)!.push(fixture);
+    });
 
-    if (filter === 'upcoming') {
-      filtered = filtered.filter((f) => {
-        const hasScore = userData.getScoreForFixture(f.id);
-        return !hasScore;
-      });
-    } else if (filter === 'watched') {
-      filtered = filtered.filter((f) => userData.isWatched(f.id));
-    }
-
-    // Sort by date
-    return filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }, [fixtures, filter, userData]);
+    // Convert to array and sort by date, then sort matches within each group
+    return Array.from(groups.entries())
+      .map(([dateKey, matches]) => ({
+        dateKey,
+        date: new Date(dateKey),
+        matches: matches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()),
+      }))
+      .sort((a, b) => a.date.getTime() - b.date.getTime());
+  }, [fixtures]);
 
   if (loading && !userData.loading) {
     return (
@@ -48,71 +57,60 @@ export function Schedule() {
     );
   }
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   return (
     <div className="min-h-screen pb-24">
       {/* Header */}
       <div className="sticky top-0 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-3xl font-bold mb-4">Schedule</h1>
-          
-          {/* Filters */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
-                filter === 'all'
-                  ? 'bg-primary text-white'
-                  : 'bg-dark-elevated text-gray-400 hover:bg-dark-border'
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setFilter('upcoming')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
-                filter === 'upcoming'
-                  ? 'bg-primary text-white'
-                  : 'bg-dark-elevated text-gray-400 hover:bg-dark-border'
-              }`}
-            >
-              Upcoming
-            </button>
-            <button
-              onClick={() => setFilter('watched')}
-              className={`px-4 py-2 rounded-xl font-semibold transition-all ${
-                filter === 'watched'
-                  ? 'bg-primary text-white'
-                  : 'bg-dark-elevated text-gray-400 hover:bg-dark-border'
-              }`}
-            >
-              Watched
-            </button>
-          </div>
+        <div className="container mx-auto px-4 py-3">
+          <h1 className="text-2xl font-bold">Schedule</h1>
         </div>
       </div>
 
-      {/* Fixtures */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="fixture-grid space-y-3">
-          {filteredFixtures.length === 0 ? (
-            <div className="card text-center py-12">
-              <div className="text-gray-400 text-lg">No matches found</div>
-            </div>
-          ) : (
-            filteredFixtures.map((fixture) => (
-              <CompactMatchCard
-                key={fixture.id}
-                fixture={fixture}
-                score={userData.getScoreForFixture(fixture.id)}
-                watched={userData.isWatched(fixture.id)}
-                hasReminder={userData.hasReminder(fixture.id)}
-                onScoreClick={() => setSelectedFixture(fixture)}
-                onWatchClick={() => userData.toggleWatchStatus(fixture.id)}
-                onReminderClick={() => userData.toggleReminder(fixture.id)}
-              />
-            ))
-          )}
-        </div>
+      {/* Grouped Fixtures */}
+      <div className="container mx-auto px-4">
+        {groupedByDate.length === 0 ? (
+          <div className="py-12 text-center border border-dark-border rounded-xl mt-4">
+            <div className="text-gray-400 text-lg">No matches found</div>
+          </div>
+        ) : (
+          groupedByDate.map((group) => {
+            const groupDate = new Date(group.date);
+            groupDate.setHours(0, 0, 0, 0);
+            
+            const isToday = groupDate.getTime() === today.getTime();
+            const isTomorrow = groupDate.getTime() === tomorrow.getTime();
+
+            return (
+              <div key={group.dateKey} className="py-4">
+                <DateHeader
+                  date={group.date}
+                  isToday={isToday}
+                  isTomorrow={isTomorrow}
+                  matchCount={group.matches.length}
+                />
+                
+                <div className="space-y-2 mt-3">
+                  {group.matches.map((fixture) => (
+                    <ScheduleMatchCard
+                      key={fixture.id}
+                      fixture={fixture}
+                      score={userData.getScoreForFixture(fixture.id)}
+                      watched={userData.isWatched(fixture.id)}
+                      onScoreClick={() => setSelectedFixture(fixture)}
+                      onWatchClick={() => userData.toggleWatchStatus(fixture.id)}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
 
       {/* Score Entry Modal */}

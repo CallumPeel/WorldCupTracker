@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import type { Fixture, MatchScore } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
 import { formatCountdown, getPerthTimeOnly } from '../utils/timezone';
+import { CountryFlag } from './CountryFlag';
+import { getTeamColors, getGroupColor } from '../utils/teamColors';
 
 interface CompactMatchCardProps {
   fixture: Fixture;
@@ -24,22 +26,34 @@ export function CompactMatchCard({
 }: CompactMatchCardProps) {
   const timeRemaining = useCountdown(fixture.date);
   const hasScore = !!score;
+  const homeColors = getTeamColors(fixture.homeTeam.code);
+  const awayColors = getTeamColors(fixture.awayTeam.code);
+  const groupColor = fixture.group ? getGroupColor(fixture.group) : undefined;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
-      className="rounded-2xl bg-dark-surface border border-dark-border p-4 hover:border-primary/30 transition-all"
+      className="rounded-2xl bg-dark-surface border p-4 hover:border-primary/30 transition-all"
+      style={{
+        borderLeftColor: groupColor,
+        borderLeftWidth: '3px',
+      }}
     >
       {/* Main Row: Teams & Score/Countdown */}
       <div className="flex items-center justify-between gap-3 mb-3">
         {/* Home Team */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <span className="text-3xl flex-shrink-0">{fixture.homeTeam.flag}</span>
+          <div 
+            className="p-0.5 rounded flex-shrink-0"
+            style={{ backgroundColor: `${homeColors.primary}20` }}
+          >
+            <CountryFlag countryCode={fixture.homeTeam.code} size="md" />
+          </div>
           <div className="flex flex-col min-w-0">
             <span className="font-bold text-base truncate">{fixture.homeTeam.name}</span>
-            <span className="text-xs text-gray-500">{fixture.homeTeam.code}</span>
+            <span className="text-xs font-semibold" style={{ color: homeColors.primary }}>{fixture.homeTeam.code}</span>
           </div>
         </div>
 
@@ -72,10 +86,15 @@ export function CompactMatchCard({
 
         {/* Away Team */}
         <div className="flex items-center gap-2 flex-1 min-w-0 flex-row-reverse">
-          <span className="text-3xl flex-shrink-0">{fixture.awayTeam.flag}</span>
+          <div 
+            className="p-0.5 rounded flex-shrink-0"
+            style={{ backgroundColor: `${awayColors.primary}20` }}
+          >
+            <CountryFlag countryCode={fixture.awayTeam.code} size="md" />
+          </div>
           <div className="flex flex-col items-end min-w-0">
             <span className="font-bold text-base truncate">{fixture.awayTeam.name}</span>
-            <span className="text-xs text-gray-500">{fixture.awayTeam.code}</span>
+            <span className="text-xs font-semibold" style={{ color: awayColors.primary }}>{fixture.awayTeam.code}</span>
           </div>
         </div>
       </div>
@@ -85,12 +104,15 @@ export function CompactMatchCard({
         <div className="flex items-center gap-2 flex-wrap">
           {/* Group/Stage */}
           {fixture.stage === 'GROUP_STAGE' && fixture.group && (
-            <span className="px-2 py-1 bg-dark-elevated rounded-md font-semibold">
+            <span 
+              className="px-2 py-1 rounded-md font-semibold text-white"
+              style={{ backgroundColor: groupColor }}
+            >
               Group {fixture.group}
             </span>
           )}
           {fixture.stage !== 'GROUP_STAGE' && (
-            <span className="px-2 py-1 bg-primary/10 text-primary rounded-md font-semibold">
+            <span className="px-2 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-md font-semibold">
               {fixture.stage.replace('_', ' ')}
             </span>
           )}

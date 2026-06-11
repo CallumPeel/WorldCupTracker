@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import type { Fixture, MatchScore } from '../types';
 import { CountdownTimer } from './CountdownTimer';
 import { getFriendlyDateLabel, getPerthTimeOnly } from '../utils/timezone';
+import { CountryFlag } from './CountryFlag';
+import { getTeamColors, getGroupColor } from '../utils/teamColors';
 
 interface MatchCardProps {
   fixture: Fixture;
@@ -23,13 +25,19 @@ export function MatchCard({
   onReminderClick,
 }: MatchCardProps) {
   const hasScore = !!score;
+  const homeColors = getTeamColors(fixture.homeTeam.code);
+  const awayColors = getTeamColors(fixture.awayTeam.code);
+  const groupColor = fixture.group ? getGroupColor(fixture.group) : undefined;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="card hover:bg-dark-elevated transition-colors duration-200"
+      className="card hover:bg-dark-elevated transition-colors duration-200 relative overflow-hidden"
+      style={{
+        borderLeft: groupColor ? `3px solid ${groupColor}` : undefined,
+      }}
     >
       {/* Date & Time Header */}
       <div className="flex items-center justify-between mb-3 pb-3 border-b border-dark-border">
@@ -46,12 +54,15 @@ export function MatchCard({
         <div className="flex items-center gap-2">
           {/* Stage Badge */}
           {fixture.stage === 'GROUP_STAGE' && fixture.group && (
-            <span className="px-2 py-1 text-xs font-semibold bg-dark-elevated rounded-lg">
+            <span 
+              className="px-2 py-1 text-xs font-semibold rounded-lg text-white"
+              style={{ backgroundColor: groupColor }}
+            >
               Group {fixture.group}
             </span>
           )}
           {fixture.stage !== 'GROUP_STAGE' && (
-            <span className="px-2 py-1 text-xs font-semibold bg-primary/20 text-primary rounded-lg">
+            <span className="px-2 py-1 text-xs font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg">
               {fixture.stage.replace('_', ' ')}
             </span>
           )}
@@ -62,10 +73,15 @@ export function MatchCard({
       <div className="flex items-center justify-between gap-4 mb-4">
         {/* Home Team */}
         <div className="flex-1 flex items-center gap-3">
-          <span className="text-4xl">{fixture.homeTeam.flag}</span>
+          <div 
+            className="p-1 rounded-lg"
+            style={{ backgroundColor: `${homeColors.primary}20` }}
+          >
+            <CountryFlag countryCode={fixture.homeTeam.code} size="lg" />
+          </div>
           <div className="flex-1">
             <div className="font-semibold text-lg">{fixture.homeTeam.name}</div>
-            <div className="text-xs text-gray-500">{fixture.homeTeam.code}</div>
+            <div className="text-xs" style={{ color: homeColors.primary }}>{fixture.homeTeam.code}</div>
           </div>
         </div>
 
@@ -97,10 +113,15 @@ export function MatchCard({
 
         {/* Away Team */}
         <div className="flex-1 flex items-center gap-3 flex-row-reverse">
-          <span className="text-4xl">{fixture.awayTeam.flag}</span>
+          <div 
+            className="p-1 rounded-lg"
+            style={{ backgroundColor: `${awayColors.primary}20` }}
+          >
+            <CountryFlag countryCode={fixture.awayTeam.code} size="lg" />
+          </div>
           <div className="flex-1 text-right">
             <div className="font-semibold text-lg">{fixture.awayTeam.name}</div>
-            <div className="text-xs text-gray-500">{fixture.awayTeam.code}</div>
+            <div className="text-xs" style={{ color: awayColors.primary }}>{fixture.awayTeam.code}</div>
           </div>
         </div>
       </div>
