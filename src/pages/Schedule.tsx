@@ -67,13 +67,13 @@ export function Schedule() {
     <div className="min-h-screen pb-24">
       {/* Header */}
       <div className="sticky top-0 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-3">
+        <div className="page-shell py-3">
           <h1 className="text-2xl font-bold">Schedule</h1>
         </div>
       </div>
 
       {/* Grouped Fixtures */}
-      <div className="container mx-auto px-4">
+      <div className="page-shell page-stack pt-0">
         {groupedByDate.length === 0 ? (
           <div className="py-12 text-center border border-dark-border rounded-xl mt-4">
             <div className="text-gray-400 text-lg">No matches found</div>
@@ -87,7 +87,7 @@ export function Schedule() {
             const isTomorrow = groupDate.getTime() === tomorrow.getTime();
 
             return (
-              <div key={group.dateKey} className="py-4">
+              <section key={group.dateKey} className="py-3 sm:py-4">
                 <DateHeader
                   date={group.date}
                   isToday={isToday}
@@ -95,7 +95,7 @@ export function Schedule() {
                   matchCount={group.matches.length}
                 />
                 
-                <div className="space-y-2 mt-3">
+                <div className="schedule-day-grid mt-3">
                   {group.matches.map((fixture) => (
                     <ScheduleMatchCard
                       key={fixture.id}
@@ -107,7 +107,7 @@ export function Schedule() {
                     />
                   ))}
                 </div>
-              </div>
+              </section>
             );
           })
         )}

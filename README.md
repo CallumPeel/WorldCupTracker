@@ -1,3 +1,5 @@
+# npm run dev -- --host
+
 # FIFA World Cup 2026 Tracker
 
 A premium, iPad-first Progressive Web App for tracking the 2026 FIFA World Cup with **NO SPOILERS**.

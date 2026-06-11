@@ -58,37 +58,38 @@ export function Home() {
     <div className="min-h-screen pb-24">
       {/* Header */}
       <div className="sticky top-0 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-3">
+        <div className="page-shell py-3">
           <h1 className="text-2xl font-bold">Home</h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-4 space-y-4">
-        {/* Next Match Section */}
-        {nextMatch && <NextMatchCard fixture={nextMatch} onClick={() => setSelectedFixture(nextMatch)} />}
+      <div className="page-shell page-stack space-y-4">
+        <div className="home-dashboard-grid">
+          {/* Next Match Section */}
+          {nextMatch && <NextMatchCard fixture={nextMatch} onClick={() => setSelectedFixture(nextMatch)} />}
 
-        {/* Next 5 Matches */}
-        {upcomingFive.length > 0 && (
-          <div>
-            <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-1">
-              Next {upcomingFive.length} Matches
-            </h2>
-            <div className="space-y-1">
-              {upcomingFive.map((fixture) => (
-                <UltraCompactMatchRow
-                  key={fixture.id}
-                  fixture={fixture}
-                  onClick={() => setSelectedFixture(fixture)}
-                />
-              ))}
+          {/* Next 5 Matches */}
+          {upcomingFive.length > 0 && (
+            <div className="min-w-0">
+              <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-1">
+                Next {upcomingFive.length} Matches
+              </h2>
+              <div className="space-y-1.5">
+                {upcomingFive.map((fixture) => (
+                  <UltraCompactMatchRow
+                    key={fixture.id}
+                    fixture={fixture}
+                    onClick={() => setSelectedFixture(fixture)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Tournament Stats & Final Countdown */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <TournamentStats fixtures={fixtures} scores={userData.scores} />
-          <FinalCountdown />
+          <div className="home-secondary-grid md:col-span-2 lg:col-span-2">
+            <TournamentStats fixtures={fixtures} scores={userData.scores} />
+            <FinalCountdown />
+          </div>
         </div>
 
         {/* Empty state */}
@@ -126,7 +127,7 @@ function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => 
   return (
     <div 
       onClick={onClick}
-      className="border border-primary/30 rounded-xl p-4 bg-dark-surface cursor-pointer hover:border-primary/50 transition-colors"
+      className="border border-primary/30 rounded-xl dense-card bg-dark-surface cursor-pointer hover:border-primary/50 transition-colors"
     >
       <div className="flex items-center gap-2 mb-3">
         <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
@@ -141,21 +142,21 @@ function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => 
       </div>
 
       {/* Teams */}
-      <div className="flex items-center justify-between gap-4 mb-3">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 sm:gap-4 mb-3">
         <div className="flex items-center gap-2 flex-1">
           <CountryFlag countryCode={fixture.homeTeam.code} size="lg" className="flex-shrink-0" />
-          <div>
-            <div className="font-bold text-lg">{fixture.homeTeam.name}</div>
+          <div className="min-w-0">
+            <div className="font-bold text-lg sm:text-xl truncate">{fixture.homeTeam.name}</div>
             <div className="text-xs text-gray-500">{fixture.homeTeam.code}</div>
           </div>
         </div>
 
-        <div className="text-xl font-bold text-gray-600">vs</div>
+        <div className="text-base sm:text-xl font-bold text-gray-600">vs</div>
 
         <div className="flex items-center gap-2 flex-1 flex-row-reverse">
           <CountryFlag countryCode={fixture.awayTeam.code} size="lg" className="flex-shrink-0" />
-          <div className="text-right">
-            <div className="font-bold text-lg">{fixture.awayTeam.name}</div>
+          <div className="text-right min-w-0">
+            <div className="font-bold text-lg sm:text-xl truncate">{fixture.awayTeam.name}</div>
             <div className="text-xs text-gray-500">{fixture.awayTeam.code}</div>
           </div>
         </div>
@@ -163,13 +164,13 @@ function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => 
 
       {/* Match Info */}
       <div className="flex items-center justify-between gap-2 pt-3 border-t border-dark-border text-sm">
-        <div className="flex items-center gap-2 text-gray-400">
+        <div className="flex items-center gap-2 text-gray-400 min-w-0">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span className="font-semibold text-white">{getPerthTimeOnly(fixture.date)}</span>
           <span className="text-gray-500">•</span>
-          <span>{fixture.venue.city}</span>
+          <span className="truncate">{fixture.venue.city}</span>
         </div>
         
         {!timeRemaining.isPast && (

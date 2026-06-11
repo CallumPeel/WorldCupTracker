@@ -26,7 +26,7 @@ export function Groups() {
     <div className="min-h-screen pb-24">
       {/* Header */}
       <div className="sticky top-0 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-3">
+        <div className="page-shell py-3">
           <h1 className="text-2xl font-bold">Groups</h1>
           <p className="text-xs text-gray-500 mt-1">
             Based on your entered scores
@@ -35,7 +35,7 @@ export function Groups() {
       </div>
 
       {/* Group Cards Grid */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="page-shell page-stack">
         {groupTables.length === 0 ? (
           <div className="py-12 text-center border border-dark-border rounded-xl">
             <div className="text-gray-400 text-lg">
@@ -43,7 +43,7 @@ export function Groups() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+          <div className="groups-auto-grid">
             {groupTables.map((table) => (
               <CompactGroupCard key={table.group} table={table} />
             ))}
