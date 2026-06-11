@@ -1,6 +1,6 @@
 import type { Fixture, MatchScore } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
-import { formatCountdown, getPerthTimeOnly } from '../utils/timezone';
+import { formatCountdown, formatFullPerthDate, getPerthTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 
 interface ScheduleMatchCardProps {
@@ -52,6 +52,9 @@ export function ScheduleMatchCard({
             </button>
           ) : (
             <div className="text-center">
+              <div className="text-[10px] font-semibold text-gray-500 whitespace-nowrap">
+                {formatFullPerthDate(fixture.date)}
+              </div>
               <div className="text-sm font-semibold text-gray-400">
                 {getPerthTimeOnly(fixture.date)}
               </div>

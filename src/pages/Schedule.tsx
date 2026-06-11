@@ -4,6 +4,7 @@ import { ScheduleMatchCard } from '../components/ScheduleMatchCard';
 import { ScoreEntry } from '../components/ScoreEntry';
 import { useFixtures } from '../hooks/useFixtures';
 import { useUserData } from '../hooks/useUserData';
+import { getPerthDateKey } from '../utils/timezone';
 import type { Fixture } from '../types';
 
 export function Schedule() {
@@ -16,9 +17,8 @@ export function Schedule() {
     const groups = new Map<string, Fixture[]>();
     
     fixtures.forEach((fixture) => {
-      const date = new Date(fixture.date);
-      // Use date string as key (YYYY-MM-DD)
-      const dateKey = date.toISOString().split('T')[0];
+      // Use Perth calendar date as key (YYYY-MM-DD) to match displayed match dates.
+      const dateKey = getPerthDateKey(fixture.date);
       
       if (!groups.has(dateKey)) {
         groups.set(dateKey, []);

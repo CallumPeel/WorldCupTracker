@@ -4,6 +4,21 @@ import type { TimeRemaining } from '../types';
 
 const PERTH_TIMEZONE = 'Australia/Perth';
 
+export function getOrdinalSuffix(day: number): string {
+  if (day >= 11 && day <= 13) return 'th';
+
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
+
 /**
  * Converts a UTC date string to Perth time
  */
@@ -18,6 +33,22 @@ export function toPerthTime(dateString: string): Date {
 export function formatPerthTime(dateString: string, formatString: string = 'PPp'): string {
   const perthTime = toPerthTime(dateString);
   return format(perthTime, formatString);
+}
+
+/**
+ * Gets the Perth calendar date key for grouping fixtures by displayed date.
+ */
+export function getPerthDateKey(dateString: string): string {
+  return formatPerthTime(dateString, 'yyyy-MM-dd');
+}
+
+export function formatFullPerthDate(date: Date | string): string {
+  const perthTime = typeof date === 'string' ? toPerthTime(date) : date;
+  const weekday = format(perthTime, 'EEEE');
+  const month = format(perthTime, 'MMMM');
+  const day = perthTime.getDate();
+
+  return `${weekday} ${day}${getOrdinalSuffix(day)} ${month}`;
 }
 
 /**

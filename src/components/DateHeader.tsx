@@ -1,3 +1,5 @@
+import { formatFullPerthDate } from '../utils/timezone';
+
 interface DateHeaderProps {
   date: Date;
   isToday?: boolean;
@@ -7,13 +9,12 @@ interface DateHeaderProps {
 
 export function DateHeader({ date, isToday, isTomorrow, matchCount }: DateHeaderProps) {
   const formatDate = () => {
-    if (isToday) return 'TODAY';
-    if (isTomorrow) return 'TOMORROW';
-    
-    // Format as "WED, JUNE 12"
-    const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
-    const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
-    return `${dayOfWeek}, ${monthDay}`;
+    const fullDate = formatFullPerthDate(date);
+
+    if (isToday) return `TODAY · ${fullDate}`;
+    if (isTomorrow) return `TOMORROW · ${fullDate}`;
+
+    return fullDate;
   };
 
   return (
