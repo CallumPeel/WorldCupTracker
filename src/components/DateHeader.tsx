@@ -18,7 +18,7 @@ export function DateHeader({ date, isToday, isTomorrow, matchCount }: DateHeader
   };
 
   return (
-    <div className="sticky top-[57px] bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border z-20 -mx-4 px-4 py-3">
+    <div className="sticky top-[57px] nav-glass border-b border-dark-border z-20 -mx-4 px-4 py-3">
       <div className="flex items-baseline justify-between">
         <h2 className="text-lg font-bold tracking-wide">
           {formatDate()}

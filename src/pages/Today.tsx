@@ -67,7 +67,7 @@ export function Today() {
   return (
     <div className="min-h-screen pb-24">
       {/* Header */}
-      <div className="sticky top-0 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border z-30 safe-top">
+      <div className="sticky top-0 nav-glass border-b border-dark-border z-30 safe-top">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
