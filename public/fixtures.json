@@ -1,0 +1,166 @@
+{
+  "fixtures": [
+    {
+      "id": 1,
+      "homeTeam": {
+        "id": 101,
+        "name": "Mexico",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 102,
+        "name": "South Africa",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "group": "A"
+      },
+      "date": "2026-06-11T19:00:00Z",
+      "venue": {
+        "id": 1,
+        "name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "matchNumber": 1
+    },
+    {
+      "id": 2,
+      "homeTeam": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 104,
+        "name": "Czechia",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "group": "A"
+      },
+      "date": "2026-06-12T02:00:00Z",
+      "venue": {
+        "id": 2,
+        "name": "Estadio Chivas",
+        "city": "Guadalajara",
+        "country": "Mexico"
+      },
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "matchNumber": 2
+    },
+    {
+      "id": 28,
+      "homeTeam": {
+        "id": 101,
+        "name": "Mexico",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "date": "2026-06-19T01:00:00Z",
+      "venue": {
+        "id": 2,
+        "name": "Estadio Chivas",
+        "city": "Guadalajara",
+        "country": "Mexico"
+      },
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "matchNumber": 28
+    },
+    {
+      "id": 30,
+      "homeTeam": {
+        "id": 104,
+        "name": "Czechia",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 102,
+        "name": "South Africa",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "group": "A"
+      },
+      "date": "2026-06-18T16:00:00Z",
+      "venue": {
+        "id": 3,
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "country": "United States"
+      },
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "matchNumber": 30
+    },
+    {
+      "id": 53,
+      "homeTeam": {
+        "id": 104,
+        "name": "Czechia",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 101,
+        "name": "Mexico",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "group": "A"
+      },
+      "date": "2026-06-25T01:00:00Z",
+      "venue": {
+        "id": 1,
+        "name": "Mexico City Stadium",
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "matchNumber": 53
+    },
+    {
+      "id": 54,
+      "homeTeam": {
+        "id": 102,
+        "name": "South Africa",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "date": "2026-06-25T01:00:00Z",
+      "venue": {
+        "id": 4,
+        "name": "Estadio BBVA",
+        "city": "Monterrey",
+        "country": "Mexico"
+      },
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "matchNumber": 54
+    }
+  ]
+}
