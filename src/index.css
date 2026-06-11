@@ -157,3 +157,26 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
+
+/* iPad landscape 2-column grid */
+@media (min-width: 768px) and (orientation: landscape) {
+  .fixture-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Single column for specific elements */
+  .fixture-grid > .hero-card,
+  .fixture-grid > .empty-state,
+  .fixture-grid > .card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Optimize spacing for dense layout */
+@media (max-width: 767px) {
+  .fixture-grid {
+    gap: 0.75rem;
+  }
+}

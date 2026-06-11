@@ -6,6 +6,15 @@ export function BottomNav() {
   const navItems = [
     {
       path: '/',
+      label: 'Today',
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      ),
+    },
+    {
+      path: '/schedule',
       label: 'Schedule',
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,25 +53,34 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-dark-surface/95 backdrop-blur-xl border-t border-dark-border safe-bottom z-40">
-      <div className="flex items-center justify-around px-4 h-20">
+      <div className="flex items-center justify-around px-2 h-20">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center justify-center gap-1 tap-target rounded-xl transition-all duration-200 ${
-                isActive
-                  ? 'text-primary'
-                  : 'text-gray-500 hover:text-gray-300'
-              }`}
+              className="relative flex-1 max-w-[100px]"
             >
-              <div className={`transition-transform ${isActive ? 'scale-110' : ''}`}>
-                {item.icon}
+              <div
+                className={`flex flex-col items-center justify-center gap-1 py-2 rounded-xl transition-all duration-200 ${
+                  isActive
+                    ? 'text-primary'
+                    : 'text-gray-500'
+                }`}
+              >
+                {/* Active indicator */}
+                {isActive && (
+                  <div className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/20" />
+                )}
+                
+                <div className={`relative transition-all duration-200 ${isActive ? 'scale-110' : 'scale-100'}`}>
+                  {item.icon}
+                </div>
+                <span className={`relative text-xs font-semibold transition-all ${isActive ? 'text-primary' : 'text-gray-500'}`}>
+                  {item.label}
+                </span>
               </div>
-              <span className={`text-xs font-semibold ${isActive ? 'text-primary' : ''}`}>
-                {item.label}
-              </span>
             </Link>
           );
         })}

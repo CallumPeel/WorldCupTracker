@@ -17,7 +17,12 @@ export default {
         primary: {
           DEFAULT: '#0a84ff',
           dark: '#0a7aee',
+          light: '#409cff',
         }
+      },
+      boxShadow: {
+        'premium': '0 10px 40px rgba(0, 0, 0, 0.5)',
+        'card': '0 4px 12px rgba(0, 0, 0, 0.3)',
       },
       fontFamily: {
         sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'],

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { MatchCard } from '../components/MatchCard';
+import { CompactMatchCard } from '../components/CompactMatchCard';
 import { ScoreEntry } from '../components/ScoreEntry';
 import { useFixtures } from '../hooks/useFixtures';
 import { useUserData } from '../hooks/useUserData';
@@ -93,14 +93,14 @@ export function Schedule() {
 
       {/* Fixtures */}
       <div className="container mx-auto px-4 py-6">
-        <div className="space-y-4">
+        <div className="fixture-grid space-y-3">
           {filteredFixtures.length === 0 ? (
             <div className="card text-center py-12">
               <div className="text-gray-400 text-lg">No matches found</div>
             </div>
           ) : (
             filteredFixtures.map((fixture) => (
-              <MatchCard
+              <CompactMatchCard
                 key={fixture.id}
                 fixture={fixture}
                 score={userData.getScoreForFixture(fixture.id)}
