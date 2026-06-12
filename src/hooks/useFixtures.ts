@@ -20,18 +20,22 @@ export function useFixtures() {
     setError(null);
 
     try {
-      // Try to load from cache first
+      // Show cached fixtures immediately for speed/offline support, but still
+      // revalidate from the network so deployed fixture updates reach everyone.
       const cached = loadFixturesFromCache();
       if (cached && cached.length > 0) {
         setFixtures(cached);
         setLoading(false);
-        return;
       }
 
-      // If no cache, fetch from API
+      // Always fetch the latest fixtures after showing any cached copy.
       const data = await fetchFixtures();
-      setFixtures(data);
-      saveFixturesToCache(data);
+      if (data.length > 0) {
+        setFixtures(data);
+        saveFixturesToCache(data);
+      } else if (!cached || cached.length === 0) {
+        setFixtures([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load fixtures');
       console.error('Error loading fixtures:', err);

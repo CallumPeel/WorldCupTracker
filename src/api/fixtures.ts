@@ -74,8 +74,16 @@ export async function fetchFixtures(): Promise<Fixture[]> {
     // const data = await response.json();
     // return data.response.map(sanitizeApiFixture);
     
-    // For now, load from local JSON
-    const response = await fetch('/fixtures.json');
+    // For now, load from local JSON. Bypass browser/mobile caches so fixture
+    // updates deployed to Vercel are picked up promptly by returning users.
+    const response = await fetch(`/fixtures.json?v=${Date.now()}`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch fixtures: ${response.status}`);
+    }
+
     const data = await response.json();
     return data.fixtures || [];
   } catch (error) {
