@@ -7,10 +7,15 @@ import { useUserData } from '../hooks/useUserData';
 import { generateKnockoutBracket, getTournamentWinner } from '../utils/bracketGenerator';
 import type { Fixture } from '../types';
 
+const ZOOM_LEVELS = [0.6, 0.75, 0.9, 1, 1.15] as const;
+const DEFAULT_ZOOM_INDEX = 3;
+
 export function Knockout() {
   const { fixtures, loading } = useFixtures();
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
+  const [collapsedRoundCount, setCollapsedRoundCount] = useState(0);
+  const [zoomIndex, setZoomIndex] = useState(DEFAULT_ZOOM_INDEX);
 
   const knockoutRounds = useMemo(() => {
     return generateKnockoutBracket(fixtures, userData.scores);
@@ -20,12 +25,39 @@ export function Knockout() {
     return getTournamentWinner(knockoutRounds);
   }, [knockoutRounds]);
 
+  const maxCollapsedRounds = Math.max(0, knockoutRounds.length - 1);
+  const safeCollapsedRoundCount = Math.min(collapsedRoundCount, maxCollapsedRounds);
+  const zoomLevel = ZOOM_LEVELS[zoomIndex];
+  const visibleRounds = knockoutRounds.slice(safeCollapsedRoundCount);
+  const firstVisibleRound = visibleRounds[0];
+
   const handleMatchClick = (fixtureId?: number) => {
     if (!fixtureId) return;
     const fixture = fixtures.find(f => f.id === fixtureId);
     if (fixture) {
       setSelectedFixture(fixture);
     }
+  };
+
+  const collapseLeftColumn = () => {
+    setCollapsedRoundCount((current) => Math.min(current + 1, maxCollapsedRounds));
+  };
+
+  const expandLeftColumn = () => {
+    setCollapsedRoundCount((current) => Math.max(current - 1, 0));
+  };
+
+  const zoomOut = () => {
+    setZoomIndex((current) => Math.max(current - 1, 0));
+  };
+
+  const zoomIn = () => {
+    setZoomIndex((current) => Math.min(current + 1, ZOOM_LEVELS.length - 1));
+  };
+
+  const resetBracketView = () => {
+    setCollapsedRoundCount(0);
+    setZoomIndex(DEFAULT_ZOOM_INDEX);
   };
 
   if (loading) {
@@ -79,9 +111,84 @@ export function Knockout() {
             </div>
           </div>
         ) : (
-          <div className="overflow-x-auto pb-4">
-            <div className="inline-flex gap-8 min-w-full">
-              {knockoutRounds.map((round, roundIndex) => (
+          <>
+            <div className="mb-4 rounded-xl border border-dark-border bg-dark-surface/80 p-3">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <div className="text-sm font-bold text-white">Bracket view</div>
+                  <div className="text-xs text-gray-500">
+                    {safeCollapsedRoundCount > 0 && firstVisibleRound
+                      ? `Showing from ${formatStageName(firstVisibleRound.stage)} onward · ${safeCollapsedRoundCount} hidden left`
+                      : 'Showing all knockout rounds'}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={expandLeftColumn}
+                    disabled={safeCollapsedRoundCount === 0}
+                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-xs font-bold text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    ← Expand left
+                  </button>
+                  <button
+                    type="button"
+                    onClick={collapseLeftColumn}
+                    disabled={safeCollapsedRoundCount >= maxCollapsedRounds}
+                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-xs font-bold text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Collapse left →
+                  </button>
+
+                  <div className="mx-1 hidden h-8 w-px bg-dark-border sm:block" />
+
+                  <button
+                    type="button"
+                    onClick={zoomOut}
+                    disabled={zoomIndex === 0}
+                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-sm font-black text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Zoom out"
+                  >
+                    −
+                  </button>
+                  <div className="min-w-16 rounded-lg border border-dark-border bg-dark-bg px-3 py-2 text-center text-xs font-bold text-gray-300">
+                    {Math.round(zoomLevel * 100)}%
+                  </div>
+                  <button
+                    type="button"
+                    onClick={zoomIn}
+                    disabled={zoomIndex === ZOOM_LEVELS.length - 1}
+                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-sm font-black text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Zoom in"
+                  >
+                    +
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={resetBracketView}
+                    className="tap-target rounded-lg bg-primary/10 px-3 py-2 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto pb-4 custom-scrollbar">
+              <div
+                style={{
+                  width: `${100 / zoomLevel}%`,
+                  transform: `scale(${zoomLevel})`,
+                  transformOrigin: 'top left',
+                }}
+              >
+                <div className="inline-flex gap-8 min-w-full">
+                  {visibleRounds.map((round, visibleRoundIndex) => {
+                    const roundIndex = visibleRoundIndex + safeCollapsedRoundCount;
+
+                    return (
                 <div key={round.stage} className="flex flex-col">
                   {/* Round Header */}
                   <div className="mb-4 text-center">
@@ -98,7 +205,7 @@ export function Knockout() {
                     {round.matches.map((match, matchIndex) => (
                       <div key={matchIndex} className="flex items-center">
                         {/* Connecting line from previous round */}
-                        {roundIndex > 0 && (
+                        {visibleRoundIndex > 0 && (
                           <div className="w-6 h-px bg-dark-border mr-2"></div>
                         )}
                         
@@ -115,15 +222,18 @@ export function Knockout() {
                     ))}
                   </div>
                 </div>
-              ))}
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
 
         {/* Scroll hint */}
         {knockoutRounds.length > 2 && (
           <div className="text-center mt-4 text-xs text-gray-500">
-            ← Scroll horizontally to view all rounds →
+            Use zoom to fit more rounds, collapse left columns to focus later stages, or scroll horizontally.
           </div>
         )}
       </div>
