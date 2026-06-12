@@ -105,7 +105,9 @@ export function More() {
                     </div>
                     <div
                       className={`flex h-7 w-7 items-center justify-center rounded-full border text-sm font-black ${
-                        selected ? 'border-primary bg-primary text-black' : 'border-white/15 text-gray-500'
+                        selected
+                          ? 'border-emerald-300 bg-emerald-400 text-black shadow-[0_0_14px_rgba(52,211,153,0.75)]'
+                          : 'border-white/15 text-gray-500'
                       }`}
                     >
                       {selected ? '✓' : '+'}
