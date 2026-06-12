@@ -99,6 +99,7 @@ export interface UserSettings {
   darkMode: boolean;
   notifications: boolean;
   defaultReminderMinutes: number;
+  favoriteTeamCodes: string[];
   lastFixtureUpdate?: string; // ISO timestamp
 }
 

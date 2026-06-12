@@ -6,7 +6,8 @@ import { calculateGroupStandings } from '../utils/groupCalculator';
 
 export function Groups() {
   const { fixtures, loading } = useFixtures();
-  const { scores } = useUserData();
+  const { scores, settings } = useUserData();
+  const favoriteTeamCodes = settings?.favoriteTeamCodes ?? [];
 
   const groupTables = useMemo(() => {
     return calculateGroupStandings(fixtures, scores);
@@ -45,7 +46,7 @@ export function Groups() {
         ) : (
           <div className="groups-auto-grid">
             {groupTables.map((table) => (
-              <CompactGroupCard key={table.group} table={table} />
+              <CompactGroupCard key={table.group} table={table} favoriteTeamCodes={favoriteTeamCodes} />
             ))}
           </div>
         )}

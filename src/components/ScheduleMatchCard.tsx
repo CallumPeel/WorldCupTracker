@@ -3,40 +3,13 @@ import { useCountdown } from '../hooks/useCountdown';
 import { formatCountdown, formatFullPerthDate, getPerthTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
-
-const favoriteTeamAccents: Record<
-  string,
-  { border: string; glow: string; gradient: string; pill: string; confetti: string[] }
-> = {
-  ENG: {
-    border: '#ff3b5f',
-    glow: 'rgba(255, 59, 95, 0.5)',
-    gradient: 'linear-gradient(135deg, rgba(255, 59, 95, 0.18), rgba(255, 255, 255, 0.08), rgba(10, 132, 255, 0.08))',
-    pill: 'England match',
-    confetti: ['#ff3b5f', '#ffffff', '#7dd3fc'],
-  },
-  AUS: {
-    border: '#facc15',
-    glow: 'rgba(250, 204, 21, 0.45)',
-    gradient: 'linear-gradient(135deg, rgba(250, 204, 21, 0.18), rgba(34, 197, 94, 0.14), rgba(28, 28, 30, 0.85))',
-    pill: 'Australia match',
-    confetti: ['#facc15', '#22c55e', '#ffffff'],
-  },
-  MIXED: {
-    border: '#a78bfa',
-    glow: 'rgba(167, 139, 250, 0.5)',
-    gradient: 'linear-gradient(135deg, rgba(255, 59, 95, 0.16), rgba(250, 204, 21, 0.16), rgba(34, 197, 94, 0.12))',
-    pill: 'My teams!',
-    confetti: ['#ff3b5f', '#facc15', '#22c55e', '#ffffff'],
-  },
-};
-
-const favoriteTeamCodes = new Set(['ENG', 'AUS']);
+import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
 
 interface ScheduleMatchCardProps {
   fixture: Fixture;
   score?: MatchScore;
   watched?: boolean;
+  favoriteTeamCodes?: string[];
   onScoreClick: () => void;
   onWatchClick: () => void;
 }
@@ -45,20 +18,20 @@ export function ScheduleMatchCard({
   fixture,
   score,
   watched,
+  favoriteTeamCodes = [],
   onScoreClick,
   onWatchClick,
 }: ScheduleMatchCardProps) {
   const timeRemaining = useCountdown(fixture.date);
   const hasScore = !!score;
   const isPast = timeRemaining.isPast;
-  const favoriteCodes = [fixture.homeTeam.code, fixture.awayTeam.code].filter((code) =>
-    favoriteTeamCodes.has(code)
-  );
+  const favoriteCodeSet = new Set(favoriteTeamCodes);
+  const favoriteTeams = [fixture.homeTeam, fixture.awayTeam].filter((team) => favoriteCodeSet.has(team.code));
   const favoriteAccent =
-    favoriteCodes.length > 1
-      ? favoriteTeamAccents.MIXED
-      : favoriteCodes[0]
-        ? favoriteTeamAccents[favoriteCodes[0]]
+    favoriteTeams.length > 1
+      ? getMixedFavoriteTeamAccent()
+      : favoriteTeams[0]
+        ? getFavoriteTeamAccent(favoriteTeams[0].code, `${favoriteTeams[0].name} match`)
         : undefined;
   const homeName = getTeamDisplayName(fixture.homeTeam, 'compact');
   const awayName = getTeamDisplayName(fixture.awayTeam, 'compact');

@@ -143,12 +143,13 @@ const DEFAULT_SETTINGS: UserSettings = {
   darkMode: true,
   notifications: true,
   defaultReminderMinutes: 30,
+  favoriteTeamCodes: ['AUS', 'ENG'],
 };
 
 export async function getSettings(): Promise<UserSettings> {
   const db = await initDB();
   const settings = await db.get(STORES.SETTINGS, 'user-settings');
-  return settings || DEFAULT_SETTINGS;
+  return { ...DEFAULT_SETTINGS, ...settings };
 }
 
 export async function saveSettings(settings: UserSettings): Promise<void> {

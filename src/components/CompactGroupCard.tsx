@@ -1,34 +1,17 @@
 import type { GroupTable } from '../types';
 import { CountryFlag } from './CountryFlag';
 import { getTeamColors, getGroupColor } from '../utils/teamColors';
-
-const favoriteTeamAccents: Record<
-  string,
-  { border: string; glow: string; gradient: string; pill: string; confetti: string[] }
-> = {
-  ENG: {
-    border: '#ff3b5f',
-    glow: 'rgba(255, 59, 95, 0.45)',
-    gradient: 'linear-gradient(90deg, rgba(255, 59, 95, 0.18), rgba(255, 255, 255, 0.07), transparent)',
-    pill: 'England',
-    confetti: ['#ff3b5f', '#ffffff', '#7dd3fc'],
-  },
-  AUS: {
-    border: '#facc15',
-    glow: 'rgba(250, 204, 21, 0.45)',
-    gradient: 'linear-gradient(90deg, rgba(250, 204, 21, 0.2), rgba(34, 197, 94, 0.12), transparent)',
-    pill: 'Australia',
-    confetti: ['#facc15', '#22c55e', '#ffffff'],
-  },
-};
+import { getFavoriteTeamAccent } from '../utils/favoriteTeams';
 
 interface CompactGroupCardProps {
   table: GroupTable;
+  favoriteTeamCodes?: string[];
 }
 
-export function CompactGroupCard({ table }: CompactGroupCardProps) {
+export function CompactGroupCard({ table, favoriteTeamCodes = [] }: CompactGroupCardProps) {
   const hasData = table.standings.some(s => s.played > 0);
   const groupColor = getGroupColor(table.group);
+  const favoriteCodeSet = new Set(favoriteTeamCodes);
 
   return (
     <div 
@@ -59,7 +42,9 @@ export function CompactGroupCard({ table }: CompactGroupCardProps) {
         {table.standings.map((standing, index) => {
           const isQualified = index < 2 && standing.played > 0;
           const teamColors = getTeamColors(standing.team.code);
-          const favoriteAccent = favoriteTeamAccents[standing.team.code];
+          const favoriteAccent = favoriteCodeSet.has(standing.team.code)
+            ? getFavoriteTeamAccent(standing.team.code, standing.team.name)
+            : undefined;
           
           return (
             <div

@@ -11,6 +11,7 @@ export function Schedule() {
   const { fixtures, loading, error } = useFixtures();
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
+  const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
 
   // Group fixtures by date
   const groupedByDate = useMemo(() => {
@@ -102,6 +103,7 @@ export function Schedule() {
                       fixture={fixture}
                       score={userData.getScoreForFixture(fixture.id)}
                       watched={userData.isWatched(fixture.id)}
+                      favoriteTeamCodes={favoriteTeamCodes}
                       onScoreClick={() => setSelectedFixture(fixture)}
                       onWatchClick={() => userData.toggleWatchStatus(fixture.id)}
                     />

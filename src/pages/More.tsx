@@ -1,153 +1,136 @@
-import { useState } from 'react';
+import { useMemo } from 'react';
+import { CountryFlag } from '../components/CountryFlag';
 import { useFixtures } from '../hooks/useFixtures';
-import { exportUserData, importUserData } from '../api/userdata';
-import { getLastFixtureUpdate } from '../api/fixtures';
+import { useUserData } from '../hooks/useUserData';
+import type { Team } from '../types';
+
+function isSelectableTeam(team: Team): boolean {
+  return Boolean(team.group) && !team.code.includes('_');
+}
 
 export function More() {
-  const { refreshFixtures, loading } = useFixtures();
-  const [exporting, setExporting] = useState(false);
-  const [importing, setImporting] = useState(false);
-  const lastUpdate = getLastFixtureUpdate();
+  const { fixtures, loading: fixturesLoading, error } = useFixtures();
+  const userData = useUserData();
+  const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
+  const favoriteCodeSet = new Set(favoriteTeamCodes);
 
-  const handleExport = async () => {
-    try {
-      setExporting(true);
-      const data = await exportUserData();
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `worldcup-data-${new Date().toISOString().split('T')[0]}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    } catch (error) {
-      alert('Failed to export data');
-      console.error(error);
-    } finally {
-      setExporting(false);
-    }
-  };
+  const teams = useMemo(() => {
+    const teamMap = new Map<string, Team>();
 
-  const handleImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+    fixtures.forEach((fixture) => {
+      [fixture.homeTeam, fixture.awayTeam].forEach((team) => {
+        if (isSelectableTeam(team)) {
+          teamMap.set(team.code, team);
+        }
+      });
+    });
 
-    try {
-      setImporting(true);
-      const text = await file.text();
-      const data = JSON.parse(text);
-      await importUserData(data);
-      alert('Data imported successfully! Refreshing...');
-      window.location.reload();
-    } catch (error) {
-      alert('Failed to import data. Please check the file format.');
-      console.error(error);
-    } finally {
-      setImporting(false);
-    }
-  };
+    return Array.from(teamMap.values()).sort((a, b) => {
+      const groupCompare = (a.group ?? '').localeCompare(b.group ?? '');
+      return groupCompare || a.name.localeCompare(b.name);
+    });
+  }, [fixtures]);
 
-  const handleUpdateFixtures = async () => {
-    if (confirm('Update fixtures? This will not affect your entered scores.')) {
-      await refreshFixtures();
-      alert('Fixtures updated successfully!');
-    }
+  const toggleFavoriteTeam = async (teamCode: string) => {
+    const nextFavoriteTeamCodes = favoriteCodeSet.has(teamCode)
+      ? favoriteTeamCodes.filter((code) => code !== teamCode)
+      : [...favoriteTeamCodes, teamCode];
+
+    await userData.updateSettings({ favoriteTeamCodes: nextFavoriteTeamCodes });
   };
 
   return (
     <div className="min-h-screen pb-24">
-      {/* Header */}
       <div className="sticky top-0 nav-glass border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-3xl font-bold">More</h1>
+        <div className="page-shell py-3">
+          <p className="text-[0.65rem] font-black uppercase tracking-[0.35em] text-primary/80">Settings</p>
+          <h1 className="text-2xl font-bold">Favourite Teams</h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6 space-y-6">
-        {/* App Info */}
-        <div className="card">
-          <h2 className="text-xl font-bold mb-4">FIFA World Cup 2026 Tracker</h2>
-          <p className="text-gray-400 text-sm mb-2">
-            A premium, spoiler-free tracker for the 2026 FIFA World Cup.
-          </p>
-          <p className="text-gray-400 text-sm">
-            All scores and standings are based on your manually entered results only.
-          </p>
-        </div>
-
-        {/* Data Management */}
-        <div className="card">
-          <h2 className="text-xl font-bold mb-4">Data Management</h2>
-          <div className="space-y-3">
-            <button
-              onClick={handleExport}
-              disabled={exporting}
-              className="w-full btn-secondary flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span>Export Data</span>
-              </div>
-              {exporting && <span className="text-sm">Exporting...</span>}
-            </button>
-
-            <label className="w-full btn-secondary flex items-center justify-between cursor-pointer">
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                <span>Import Data</span>
-              </div>
-              {importing && <span className="text-sm">Importing...</span>}
-              <input
-                type="file"
-                accept="application/json"
-                onChange={handleImport}
-                className="hidden"
-                disabled={importing}
-              />
-            </label>
+      <div className="page-shell page-stack">
+        <section className="card">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-bold mb-2">Pick your teams</h2>
+              <p className="text-sm text-gray-400 max-w-2xl">
+                Selected teams get special highlights across the schedule and group tables. Choose as many or as few as you like.
+              </p>
+            </div>
+            <div className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-sm font-bold text-primary">
+              {favoriteTeamCodes.length} selected
+            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Fixtures Management */}
-        <div className="card">
-          <h2 className="text-xl font-bold mb-4">Fixtures</h2>
-          <div className="space-y-3">
-            <button
-              onClick={handleUpdateFixtures}
-              disabled={loading}
-              className="w-full btn-primary flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span>Update Fixtures</span>
-              </div>
-              {loading && <span className="text-sm">Updating...</span>}
-            </button>
-            {lastUpdate && (
-              <div className="text-sm text-gray-500">
-                Last updated: {new Date(lastUpdate).toLocaleString()}
-              </div>
-            )}
+        {(fixturesLoading || userData.loading) && (
+          <div className="py-12 text-center border border-dark-border rounded-xl">
+            <div className="text-primary text-lg font-bold">Loading teams...</div>
           </div>
-        </div>
+        )}
 
-        {/* About */}
-        <div className="card">
-          <h2 className="text-xl font-bold mb-4">About</h2>
+        {error && (
+          <div className="card border-red-500/40 text-center">
+            <div className="text-red-400 font-bold mb-1">Could not load teams</div>
+            <div className="text-sm text-gray-400">{error}</div>
+          </div>
+        )}
+
+        {!fixturesLoading && !userData.loading && !error && (
+          <div className="groups-auto-grid">
+            {teams.map((team) => {
+              const selected = favoriteCodeSet.has(team.code);
+
+              return (
+                <button
+                  key={team.code}
+                  type="button"
+                  onClick={() => toggleFavoriteTeam(team.code)}
+                  className={`relative overflow-hidden dense-card rounded-lg border text-left transition-all ${
+                    selected
+                      ? 'border-primary bg-primary/10 shadow-[0_0_18px_rgba(10,132,255,0.28)]'
+                      : 'border-dark-border bg-dark-surface hover:border-primary/40 hover:bg-white/[0.04]'
+                  }`}
+                >
+                  {selected && (
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/15 via-transparent to-emerald-400/10" />
+                  )}
+                  <div className="relative flex items-center gap-3">
+                    <div className={`rounded-lg p-1 ${selected ? 'bg-primary/20 shadow-[0_0_12px_rgba(10,132,255,0.4)]' : 'bg-dark-elevated'}`}>
+                      <CountryFlag countryCode={team.code} size="md" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="font-bold truncate">{team.name}</div>
+                      <div className="text-xs text-gray-500">{team.code} · Group {team.group}</div>
+                    </div>
+                    <div
+                      className={`flex h-7 w-7 items-center justify-center rounded-full border text-sm font-black ${
+                        selected ? 'border-primary bg-primary text-black' : 'border-white/15 text-gray-500'
+                      }`}
+                    >
+                      {selected ? '✓' : '+'}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {!fixturesLoading && !userData.loading && !error && teams.length === 0 && (
+          <div className="py-12 text-center border border-dark-border rounded-xl">
+            <div className="text-gray-400 text-lg">No teams found</div>
+          </div>
+        )}
+
+        <section className="card">
+          <h2 className="text-xl font-bold mb-3">About</h2>
           <div className="space-y-2 text-sm text-gray-400">
-            <p>Version 1.0.0</p>
-            <p>Made for iPad with ❤️</p>
+            <p>FIFA World Cup 2026 Tracker</p>
+            <p>All scores and standings are based on your manually entered results only.</p>
             <p>Times shown in Australia/Perth timezone (AWST)</p>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
