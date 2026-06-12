@@ -199,8 +199,15 @@
 
   .groups-auto-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    grid-template-columns: 1fr;
     gap: clamp(0.75rem, 1.25vw, 1.25rem);
+  }
+
+  .group-standings-grid {
+    display: grid;
+    grid-template-columns: minmax(1.35rem, 0.34fr) minmax(0, 1fr) repeat(7, minmax(1.35rem, 0.38fr)) minmax(1.75rem, 0.5fr);
+    align-items: center;
+    column-gap: clamp(0.125rem, 0.5vw, 0.35rem);
   }
 
   .card {
@@ -363,6 +370,18 @@
   }
 }
 
+@media (min-width: 768px) {
+  .groups-auto-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .groups-auto-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 767px) {
   .next-match-teams,
   .hero-info-grid {
@@ -405,6 +424,10 @@
   .team-hero-name {
     font-size: clamp(2.1rem, 3.35vw, 3.5rem);
     letter-spacing: -0.05em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-wrap: nowrap;
   }
 
   .team-hero-side {
@@ -419,6 +442,36 @@
   .hero-flag {
     width: clamp(3.85rem, 6.9vw, 5.75rem) !important;
     height: clamp(2.65rem, 4.75vw, 4rem) !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) and (orientation: landscape) {
+  .next-match-teams {
+    grid-template-columns: minmax(0, 1fr) clamp(3.75rem, 6vw, 4.75rem) minmax(0, 1fr);
+    gap: clamp(0.5rem, 1.25vw, 0.875rem);
+  }
+
+  .team-hero-side {
+    gap: 0.625rem;
+  }
+
+  .flag-plinth {
+    width: clamp(4.25rem, 7.25vw, 5.5rem);
+    height: clamp(3.75rem, 6.5vw, 4.875rem);
+  }
+
+  .hero-flag {
+    width: clamp(3.4rem, 5.75vw, 4.5rem) !important;
+    height: clamp(2.35rem, 4vw, 3.125rem) !important;
+  }
+
+  .vs-orb {
+    width: clamp(3.75rem, 6vw, 4.75rem);
+    height: clamp(3.75rem, 6vw, 4.75rem);
+  }
+
+  .team-hero-name {
+    font-size: clamp(2rem, 3vw, 2.75rem);
   }
 }
 

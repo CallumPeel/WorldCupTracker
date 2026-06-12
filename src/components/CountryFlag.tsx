@@ -14,6 +14,10 @@ const sizeClasses = {
 };
 
 export function CountryFlag({ countryCode, className = '', size = 'md' }: CountryFlagProps) {
+  if (countryCode === 'SCO') {
+    return <ScotlandFlag className={className} size={size} />;
+  }
+
   // Convert FIFA codes to ISO 3166-1 alpha-2 codes
   const isoCode = fifaToIsoCode(countryCode);
   
@@ -33,6 +37,21 @@ export function CountryFlag({ countryCode, className = '', size = 'md' }: Countr
   );
 }
 
+function ScotlandFlag({ className = '', size }: Pick<CountryFlagProps, 'className' | 'size'>) {
+  return (
+    <svg
+      viewBox="0 0 60 40"
+      className={`${sizeClasses[size ?? 'md']} ${className} rounded shadow-sm border border-white/10`}
+      role="img"
+      aria-label="Scotland flag"
+    >
+      <title>Scotland</title>
+      <rect width="60" height="40" fill="#005EB8" />
+      <path d="M0 0L60 40M60 0L0 40" stroke="#FFFFFF" strokeWidth="8" />
+    </svg>
+  );
+}
+
 // Map FIFA codes to ISO 3166-1 alpha-2 codes
 function fifaToIsoCode(fifaCode: string): string {
   const codeMap: Record<string, string> = {
@@ -40,6 +59,8 @@ function fifaToIsoCode(fifaCode: string): string {
     'MEX': 'MX',
     'USA': 'US',
     'CAN': 'CA',
+    'HAI': 'HT',
+    'CUW': 'CW',
     'CRC': 'CR',
     'PAN': 'PA',
     'JAM': 'JM',
@@ -109,6 +130,7 @@ function fifaToIsoCode(fifaCode: string): string {
     'CPV': 'CV',
     'GAB': 'GA',
     'CGO': 'CG',
+    'COD': 'CD',
     'UGA': 'UG',
     'ZAM': 'ZM',
     'ZIM': 'ZW',
