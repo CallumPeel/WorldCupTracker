@@ -79,6 +79,26 @@ The built files will be in the `dist` folder.
 npm run preview
 ```
 
+## 🌐 Deploy for Free on Vercel
+
+This app is ready to deploy on Vercel's free Hobby plan.
+
+### One-time setup
+
+1. Push this repository to GitHub.
+2. Open your [Vercel dashboard](https://vercel.com/dashboard).
+3. Click **Add New → Project**.
+4. Import `CallumPeel/WorldCupTracker` from GitHub.
+5. Confirm the project settings:
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+6. Click **Deploy**.
+
+The included `vercel.json` file configures Vercel to serve React Router routes such as `/schedule`, `/groups`, and `/knockout` correctly.
+
+After the first deployment, Vercel will automatically redeploy the app whenever you push changes to the connected branch.
+
 ## 📱 Installing as PWA
 
 ### On iPad (Safari)
