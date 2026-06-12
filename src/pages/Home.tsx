@@ -7,7 +7,7 @@ import { CountryFlag } from '../components/CountryFlag';
 import { useFixtures } from '../hooks/useFixtures';
 import { useUserData } from '../hooks/useUserData';
 import { useCountdown } from '../hooks/useCountdown';
-import { formatCountdown, formatFullPerthDate, getFriendlyDateLabel, getPerthTimeOnly } from '../utils/timezone';
+import { formatCountdown, formatFullLocalDate, getFriendlyDateLabel, getLocalTimeOnly } from '../utils/timezone';
 import { getGroupColor, getStageColor, getTeamColors } from '../utils/teamColors';
 import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
 import type { Fixture } from '../types';
@@ -65,7 +65,7 @@ export function Home() {
           </div>
           <div className="hidden sm:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-gray-300">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)]" />
-            Perth time
+            Local time
           </div>
         </div>
       </div>
@@ -186,9 +186,9 @@ function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => 
 
           <div className="hero-detail-tile">
             <div className="text-xs font-black uppercase tracking-[0.25em] text-gray-400 mb-2">Kick-off</div>
-            <div className="text-3xl sm:text-4xl font-black tracking-tight">{getPerthTimeOnly(fixture.date)}</div>
+            <div className="text-3xl sm:text-4xl font-black tracking-tight">{getLocalTimeOnly(fixture.date)}</div>
             <div className="mt-1 text-sm sm:text-base font-semibold text-gray-300">
-              {getFriendlyDateLabel(fixture.date)} · {formatFullPerthDate(fixture.date)}
+              {getFriendlyDateLabel(fixture.date)} · {formatFullLocalDate(fixture.date)}
             </div>
           </div>
         </div>

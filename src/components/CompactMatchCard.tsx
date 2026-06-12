@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Fixture, MatchScore } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
-import { formatCountdown, getPerthTimeOnly } from '../utils/timezone';
+import { formatCountdown, getLocalTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 import { getTeamColors, getGroupColor } from '../utils/teamColors';
 
@@ -119,7 +119,7 @@ export function CompactMatchCard({
           
           {/* Time */}
           <span className="text-gray-400 font-medium">
-            {getPerthTimeOnly(fixture.date)}
+            {getLocalTimeOnly(fixture.date)}
           </span>
 
           {/* Venue */}

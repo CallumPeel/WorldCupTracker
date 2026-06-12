@@ -1,4 +1,4 @@
-import { formatFullPerthDate } from '../utils/timezone';
+import { formatFullLocalDate } from '../utils/timezone';
 
 interface DateHeaderProps {
   date: Date;
@@ -9,7 +9,7 @@ interface DateHeaderProps {
 
 export function DateHeader({ date, isToday, isTomorrow, matchCount }: DateHeaderProps) {
   const formatDate = () => {
-    const fullDate = formatFullPerthDate(date);
+    const fullDate = formatFullLocalDate(date);
 
     if (isToday) return `TODAY · ${fullDate}`;
     if (isTomorrow) return `TOMORROW · ${fullDate}`;

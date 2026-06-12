@@ -1,8 +1,5 @@
 import { format, formatDistanceToNow } from 'date-fns';
-import { toZonedTime } from 'date-fns-tz';
 import type { TimeRemaining } from '../types';
-
-const PERTH_TIMEZONE = 'Australia/Perth';
 
 export function getOrdinalSuffix(day: number): string {
   if (day >= 11 && day <= 13) return 'th';
@@ -20,33 +17,39 @@ export function getOrdinalSuffix(day: number): string {
 }
 
 /**
- * Converts a UTC date string to Perth time
+ * Converts an ISO date string to a Date in the user's local timezone.
+ *
+ * Fixture dates are stored as absolute instants, so the browser automatically
+ * renders the same kickoff moment in the viewer's own local timezone.
  */
-export function toPerthTime(dateString: string): Date {
-  const date = new Date(dateString);
-  return toZonedTime(date, PERTH_TIMEZONE);
+export function toLocalTime(dateString: string): Date {
+  return new Date(dateString);
 }
 
 /**
- * Formats a date string in Perth timezone
+ * Formats a date string in the user's local timezone.
  */
-export function formatPerthTime(dateString: string, formatString: string = 'PPp'): string {
-  const perthTime = toPerthTime(dateString);
-  return format(perthTime, formatString);
+export function formatLocalTime(dateString: string, formatString: string = 'PPp'): string {
+  return format(toLocalTime(dateString), formatString);
 }
 
 /**
- * Gets the Perth calendar date key for grouping fixtures by displayed date.
+ * Gets the user's local calendar date key for grouping fixtures by displayed date.
  */
-export function getPerthDateKey(dateString: string): string {
-  return formatPerthTime(dateString, 'yyyy-MM-dd');
+export function getLocalDateKey(dateString: string): string {
+  return formatLocalTime(dateString, 'yyyy-MM-dd');
 }
 
-export function formatFullPerthDate(date: Date | string): string {
-  const perthTime = typeof date === 'string' ? toPerthTime(date) : date;
-  const weekday = format(perthTime, 'EEEE');
-  const month = format(perthTime, 'MMMM');
-  const day = perthTime.getDate();
+export function getLocalDateFromKey(dateKey: string): Date {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+export function formatFullLocalDate(date: Date | string): string {
+  const localTime = typeof date === 'string' ? toLocalTime(date) : date;
+  const weekday = format(localTime, 'EEEE');
+  const month = format(localTime, 'MMMM');
+  const day = localTime.getDate();
 
   return `${weekday} ${day}${getOrdinalSuffix(day)} ${month}`;
 }
@@ -92,31 +95,31 @@ export function getTimeRemaining(dateString: string): TimeRemaining {
 }
 
 /**
- * Checks if a match is happening today in Perth time
+ * Checks if a match is happening today in the user's local timezone.
  */
 export function isToday(dateString: string): boolean {
-  const perthTime = toPerthTime(dateString);
-  const now = toZonedTime(new Date(), PERTH_TIMEZONE);
+  const localTime = toLocalTime(dateString);
+  const now = new Date();
   
   return (
-    perthTime.getDate() === now.getDate() &&
-    perthTime.getMonth() === now.getMonth() &&
-    perthTime.getFullYear() === now.getFullYear()
+    localTime.getDate() === now.getDate() &&
+    localTime.getMonth() === now.getMonth() &&
+    localTime.getFullYear() === now.getFullYear()
   );
 }
 
 /**
- * Checks if a match is happening tomorrow in Perth time
+ * Checks if a match is happening tomorrow in the user's local timezone.
  */
 export function isTomorrow(dateString: string): boolean {
-  const perthTime = toPerthTime(dateString);
-  const tomorrow = toZonedTime(new Date(), PERTH_TIMEZONE);
+  const localTime = toLocalTime(dateString);
+  const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   
   return (
-    perthTime.getDate() === tomorrow.getDate() &&
-    perthTime.getMonth() === tomorrow.getMonth() &&
-    perthTime.getFullYear() === tomorrow.getFullYear()
+    localTime.getDate() === tomorrow.getDate() &&
+    localTime.getMonth() === tomorrow.getMonth() &&
+    localTime.getFullYear() === tomorrow.getFullYear()
   );
 }
 
@@ -130,14 +133,14 @@ export function getFriendlyDateLabel(dateString: string): string {
   if (isTomorrow(dateString)) {
     return 'Tomorrow';
   }
-  return formatPerthTime(dateString, 'EEEE, MMMM d');
+  return formatLocalTime(dateString, 'EEEE, MMMM d');
 }
 
 /**
- * Gets just the time in Perth timezone
+ * Gets just the time in the user's local timezone.
  */
-export function getPerthTimeOnly(dateString: string): string {
-  return formatPerthTime(dateString, 'h:mm a');
+export function getLocalTimeOnly(dateString: string): string {
+  return formatLocalTime(dateString, 'h:mm a');
 }
 
 /**

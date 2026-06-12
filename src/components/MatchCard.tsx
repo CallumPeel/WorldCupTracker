@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Fixture, MatchScore } from '../types';
 import { CountdownTimer } from './CountdownTimer';
-import { getFriendlyDateLabel, getPerthTimeOnly } from '../utils/timezone';
+import { getFriendlyDateLabel, getLocalTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 import { getTeamColors, getGroupColor } from '../utils/teamColors';
 
@@ -47,7 +47,7 @@ export function MatchCard({
           </span>
           <span className="text-sm text-gray-500">•</span>
           <span className="text-sm font-medium text-white">
-            {getPerthTimeOnly(fixture.date)}
+            {getLocalTimeOnly(fixture.date)}
           </span>
         </div>
         

@@ -1,6 +1,6 @@
 import type { Fixture, MatchScore } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
-import { formatCountdown, formatFullPerthDate, getPerthTimeOnly } from '../utils/timezone';
+import { formatCountdown, formatFullLocalDate, getLocalTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
 import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
@@ -103,10 +103,10 @@ export function ScheduleMatchCard({
           ) : (
             <div className="text-center">
               <div className="hidden sm:block text-[10px] font-semibold text-gray-500 whitespace-nowrap">
-                {formatFullPerthDate(fixture.date)}
+                {formatFullLocalDate(fixture.date)}
               </div>
               <div className="text-sm font-semibold text-gray-400">
-                {getPerthTimeOnly(fixture.date)}
+                {getLocalTimeOnly(fixture.date)}
               </div>
               {!isPast && (
                 <div className="text-xs text-primary tabular-nums">

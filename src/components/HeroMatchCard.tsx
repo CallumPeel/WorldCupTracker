@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Fixture } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
-import { formatCountdown } from '../utils/timezone';
-import { getPerthTimeOnly } from '../utils/timezone';
+import { formatCountdown, getLocalTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 import { getTeamColors, getGroupColor } from '../utils/teamColors';
 
@@ -109,8 +108,8 @@ export function HeroMatchCard({
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="font-semibold text-white">{getPerthTimeOnly(fixture.date)}</span>
-          <span className="text-gray-500">Perth</span>
+          <span className="font-semibold text-white">{getLocalTimeOnly(fixture.date)}</span>
+          <span className="text-gray-500">Local</span>
         </div>
         <span className="text-gray-600">•</span>
         <div className="flex items-center gap-2">

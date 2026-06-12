@@ -130,7 +130,7 @@ export function More() {
           <div className="space-y-2 text-sm text-gray-400">
             <p>FIFA World Cup 2026 Tracker</p>
             <p>All scores and standings are based on your manually entered results only.</p>
-            <p>Times shown in Australia/Perth timezone (AWST)</p>
+            <p>Times are shown in your device&apos;s local timezone.</p>
           </div>
         </section>
       </div>
