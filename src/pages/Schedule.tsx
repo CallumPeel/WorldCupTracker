@@ -232,7 +232,7 @@ export function Schedule() {
                     </span>
                   </div>
                   <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-500">
-                    <span>{pastGroups.length} old {pastGroups.length === 1 ? 'day' : 'days'}</span>
+                    <span>{pastGroups.length} past match {pastGroups.length === 1 ? 'day' : 'days'}</span>
                     {pastArchiveMissingScoreCount > 0 && (
                       <span className="font-semibold text-amber-300/80">
                         {pastArchiveMissingScoreCount} need scores

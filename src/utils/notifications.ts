@@ -43,8 +43,8 @@ export async function showMatchReminder(
   try {
     const notification = new Notification('Match Starting Soon! ⚽', {
       body: `${homeTeam} vs ${awayTeam} starts in ${minutesUntil} minutes`,
-      icon: '/pwa-192x192.png',
-      badge: '/pwa-192x192.png',
+      icon: '/football-ball.ico',
+      badge: '/football-ball.ico',
       tag: `match-reminder-${homeTeam}-${awayTeam}`,
       requireInteraction: false,
       silent: false,
