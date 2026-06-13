@@ -3,7 +3,7 @@ import type { Team } from '../types';
 export type TeamDisplayVariant = 'compact' | 'hero' | 'full';
 
 const ACTUAL_TEAM_SHORT_NAMES: Record<string, string> = {
-  BIH: 'Bosnia & Herz.',
+  BIH: 'Bosnia',
 };
 
 const ACTUAL_TEAM_HERO_NAMES: Record<string, string> = {

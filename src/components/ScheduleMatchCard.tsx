@@ -25,6 +25,9 @@ export function ScheduleMatchCard({
   const timeRemaining = useCountdown(fixture.date);
   const hasScore = !!score;
   const isPast = timeRemaining.isPast;
+  const needsScore = isPast && !hasScore;
+  const needsWatched = isPast && !watched;
+  const needsPastAttention = needsScore || needsWatched;
   const favoriteCodeSet = new Set(favoriteTeamCodes);
   const favoriteTeams = [fixture.homeTeam, fixture.awayTeam].filter((team) => favoriteCodeSet.has(team.code));
   const favoriteAccent =
@@ -43,7 +46,9 @@ export function ScheduleMatchCard({
       className={`relative overflow-hidden rounded-lg dense-card bg-dark-surface transition-all ${
         favoriteAccent ? 'border-2' : 'border border-dark-border'
       } ${
-        isPast && !hasScore ? 'opacity-60' : ''
+        needsPastAttention ? 'bg-gradient-to-br from-amber-500/[0.06] via-dark-surface to-sky-500/[0.04]' : ''
+      } ${
+        isPast && !hasScore ? 'opacity-75' : ''
       }`}
       style={
         favoriteAccent
@@ -55,6 +60,19 @@ export function ScheduleMatchCard({
           : undefined
       }
     >
+      {needsPastAttention && (
+        <div
+          aria-hidden="true"
+          className={`absolute inset-y-0 left-0 w-1 ${
+            needsScore && needsWatched
+              ? 'bg-gradient-to-b from-amber-400/70 to-sky-400/60'
+              : needsScore
+                ? 'bg-amber-400/60'
+                : 'bg-sky-400/60'
+          }`}
+        />
+      )}
+
       {favoriteAccent && (
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <span
@@ -113,6 +131,11 @@ export function ScheduleMatchCard({
                   {formatCountdown(timeRemaining)}
                 </div>
               )}
+              {needsScore && (
+                <div className="text-[10px] font-bold uppercase tracking-wide text-amber-300/80">
+                  Score needed
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -159,6 +182,8 @@ export function ScheduleMatchCard({
             className={`px-2 py-1 rounded text-xs font-semibold transition-all ${
               watched
                 ? 'bg-primary/20 text-primary'
+                : needsWatched
+                  ? 'bg-sky-400/10 text-sky-300 hover:bg-sky-400/20'
                 : 'bg-dark-elevated text-gray-400 hover:bg-dark-border'
             }`}
           >
