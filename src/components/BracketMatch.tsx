@@ -18,11 +18,15 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
   const awayLabel = getDisplayLabel(match.awayTeam?.code, match.awayLabel);
 
   const favoriteCodeSet = new Set(favoriteTeamCodes);
-  const favoriteTeams = [match.homeTeam, match.awayTeam].filter((team) => team && favoriteCodeSet.has(team.code));
+  // Check both actual teams and filter out placeholder codes
+  const actualTeams = [match.homeTeam, match.awayTeam].filter(
+    (team): team is NonNullable<typeof team> => team !== null && team !== undefined && !isInternalPlaceholderCode(team.code)
+  );
+  const favoriteTeams = actualTeams.filter((team) => favoriteCodeSet.has(team.code));
   const favoriteAccent =
     favoriteTeams.length > 1
       ? getMixedFavoriteTeamAccent()
-      : favoriteTeams[0]
+      : favoriteTeams.length === 1 && favoriteTeams[0]
         ? getFavoriteTeamAccent(favoriteTeams[0].code, favoriteTeams[0].name)
         : undefined;
 
@@ -38,18 +42,18 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
           : 'border-dark-border/30 bg-dark-bg/50 cursor-not-allowed'
       }`}
       style={
-        favoriteAccent && hasTeams
+        favoriteAccent
           ? {
               borderColor: favoriteAccent.border,
               background: favoriteAccent.gradient,
               boxShadow: `0 0 0 1px ${favoriteAccent.glow}, 0 0 14px ${favoriteAccent.glow}`,
             }
-          : !favoriteAccent && hasTeams
+          : hasTeams
             ? { borderColor: 'rgb(56, 56, 58)' }
             : undefined
       }
     >
-      {favoriteAccent && hasTeams && (
+      {favoriteAccent && (
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <span
             className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full shadow-[0_0_8px_currentColor]"

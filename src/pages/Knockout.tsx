@@ -14,8 +14,9 @@ export function Knockout() {
   const { fixtures, loading } = useFixtures();
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
-  const [collapsedRoundCount, setCollapsedRoundCount] = useState(0);
-  const [zoomIndex, setZoomIndex] = useState(DEFAULT_ZOOM_INDEX);
+  const [collapsedRounds, setCollapsedRounds] = useState<Set<string>>(new Set());
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [showZoomIndicator, setShowZoomIndicator] = useState(false);
   const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
 
   const knockoutRounds = useMemo(() => {
@@ -26,11 +27,7 @@ export function Knockout() {
     return getTournamentWinner(knockoutRounds);
   }, [knockoutRounds]);
 
-  const maxCollapsedRounds = Math.max(0, knockoutRounds.length - 1);
-  const safeCollapsedRoundCount = Math.min(collapsedRoundCount, maxCollapsedRounds);
-  const zoomLevel = ZOOM_LEVELS[zoomIndex];
-  const visibleRounds = knockoutRounds.slice(safeCollapsedRoundCount);
-  const firstVisibleRound = visibleRounds[0];
+  const visibleRounds = knockoutRounds.filter(round => !collapsedRounds.has(round.stage));
 
   const handleMatchClick = (fixtureId?: number) => {
     if (!fixtureId) return;
@@ -40,25 +37,63 @@ export function Knockout() {
     }
   };
 
-  const collapseLeftColumn = () => {
-    setCollapsedRoundCount((current) => Math.min(current + 1, maxCollapsedRounds));
+  const toggleRoundCollapse = (stage: string) => {
+    setCollapsedRounds((current) => {
+      const next = new Set(current);
+      if (next.has(stage)) {
+        next.delete(stage);
+      } else {
+        next.add(stage);
+      }
+      return next;
+    });
   };
 
-  const expandLeftColumn = () => {
-    setCollapsedRoundCount((current) => Math.max(current - 1, 0));
+  const handleZoom = (delta: number) => {
+    setZoomLevel((current) => {
+      const newZoom = Math.max(0.5, Math.min(1.5, current + delta));
+      return Math.round(newZoom * 100) / 100;
+    });
+    setShowZoomIndicator(true);
+    setTimeout(() => setShowZoomIndicator(false), 1500);
   };
 
-  const zoomOut = () => {
-    setZoomIndex((current) => Math.max(current - 1, 0));
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      handleZoom(delta);
+    }
   };
 
-  const zoomIn = () => {
-    setZoomIndex((current) => Math.min(current + 1, ZOOM_LEVELS.length - 1));
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+      (e.currentTarget as any)._lastPinchDistance = distance;
+    }
   };
 
-  const resetBracketView = () => {
-    setCollapsedRoundCount(0);
-    setZoomIndex(DEFAULT_ZOOM_INDEX);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = Math.hypot(
+        touch2.clientX - touch1.clientX,
+        touch2.clientY - touch1.clientY
+      );
+      const lastDistance = (e.currentTarget as any)._lastPinchDistance;
+      if (lastDistance) {
+        const delta = (distance - lastDistance) / 200;
+        handleZoom(delta);
+      }
+      (e.currentTarget as any)._lastPinchDistance = distance;
+    }
   };
 
   if (loading) {
@@ -75,9 +110,9 @@ export function Knockout() {
     <div className="min-h-screen pb-24">
       {/* Header */}
       <div className="sticky top-0 nav-glass border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-3">
-          <h1 className="text-2xl font-bold">Knockout</h1>
-          <p className="text-xs text-gray-500 mt-1">
+        <div className="container mx-auto px-4 py-2 landscape:py-1.5">
+          <h1 className="text-2xl font-bold landscape:text-lg">Knockout</h1>
+          <p className="text-xs text-gray-500 mt-1 landscape:hidden">
             Generated from your entered scores
           </p>
         </div>
@@ -113,71 +148,22 @@ export function Knockout() {
           </div>
         ) : (
           <>
-            <div className="mb-4 rounded-xl border border-dark-border bg-dark-surface/80 p-3">
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                <div>
-                  <div className="text-sm font-bold text-white">Bracket view</div>
-                  <div className="text-xs text-gray-500">
-                    {safeCollapsedRoundCount > 0 && firstVisibleRound
-                      ? `Showing from ${formatStageName(firstVisibleRound.stage)} onward · ${safeCollapsedRoundCount} hidden left`
-                      : 'Showing all knockout rounds'}
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={expandLeftColumn}
-                    disabled={safeCollapsedRoundCount === 0}
-                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-xs font-bold text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    ← Expand left
-                  </button>
-                  <button
-                    type="button"
-                    onClick={collapseLeftColumn}
-                    disabled={safeCollapsedRoundCount >= maxCollapsedRounds}
-                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-xs font-bold text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    Collapse left →
-                  </button>
-
-                  <div className="mx-1 hidden h-8 w-px bg-dark-border sm:block" />
-
-                  <button
-                    type="button"
-                    onClick={zoomOut}
-                    disabled={zoomIndex === 0}
-                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-sm font-black text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
-                    aria-label="Zoom out"
-                  >
-                    −
-                  </button>
-                  <div className="min-w-16 rounded-lg border border-dark-border bg-dark-bg px-3 py-2 text-center text-xs font-bold text-gray-300">
-                    {Math.round(zoomLevel * 100)}%
-                  </div>
-                  <button
-                    type="button"
-                    onClick={zoomIn}
-                    disabled={zoomIndex === ZOOM_LEVELS.length - 1}
-                    className="tap-target rounded-lg border border-dark-border bg-dark-elevated px-3 py-2 text-sm font-black text-gray-200 transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-40"
-                    aria-label="Zoom in"
-                  >
-                    +
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={resetBracketView}
-                    className="tap-target rounded-lg bg-primary/10 px-3 py-2 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
-                  >
-                    Reset
-                  </button>
+            {/* Zoom Indicator */}
+            {showZoomIndicator && (
+              <div className="fixed top-20 right-4 z-50 rounded-lg bg-dark-elevated border border-primary/30 px-4 py-2 shadow-lg animate-fade-in">
+                <div className="text-sm font-bold text-primary">
+                  {Math.round(zoomLevel * 100)}%
                 </div>
               </div>
-            </div>
+            )}
 
-            <div className="overflow-x-auto pb-4 custom-scrollbar">
+            <div 
+              className="overflow-x-auto pb-4 custom-scrollbar"
+              onWheel={handleWheel}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              style={{ touchAction: 'pan-x pan-y' }}
+            >
               <div
                 style={{
                   width: `${100 / zoomLevel}%`,
@@ -186,43 +172,66 @@ export function Knockout() {
                 }}
               >
                 <div className="inline-flex gap-8 min-w-full">
-                  {visibleRounds.map((round, visibleRoundIndex) => {
-                    const roundIndex = visibleRoundIndex + safeCollapsedRoundCount;
+                  {knockoutRounds.map((round, roundIndex) => {
+                    const isCollapsed = collapsedRounds.has(round.stage);
+                    const isVisible = !isCollapsed;
 
                     return (
-                <div key={round.stage} className="flex flex-col">
+                <div key={round.stage} className={`flex flex-col transition-all ${isCollapsed ? 'w-12' : ''}`}>
                   {/* Round Header */}
-                  <div className="mb-4 text-center">
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">
-                      {formatStageName(round.stage)}
-                    </h3>
-                    <div className="text-xs text-gray-600 mt-1">
-                      {round.matches.length} {round.matches.length === 1 ? 'match' : 'matches'}
-                    </div>
+                  <div className="mb-4">
+                    <button
+                      type="button"
+                      onClick={() => toggleRoundCollapse(round.stage)}
+                      className="w-full text-center hover:bg-dark-elevated rounded-lg px-2 py-1.5 transition-all group cursor-pointer border border-transparent hover:border-primary/30"
+                    >
+                      {isCollapsed ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="text-sm font-bold text-primary/60 group-hover:text-primary transition-colors">→</span>
+                          <span className="text-[10px] font-bold text-gray-500 group-hover:text-gray-300 transition-colors" style={{ writingMode: 'vertical-rl' }}>
+                            {formatStageName(round.stage)}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center gap-2">
+                          <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider group-hover:text-gray-200 transition-colors">
+                            {formatStageName(round.stage)}
+                          </h3>
+                          <span className="text-sm text-primary/60 group-hover:text-primary transition-colors">←</span>
+                        </div>
+                      )}
+                    </button>
+                    {isVisible && (
+                      <div className="text-xs text-gray-600 mt-1 text-center">
+                        {round.matches.length} {round.matches.length === 1 ? 'match' : 'matches'}
+                      </div>
+                    )}
                   </div>
 
                   {/* Matches */}
-                  <div className="flex flex-col justify-around flex-1 gap-4">
-                    {round.matches.map((match, matchIndex) => (
-                      <div key={matchIndex} className="flex items-center">
-                        {/* Connecting line from previous round */}
-                        {visibleRoundIndex > 0 && (
-                          <div className="w-6 h-px bg-dark-border mr-2"></div>
-                        )}
-                        
-                        <BracketMatch
-                          match={match}
-                          favoriteTeamCodes={favoriteTeamCodes}
-                          onClick={() => handleMatchClick(match.fixtureId)}
-                        />
+                  {isVisible && (
+                    <div className="flex flex-col justify-around flex-1 gap-4">
+                      {round.matches.map((match, matchIndex) => (
+                        <div key={matchIndex} className="flex items-center">
+                          {/* Connecting line from previous round */}
+                          {roundIndex > 0 && !collapsedRounds.has(knockoutRounds[roundIndex - 1].stage) && (
+                            <div className="w-6 h-px bg-dark-border mr-2"></div>
+                          )}
+                          
+                          <BracketMatch
+                            match={match}
+                            favoriteTeamCodes={favoriteTeamCodes}
+                            onClick={() => handleMatchClick(match.fixtureId)}
+                          />
 
-                        {/* Connecting line to next round */}
-                        {roundIndex < knockoutRounds.length - 1 && (
-                          <div className="w-6 h-px bg-dark-border ml-2"></div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                          {/* Connecting line to next round */}
+                          {roundIndex < knockoutRounds.length - 1 && (
+                            <div className="w-6 h-px bg-dark-border ml-2"></div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                     );
                   })}
@@ -232,10 +241,10 @@ export function Knockout() {
           </>
         )}
 
-        {/* Scroll hint */}
-        {knockoutRounds.length > 2 && (
+        {/* Hints */}
+        {knockoutRounds.length > 0 && (
           <div className="text-center mt-4 text-xs text-gray-500">
-            Use zoom to fit more rounds, collapse left columns to focus later stages, or scroll horizontally.
+            <div>Click round headers to collapse/expand · Pinch or Ctrl+Scroll to zoom</div>
           </div>
         )}
       </div>
