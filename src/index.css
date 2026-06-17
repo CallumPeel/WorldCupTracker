@@ -85,6 +85,54 @@
     mask-image: radial-gradient(circle at center, black, transparent 78%);
   }
 
+  .next-match-hero-special {
+    animation: favorite-hero-glow 4.5s ease-in-out infinite;
+  }
+
+  .favorite-hero-shimmer {
+    position: absolute;
+    inset: -35% -65%;
+    background: linear-gradient(115deg, transparent 38%, color-mix(in srgb, var(--favorite-accent) 42%, transparent) 48%, rgba(255, 255, 255, 0.34) 50%, transparent 62%);
+    filter: blur(0.5px);
+    opacity: 0;
+    transform: translateX(-38%) rotate(8deg);
+    animation: favorite-hero-shimmer 5.5s ease-in-out infinite;
+  }
+
+  .favorite-hero-confetti {
+    animation: favorite-confetti-float 3.8s ease-in-out infinite;
+  }
+
+  .favorite-hero-confetti-delay {
+    animation-delay: -1.6s;
+  }
+
+  .favorite-hero-orbit {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    font-size: 1.2rem;
+    line-height: 1;
+    background: radial-gradient(circle, currentColor 0 2px, transparent 3px);
+    filter: drop-shadow(0 0 0.7rem currentColor);
+    opacity: 0.9;
+    animation: favorite-sparkle-drift 6s ease-in-out infinite;
+  }
+
+  .favorite-hero-orbit-one {
+    left: 12%;
+    top: 20%;
+  }
+
+  .favorite-hero-orbit-two {
+    right: 12%;
+    bottom: 24%;
+    animation-delay: -2.8s;
+  }
+
   .next-match-teams {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -543,6 +591,72 @@
 
 .animate-fade-in {
   animation: fade-in 0.2s ease-out;
+}
+
+@keyframes favorite-hero-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px var(--favorite-glow),
+      0 0 24px var(--favorite-glow),
+      0 2rem 5rem rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--favorite-accent) 76%, white),
+      0 0 36px var(--favorite-glow),
+      0 2rem 5rem rgba(0, 0, 0, 0.45);
+  }
+}
+
+@keyframes favorite-hero-shimmer {
+  0%, 62%, 100% {
+    opacity: 0;
+    transform: translateX(-38%) rotate(8deg);
+  }
+  72% {
+    opacity: 0.55;
+  }
+  88% {
+    opacity: 0;
+    transform: translateX(38%) rotate(8deg);
+  }
+}
+
+@keyframes favorite-confetti-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(var(--tw-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -0.45rem, 0) rotate(var(--tw-rotate, 0deg));
+  }
+}
+
+@keyframes favorite-sparkle-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(0.86) rotate(0deg);
+    opacity: 0.45;
+  }
+  42% {
+    transform: translate3d(0.75rem, -0.65rem, 0) scale(1) rotate(12deg);
+    opacity: 1;
+  }
+  70% {
+    transform: translate3d(-0.35rem, 0.5rem, 0) scale(0.92) rotate(-8deg);
+    opacity: 0.68;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .next-match-hero-special,
+  .favorite-hero-shimmer,
+  .favorite-hero-confetti,
+  .favorite-hero-orbit {
+    animation: none !important;
+  }
+
+  .favorite-hero-shimmer {
+    display: none;
+  }
 }
 
 /* Glassmorphism effect */

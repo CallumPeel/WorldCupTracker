@@ -153,31 +153,46 @@ function NextMatchCard({ fixture, favoriteTeamCodes = [], onClick }: { fixture: 
   return (
     <div
       onClick={onClick}
-      className="next-match-hero group cursor-pointer relative overflow-hidden"
+      className={`next-match-hero group cursor-pointer relative overflow-hidden ${favoriteAccent ? 'next-match-hero-special' : ''}`}
       style={{
         '--home-color': homeColors.primary,
         '--away-color': awayColors.primary,
         '--accent-color': accentColor,
+        '--favorite-accent': favoriteAccent?.border,
+        '--favorite-glow': favoriteAccent?.glow,
         border: favoriteAccent ? `2px solid ${favoriteAccent.border}` : undefined,
         boxShadow: favoriteAccent ? `0 0 0 1px ${favoriteAccent.glow}, 0 0 24px ${favoriteAccent.glow}` : undefined,
       } as React.CSSProperties}
     >
       {favoriteAccent && (
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[5]">
+          <span className="favorite-hero-shimmer" />
           <span
-            className="absolute right-6 top-6 h-2 w-2 rounded-full shadow-[0_0_12px_currentColor]"
+            className="favorite-hero-orbit favorite-hero-orbit-one"
+            style={{ color: favoriteAccent.confetti[0] }}
+          >
+            ✦
+          </span>
+          <span
+            className="favorite-hero-orbit favorite-hero-orbit-two"
+            style={{ color: favoriteAccent.confetti[1] }}
+          >
+            ✧
+          </span>
+          <span
+            className="favorite-hero-confetti absolute right-6 top-6 h-2 w-2 rounded-full shadow-[0_0_12px_currentColor]"
             style={{ backgroundColor: favoriteAccent.confetti[0], color: favoriteAccent.confetti[0] }}
           />
           <span
-            className="absolute right-16 top-10 h-1.5 w-4 rotate-12 rounded-full shadow-[0_0_12px_currentColor]"
+            className="favorite-hero-confetti favorite-hero-confetti-delay absolute right-16 top-10 h-1.5 w-4 rotate-12 rounded-full shadow-[0_0_12px_currentColor]"
             style={{ backgroundColor: favoriteAccent.confetti[1], color: favoriteAccent.confetti[1] }}
           />
           <span
-            className="absolute bottom-6 left-8 h-3 w-3 rounded-sm rotate-45 shadow-[0_0_12px_currentColor]"
+            className="favorite-hero-confetti absolute bottom-6 left-8 h-3 w-3 rounded-sm rotate-45 shadow-[0_0_12px_currentColor]"
             style={{ backgroundColor: favoriteAccent.confetti[2], color: favoriteAccent.confetti[2] }}
           />
           <span
-            className="absolute bottom-10 right-24 text-lg leading-none drop-shadow-[0_0_8px_currentColor]"
+            className="favorite-hero-confetti favorite-hero-confetti-delay absolute bottom-10 right-24 text-lg leading-none drop-shadow-[0_0_8px_currentColor]"
             style={{ color: favoriteAccent.confetti[3] ?? favoriteAccent.border }}
           >
             ✦
