@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { BottomNav } from './components/BottomNav';
 import { Home } from './pages/Home';
 import { Schedule } from './pages/Schedule';
@@ -19,6 +20,7 @@ function App() {
         </Routes>
         <BottomNav />
       </div>
+      <Analytics />
     </BrowserRouter>
   );
 }
