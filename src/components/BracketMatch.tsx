@@ -1,13 +1,15 @@
 import type { KnockoutMatch } from '../types';
 import { CountryFlag } from './CountryFlag';
 import { getTeamColors } from '../utils/teamColors';
+import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
 
 interface BracketMatchProps {
   match: KnockoutMatch;
+  favoriteTeamCodes?: string[];
   onClick?: () => void;
 }
 
-export function BracketMatch({ match, onClick }: BracketMatchProps) {
+export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: BracketMatchProps) {
   const hasTeams = match.homeTeam && match.awayTeam;
   const hasScore = !!match.score;
   const homeColors = match.homeTeam ? getTeamColors(match.homeTeam.code) : undefined;
@@ -15,18 +17,58 @@ export function BracketMatch({ match, onClick }: BracketMatchProps) {
   const homeLabel = getDisplayLabel(match.homeTeam?.code, match.homeLabel);
   const awayLabel = getDisplayLabel(match.awayTeam?.code, match.awayLabel);
 
+  const favoriteCodeSet = new Set(favoriteTeamCodes);
+  const favoriteTeams = [match.homeTeam, match.awayTeam].filter((team) => team && favoriteCodeSet.has(team.code));
+  const favoriteAccent =
+    favoriteTeams.length > 1
+      ? getMixedFavoriteTeamAccent()
+      : favoriteTeams[0]
+        ? getFavoriteTeamAccent(favoriteTeams[0].code, favoriteTeams[0].name)
+        : undefined;
+
   return (
     <button
       onClick={onClick}
       disabled={!hasTeams}
-      className={`w-48 border rounded-lg p-2 transition-all text-left ${
+      className={`relative w-48 rounded-lg p-2 transition-all text-left overflow-hidden ${
+        favoriteAccent ? 'border-2' : 'border'
+      } ${
         hasTeams
-          ? 'border-dark-border bg-dark-surface hover:border-primary/50 cursor-pointer'
+          ? 'bg-dark-surface hover:border-primary/50 cursor-pointer'
           : 'border-dark-border/30 bg-dark-bg/50 cursor-not-allowed'
       }`}
+      style={
+        favoriteAccent && hasTeams
+          ? {
+              borderColor: favoriteAccent.border,
+              background: favoriteAccent.gradient,
+              boxShadow: `0 0 0 1px ${favoriteAccent.glow}, 0 0 14px ${favoriteAccent.glow}`,
+            }
+          : !favoriteAccent && hasTeams
+            ? { borderColor: 'rgb(56, 56, 58)' }
+            : undefined
+      }
     >
+      {favoriteAccent && hasTeams && (
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <span
+            className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full shadow-[0_0_8px_currentColor]"
+            style={{ backgroundColor: favoriteAccent.confetti[0], color: favoriteAccent.confetti[0] }}
+          />
+          <span
+            className="absolute right-6 bottom-2 h-1 w-2.5 rotate-12 rounded-full shadow-[0_0_8px_currentColor]"
+            style={{ backgroundColor: favoriteAccent.confetti[1], color: favoriteAccent.confetti[1] }}
+          />
+          <span
+            className="absolute left-2 top-2 text-[9px] leading-none drop-shadow-[0_0_6px_currentColor]"
+            style={{ color: favoriteAccent.confetti[2] }}
+          >
+            ✦
+          </span>
+        </div>
+      )}
       {/* Home Team */}
-      <div className={`flex items-center justify-between gap-2 py-1.5 px-2 rounded ${
+      <div className={`relative flex items-center justify-between gap-2 py-1.5 px-2 rounded ${
         match.winner?.id === match.homeTeam?.id ? 'bg-gradient-to-r from-green-500/20 to-green-500/10 border border-green-500/40' : ''
       }`}>
         {match.homeTeam ? (
@@ -55,7 +97,7 @@ export function BracketMatch({ match, onClick }: BracketMatchProps) {
       </div>
 
       {/* Away Team */}
-      <div className={`flex items-center justify-between gap-2 py-1.5 px-2 rounded mt-1 ${
+      <div className={`relative flex items-center justify-between gap-2 py-1.5 px-2 rounded mt-1 ${
         match.winner?.id === match.awayTeam?.id ? 'bg-gradient-to-r from-green-500/20 to-green-500/10 border border-green-500/40' : ''
       }`}>
         {match.awayTeam ? (

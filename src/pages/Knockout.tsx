@@ -16,6 +16,7 @@ export function Knockout() {
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
   const [collapsedRoundCount, setCollapsedRoundCount] = useState(0);
   const [zoomIndex, setZoomIndex] = useState(DEFAULT_ZOOM_INDEX);
+  const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
 
   const knockoutRounds = useMemo(() => {
     return generateKnockoutBracket(fixtures, userData.scores);
@@ -211,6 +212,7 @@ export function Knockout() {
                         
                         <BracketMatch
                           match={match}
+                          favoriteTeamCodes={favoriteTeamCodes}
                           onClick={() => handleMatchClick(match.fixtureId)}
                         />
 

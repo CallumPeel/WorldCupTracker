@@ -10,12 +10,14 @@ import { useCountdown } from '../hooks/useCountdown';
 import { formatCountdown, formatFullLocalDate, getFriendlyDateLabel, getLocalTimeOnly } from '../utils/timezone';
 import { getGroupColor, getStageColor, getTeamColors } from '../utils/teamColors';
 import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
+import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
 import type { Fixture } from '../types';
 
 export function Home() {
   const { fixtures, loading, error } = useFixtures();
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
+  const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
 
   const { nextMatch, upcomingFive } = useMemo(() => {
     const now = new Date();
@@ -72,7 +74,7 @@ export function Home() {
 
       <div className="page-shell page-stack">
         <div className="home-dashboard-grid">
-          {nextMatch && <NextMatchCard fixture={nextMatch} onClick={() => setSelectedFixture(nextMatch)} />}
+          {nextMatch && <NextMatchCard fixture={nextMatch} favoriteTeamCodes={favoriteTeamCodes} onClick={() => setSelectedFixture(nextMatch)} />}
 
           {upcomingFive.length > 0 && (
             <section className="min-w-0 h-full flex flex-col next-fixtures-panel">
@@ -90,6 +92,7 @@ export function Home() {
                   <UltraCompactMatchRow
                     key={fixture.id}
                     fixture={fixture}
+                    favoriteTeamCodes={favoriteTeamCodes}
                     onClick={() => setSelectedFixture(fixture)}
                   />
                 ))}
@@ -127,7 +130,7 @@ export function Home() {
   );
 }
 
-function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => void }) {
+function NextMatchCard({ fixture, favoriteTeamCodes = [], onClick }: { fixture: Fixture; favoriteTeamCodes?: string[]; onClick: () => void }) {
   const timeRemaining = useCountdown(fixture.date);
   const homeColors = getTeamColors(fixture.homeTeam.code);
   const awayColors = getTeamColors(fixture.awayTeam.code);
@@ -137,17 +140,50 @@ function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => 
   const stageLabel = fixture.stage === 'GROUP_STAGE' && fixture.group
     ? `Group ${fixture.group}`
     : fixture.stage.replace(/_/g, ' ');
+  
+  const favoriteCodeSet = new Set(favoriteTeamCodes);
+  const favoriteTeams = [fixture.homeTeam, fixture.awayTeam].filter((team) => favoriteCodeSet.has(team.code));
+  const favoriteAccent =
+    favoriteTeams.length > 1
+      ? getMixedFavoriteTeamAccent()
+      : favoriteTeams[0]
+        ? getFavoriteTeamAccent(favoriteTeams[0].code, `${favoriteTeams[0].name} match`)
+        : undefined;
 
   return (
     <div
       onClick={onClick}
-      className="next-match-hero group cursor-pointer"
+      className="next-match-hero group cursor-pointer relative overflow-hidden"
       style={{
         '--home-color': homeColors.primary,
         '--away-color': awayColors.primary,
         '--accent-color': accentColor,
+        border: favoriteAccent ? `2px solid ${favoriteAccent.border}` : undefined,
+        boxShadow: favoriteAccent ? `0 0 0 1px ${favoriteAccent.glow}, 0 0 24px ${favoriteAccent.glow}` : undefined,
       } as React.CSSProperties}
     >
+      {favoriteAccent && (
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[5]">
+          <span
+            className="absolute right-6 top-6 h-2 w-2 rounded-full shadow-[0_0_12px_currentColor]"
+            style={{ backgroundColor: favoriteAccent.confetti[0], color: favoriteAccent.confetti[0] }}
+          />
+          <span
+            className="absolute right-16 top-10 h-1.5 w-4 rotate-12 rounded-full shadow-[0_0_12px_currentColor]"
+            style={{ backgroundColor: favoriteAccent.confetti[1], color: favoriteAccent.confetti[1] }}
+          />
+          <span
+            className="absolute bottom-6 left-8 h-3 w-3 rounded-sm rotate-45 shadow-[0_0_12px_currentColor]"
+            style={{ backgroundColor: favoriteAccent.confetti[2], color: favoriteAccent.confetti[2] }}
+          />
+          <span
+            className="absolute bottom-10 right-24 text-lg leading-none drop-shadow-[0_0_8px_currentColor]"
+            style={{ color: favoriteAccent.confetti[3] ?? favoriteAccent.border }}
+          >
+            ✦
+          </span>
+        </div>
+      )}
       <div className="absolute inset-0 opacity-80 transition-opacity group-hover:opacity-100 pointer-events-none">
         <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full blur-3xl" style={{ backgroundColor: `${homeColors.primary}55` }} />
         <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full blur-3xl" style={{ backgroundColor: `${awayColors.primary}55` }} />
@@ -161,6 +197,14 @@ function NextMatchCard({ fixture, onClick }: { fixture: Fixture; onClick: () => 
             <span className="text-xs sm:text-sm font-black text-white uppercase tracking-[0.28em]">Next Match</span>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            {favoriteAccent && (
+              <span
+                className="rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider text-white shadow-[0_0_12px_currentColor]"
+                style={{ backgroundColor: `${favoriteAccent.border}33`, color: favoriteAccent.border }}
+              >
+                ✦ {favoriteAccent.pill}
+              </span>
+            )}
             <span className="rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider text-black" style={{ backgroundColor: accentColor }}>
               {stageLabel}
             </span>
