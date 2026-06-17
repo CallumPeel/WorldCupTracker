@@ -14,6 +14,10 @@ const sizeClasses = {
 };
 
 export function CountryFlag({ countryCode, className = '', size = 'md' }: CountryFlagProps) {
+  if (countryCode === 'ENG') {
+    return <EnglandFlag className={className} size={size} />;
+  }
+
   if (countryCode === 'SCO') {
     return <ScotlandFlag className={className} size={size} />;
   }
@@ -34,6 +38,22 @@ export function CountryFlag({ countryCode, className = '', size = 'md' }: Countr
       className={`${sizeClasses[size]} ${className} rounded shadow-sm border border-white/10`}
       title={countryCode}
     />
+  );
+}
+
+function EnglandFlag({ className = '', size }: Pick<CountryFlagProps, 'className' | 'size'>) {
+  return (
+    <svg
+      viewBox="0 0 60 40"
+      className={`${sizeClasses[size ?? 'md']} ${className} rounded shadow-sm border border-white/10`}
+      role="img"
+      aria-label="England flag"
+    >
+      <title>England</title>
+      <rect width="60" height="40" fill="#FFFFFF" />
+      <path d="M25 0H35V40H25Z" fill="#CE1124" />
+      <path d="M0 15H60V25H0Z" fill="#CE1124" />
+    </svg>
   );
 }
 
