@@ -111,9 +111,9 @@ export function Knockout() {
     <div className="min-h-screen pb-24">
       {/* Header */}
       <div className="sticky top-0 nav-glass border-b border-dark-border z-30 safe-top">
-        <div className="container mx-auto px-4 py-2 landscape:py-1.5">
-          <h1 className="text-2xl font-bold landscape:text-lg">Knockout</h1>
-          <p className="text-xs text-gray-500 mt-1 landscape:hidden">
+        <div className="container mx-auto px-4 py-2 max-md:landscape:py-1.5">
+          <h1 className="text-2xl font-bold max-md:landscape:text-lg">Knockout</h1>
+          <p className="text-xs text-gray-500 mt-1 max-md:landscape:hidden">
             Generated from your entered scores
           </p>
         </div>

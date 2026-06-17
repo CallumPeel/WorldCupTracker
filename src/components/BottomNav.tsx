@@ -53,7 +53,7 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bottom-nav-glass border-t border-dark-border safe-bottom z-40">
-      <div className="flex items-center justify-around px-2 h-20 landscape:h-14">
+      <div className="flex items-center justify-around px-2 h-20 max-md:landscape:h-14">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -63,7 +63,7 @@ export function BottomNav() {
               className="relative flex-1 max-w-[100px]"
             >
               <div
-                className={`flex flex-col items-center justify-center gap-1 py-2 landscape:py-1 landscape:gap-0.5 rounded-xl transition-all duration-200 ${
+                className={`flex flex-col items-center justify-center gap-1 py-2 max-md:landscape:py-1 max-md:landscape:gap-0.5 rounded-xl transition-all duration-200 ${
                   isActive
                     ? 'text-primary'
                     : 'text-gray-500'
@@ -74,10 +74,10 @@ export function BottomNav() {
                   <div className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/20" />
                 )}
                 
-                <div className={`relative transition-all duration-200 landscape:scale-90 ${isActive ? 'scale-110' : 'scale-100'}`}>
+                <div className={`relative transition-all duration-200 max-md:landscape:scale-90 ${isActive ? 'scale-110' : 'scale-100'}`}>
                   {item.icon}
                 </div>
-                <span className={`relative text-xs landscape:text-[10px] font-semibold transition-all ${isActive ? 'text-primary' : 'text-gray-500'}`}>
+                <span className={`relative text-xs max-md:landscape:text-[10px] font-semibold transition-all ${isActive ? 'text-primary' : 'text-gray-500'}`}>
                   {item.label}
                 </span>
               </div>
