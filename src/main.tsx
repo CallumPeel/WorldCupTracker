@@ -2,7 +2,14 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
+import { APP_VERSION } from './generated/version';
 import './index.css';
+
+interface AppVersion {
+  version: string;
+  buildTime: string;
+  buildId: string;
+}
 
 const updateSW = registerSW({
   immediate: true,
@@ -15,6 +22,44 @@ const updateSW = registerSW({
     console.info('World Cup Tracker is ready to work offline.');
   },
 });
+
+checkForRescueUpdate();
+setInterval(checkForRescueUpdate, 15 * 60 * 1000);
+
+async function checkForRescueUpdate() {
+  try {
+    const response = await fetch(`/version.json?t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    if (!response.ok) return;
+
+    const deployedVersion = (await response.json()) as Partial<AppVersion>;
+
+    if (
+      typeof deployedVersion.buildId === 'string' &&
+      deployedVersion.buildId !== APP_VERSION.buildId
+    ) {
+      showUpdatePrompt(() => {
+        unregisterServiceWorkersAndReload();
+      });
+    }
+  } catch (error) {
+    console.info('Unable to check for app updates right now.', error);
+  }
+}
+
+async function unregisterServiceWorkersAndReload() {
+  if ('serviceWorker' in navigator) {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(registrations.map((registration) => registration.unregister()));
+  }
+
+  window.location.reload();
+}
 
 function showUpdatePrompt(onUpdate: () => void) {
   if (document.getElementById('app-update-prompt')) return;
