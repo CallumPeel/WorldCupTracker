@@ -87,6 +87,7 @@ export interface KnockoutMatch {
   awayLabel?: string;
   winner?: Team;
   score?: MatchScore;
+  isProvisional?: boolean; // True if teams are based on incomplete group data
 }
 
 export interface KnockoutRound {

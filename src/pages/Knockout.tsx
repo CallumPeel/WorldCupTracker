@@ -7,9 +7,6 @@ import { useUserData } from '../hooks/useUserData';
 import { generateKnockoutBracket, getTournamentWinner } from '../utils/bracketGenerator';
 import type { Fixture } from '../types';
 
-const ZOOM_LEVELS = [0.6, 0.75, 0.9, 1, 1.15] as const;
-const DEFAULT_ZOOM_INDEX = 3;
-
 export function Knockout() {
   const { fixtures, loading } = useFixtures();
   const userData = useUserData();
@@ -27,7 +24,11 @@ export function Knockout() {
     return getTournamentWinner(knockoutRounds);
   }, [knockoutRounds]);
 
-  const visibleRounds = knockoutRounds.filter(round => !collapsedRounds.has(round.stage));
+  const hasProvisionalMatches = useMemo(() => {
+    return knockoutRounds.some(round => 
+      round.matches.some(match => match.isProvisional)
+    );
+  }, [knockoutRounds]);
 
   const handleMatchClick = (fixtureId?: number) => {
     if (!fixtureId) return;
@@ -129,6 +130,24 @@ export function Knockout() {
               <div>
                 <div className="text-xl font-bold">{winner.name}</div>
                 <div className="text-xs text-gray-500">{winner.code}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Provisional Warning Banner */}
+      {hasProvisionalMatches && (
+        <div className="container mx-auto px-4 py-4">
+          <div className="border border-orange-500/40 rounded-xl p-4 bg-gradient-to-br from-orange-500/10 to-orange-500/5">
+            <div className="flex items-start gap-3">
+              <div className="text-2xl">⚠️</div>
+              <div className="flex-1">
+                <div className="text-sm font-bold text-orange-400 mb-1">GROUP STAGES INCOMPLETE</div>
+                <div className="text-xs text-gray-400">
+                  Teams marked as <span className="text-orange-400 font-bold">PROJECTED</span> are current standings based on incomplete group data. 
+                  These matchups may change as more group matches are played.
+                </div>
               </div>
             </div>
           </div>

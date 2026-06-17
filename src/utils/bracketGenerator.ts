@@ -1,5 +1,5 @@
 import type { Fixture, MatchScore, KnockoutRound, KnockoutMatch, Team } from '../types';
-import { getGroupWinners, calculateGroupStandings } from './groupCalculator';
+import { getGroupWinners, calculateGroupStandings, isGroupProvisional } from './groupCalculator';
 
 /**
  * Generates knockout bracket from group winners and user-entered scores
@@ -17,42 +17,42 @@ export function generateKnockoutBracket(
   // Round of 32
   const round32Fixtures = fixtures.filter((f) => f.stage === 'ROUND_OF_32');
   if (round32Fixtures.length > 0) {
-    rounds.push(createKnockoutRound('ROUND_OF_32', round32Fixtures, scores, groupWinners));
+    rounds.push(createKnockoutRound('ROUND_OF_32', round32Fixtures, scores, groupWinners, fixtures));
   }
 
   // Round of 16
   const round16Fixtures = fixtures.filter((f) => f.stage === 'ROUND_OF_16');
   if (round16Fixtures.length > 0) {
     const round16Winners = rounds.length > 0 ? getKnockoutWinners(rounds[0]) : new Map();
-    rounds.push(createKnockoutRound('ROUND_OF_16', round16Fixtures, scores, round16Winners));
+    rounds.push(createKnockoutRound('ROUND_OF_16', round16Fixtures, scores, round16Winners, fixtures));
   }
 
   // Quarter Finals
   const qfFixtures = fixtures.filter((f) => f.stage === 'QUARTER_FINAL');
   if (qfFixtures.length > 0) {
     const qfQualifiers = getKnockoutWinners(rounds[rounds.length - 1]);
-    rounds.push(createKnockoutRound('QUARTER_FINAL', qfFixtures, scores, qfQualifiers));
+    rounds.push(createKnockoutRound('QUARTER_FINAL', qfFixtures, scores, qfQualifiers, fixtures));
   }
 
   // Semi Finals
   const sfFixtures = fixtures.filter((f) => f.stage === 'SEMI_FINAL');
   if (sfFixtures.length > 0) {
     const sfQualifiers = getKnockoutWinners(rounds[rounds.length - 1]);
-    rounds.push(createKnockoutRound('SEMI_FINAL', sfFixtures, scores, sfQualifiers));
+    rounds.push(createKnockoutRound('SEMI_FINAL', sfFixtures, scores, sfQualifiers, fixtures));
   }
 
   // Third Place
   const thirdPlaceFixtures = fixtures.filter((f) => f.stage === 'THIRD_PLACE');
   if (thirdPlaceFixtures.length > 0) {
     const losers = getKnockoutLosers(rounds[rounds.length - 1]);
-    rounds.push(createKnockoutRound('THIRD_PLACE', thirdPlaceFixtures, scores, losers));
+    rounds.push(createKnockoutRound('THIRD_PLACE', thirdPlaceFixtures, scores, losers, fixtures));
   }
 
   // Final
   const finalFixtures = fixtures.filter((f) => f.stage === 'FINAL');
   if (finalFixtures.length > 0) {
     const finalists = getKnockoutWinners(rounds.find(r => r.stage === 'SEMI_FINAL')!);
-    rounds.push(createKnockoutRound('FINAL', finalFixtures, scores, finalists));
+    rounds.push(createKnockoutRound('FINAL', finalFixtures, scores, finalists, fixtures));
   }
 
   return rounds;
@@ -65,7 +65,8 @@ function createKnockoutRound(
   stage: any,
   fixtures: Fixture[],
   scores: MatchScore[],
-  qualifiers: Map<string, Team[]>
+  qualifiers: Map<string, Team[]>,
+  allFixtures: Fixture[]
 ): KnockoutRound {
   const matches: KnockoutMatch[] = fixtures.map((fixture) => {
     const score = scores.find((s) => s.fixtureId === fixture.id);
@@ -78,6 +79,14 @@ function createKnockoutRound(
     };
     const winner = score ? determineWinner(resolvedFixture, score) : undefined;
 
+    // Check if this match contains teams from provisional groups
+    const isProvisional = isMatchProvisional(
+      resolvedHome,
+      resolvedAway,
+      allFixtures,
+      scores
+    );
+
     return {
       fixtureId: fixture.id,
       homeTeam: resolvedHome.team,
@@ -86,6 +95,7 @@ function createKnockoutRound(
       awayLabel: resolvedAway.label,
       winner,
       score,
+      isProvisional,
     };
   });
 
@@ -98,6 +108,7 @@ function createKnockoutRound(
 interface ResolvedSlot {
   team?: Team;
   label?: string;
+  sourceGroups?: string[]; // Groups this team/slot came from
 }
 
 /**
@@ -115,6 +126,7 @@ function resolveFixtureTeam(
     return {
       team,
       label: formatGroupQualificationLabel(groupSlot.groups, groupSlot.position),
+      sourceGroups: groupSlot.groups,
     };
   }
 
@@ -248,6 +260,31 @@ function getKnockoutLosers(round: KnockoutRound): Map<string, Team[]> {
  */
 export function isKnockoutStageComplete(round: KnockoutRound): boolean {
   return round.matches.every((match) => match.winner !== undefined);
+}
+
+/**
+ * Determines if a match is provisional based on whether its teams come from incomplete groups
+ */
+function isMatchProvisional(
+  homeSlot: ResolvedSlot,
+  awaySlot: ResolvedSlot,
+  fixtures: Fixture[],
+  scores: MatchScore[]
+): boolean {
+  // Check if either slot has source groups that are provisional
+  const groupsToCheck = [
+    ...(homeSlot.sourceGroups || []),
+    ...(awaySlot.sourceGroups || []),
+  ];
+
+  if (groupsToCheck.length === 0) {
+    // If no source groups, check if teams are assigned
+    // A match without teams is not "provisional" - it's just TBD
+    return false;
+  }
+
+  // Check if any source group is provisional
+  return groupsToCheck.some((group) => isGroupProvisional(group, fixtures, scores));
 }
 
 /**

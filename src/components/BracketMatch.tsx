@@ -12,6 +12,7 @@ interface BracketMatchProps {
 export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: BracketMatchProps) {
   const hasTeams = match.homeTeam && match.awayTeam;
   const hasScore = !!match.score;
+  const isProvisional = match.isProvisional && hasTeams;
   const homeColors = match.homeTeam ? getTeamColors(match.homeTeam.code) : undefined;
   const awayColors = match.awayTeam ? getTeamColors(match.awayTeam.code) : undefined;
   const homeLabel = getDisplayLabel(match.homeTeam?.code, match.homeLabel);
@@ -37,6 +38,8 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
       className={`relative w-48 rounded-lg p-2 transition-all text-left overflow-hidden ${
         favoriteAccent ? 'border-2' : 'border'
       } ${
+        isProvisional ? 'border-dashed' : ''
+      } ${
         hasTeams
           ? 'bg-dark-surface hover:border-primary/50 cursor-pointer'
           : 'border-dark-border/30 bg-dark-bg/50 cursor-not-allowed'
@@ -49,10 +52,18 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
               boxShadow: `0 0 0 1px ${favoriteAccent.glow}, 0 0 14px ${favoriteAccent.glow}`,
             }
           : hasTeams
-            ? { borderColor: 'rgb(56, 56, 58)' }
+            ? { borderColor: isProvisional ? 'rgb(255, 159, 64)' : 'rgb(56, 56, 58)' }
             : undefined
       }
+      title={isProvisional ? 'Projected teams - group stages incomplete' : undefined}
     >
+      {/* Provisional indicator */}
+      {isProvisional && (
+        <div className="absolute top-1 right-1 px-1.5 py-0.5 bg-orange-500/20 border border-orange-500/40 rounded text-[9px] font-bold text-orange-400">
+          PROJECTED
+        </div>
+      )}
+      
       {favoriteAccent && (
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <span

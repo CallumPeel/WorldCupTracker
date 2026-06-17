@@ -153,3 +153,28 @@ export function getGroupMatchesWithScores(
     scores.some((s) => s.fixtureId === fixture.id)
   ).length;
 }
+
+/**
+ * Checks if a group's standings are provisional (incomplete)
+ * A group is considered complete when at least 75% of matches have been played
+ */
+export function isGroupProvisional(
+  group: string,
+  fixtures: Fixture[],
+  scores: MatchScore[]
+): boolean {
+  const groupFixtures = fixtures.filter(
+    (f) => f.stage === 'GROUP_STAGE' && f.group === group
+  );
+  
+  if (groupFixtures.length === 0) return true;
+  
+  const matchesWithScores = groupFixtures.filter((fixture) =>
+    scores.some((s) => s.fixtureId === fixture.id)
+  ).length;
+  
+  const completionRate = matchesWithScores / groupFixtures.length;
+  
+  // Consider provisional if less than 75% of matches are complete
+  return completionRate < 0.75;
+}
