@@ -119,8 +119,8 @@ export function Schedule() {
   const handleFillGroupStageScores = async () => {
     const hasExistingGroupStageScores = enteredGroupStageScoreCount > 0;
     const confirmationMessage = hasExistingGroupStageScores
-      ? `This will overwrite ${enteredGroupStageScoreCount} existing group-stage score${enteredGroupStageScoreCount === 1 ? '' : 's'} with the completed results. Continue?`
-      : 'Fill all completed group-stage scores from the results file?';
+      ? 'Overwrite your group match scores?'
+      : 'Fill all group match scores?';
 
     if (!confirm(confirmationMessage)) {
       return;
@@ -247,7 +247,7 @@ export function Schedule() {
                     <div className="text-sm font-bold uppercase tracking-wide text-primary">Group stage results</div>
                     <h2 className="mt-1 text-lg font-bold text-white">Fill all group-stage scores</h2>
                     <p className="mt-1 text-sm text-gray-400">
-                      Use the completed results file to populate all {groupStageFixtures.length} group-stage matches.
+                      Populate all {groupStageFixtures.length} group-stage matches with completed results.
                       {missingGroupStageScoreCount > 0
                         ? ` ${missingGroupStageScoreCount} still need scores.`
                         : ' Your group-stage scores are already complete.'}

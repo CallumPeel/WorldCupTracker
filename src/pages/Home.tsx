@@ -54,8 +54,8 @@ export function Home() {
 
   const handleFillGroupStageScores = async () => {
     const confirmationMessage = enteredGroupStageScoreCount > 0
-      ? `This will overwrite ${enteredGroupStageScoreCount} existing group-stage score${enteredGroupStageScoreCount === 1 ? '' : 's'} with the completed results. Continue?`
-      : 'Fill all completed group-stage scores from the results file?';
+      ? 'Overwrite your group match scores?'
+      : 'Fill all group match scores?';
 
     if (!confirm(confirmationMessage)) {
       return;
