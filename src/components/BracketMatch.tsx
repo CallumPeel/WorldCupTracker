@@ -1,6 +1,6 @@
 import type { KnockoutMatch } from '../types';
 import { CountryFlag } from './CountryFlag';
-import { getTeamColors } from '../utils/teamColors';
+import { getReadableTeamColor, getTeamColors } from '../utils/teamColors';
 import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
 
 interface BracketMatchProps {
@@ -15,6 +15,8 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
   const isProvisional = match.isProvisional && hasTeams;
   const homeColors = match.homeTeam ? getTeamColors(match.homeTeam.code) : undefined;
   const awayColors = match.awayTeam ? getTeamColors(match.awayTeam.code) : undefined;
+  const homeReadableColor = match.homeTeam ? getReadableTeamColor(match.homeTeam.code) : undefined;
+  const awayReadableColor = match.awayTeam ? getReadableTeamColor(match.awayTeam.code) : undefined;
   const homeLabel = getDisplayLabel(match.homeTeam?.code, match.homeLabel);
   const awayLabel = getDisplayLabel(match.awayTeam?.code, match.awayLabel);
 
@@ -97,7 +99,7 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
               </div>
               <span 
                 className="font-semibold text-xs truncate"
-                style={{ color: homeColors?.primary }}
+                style={{ color: homeReadableColor }}
               >
                 {match.homeTeam.code}
               </span>
@@ -126,7 +128,7 @@ export function BracketMatch({ match, favoriteTeamCodes = [], onClick }: Bracket
               </div>
               <span 
                 className="font-semibold text-xs truncate"
-                style={{ color: awayColors?.primary }}
+                style={{ color: awayReadableColor }}
               >
                 {match.awayTeam.code}
               </span>

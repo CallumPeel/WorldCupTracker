@@ -74,6 +74,24 @@ export function getTeamColors(code: string): { primary: string; secondary: strin
   return teamColors[code] || { primary: '#0a84ff', secondary: '#FFFFFF' };
 }
 
+export function getReadableTeamColor(code: string): string {
+  const colors = getTeamColors(code);
+
+  return isLowContrastOnDark(colors.primary) ? colors.secondary : colors.primary;
+}
+
+function isLowContrastOnDark(hexColor: string): boolean {
+  const normalizedHex = hexColor.replace('#', '');
+  if (!/^[\da-f]{6}$/i.test(normalizedHex)) return false;
+
+  const red = parseInt(normalizedHex.slice(0, 2), 16);
+  const green = parseInt(normalizedHex.slice(2, 4), 16);
+  const blue = parseInt(normalizedHex.slice(4, 6), 16);
+  const relativeLuminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue) / 255;
+
+  return relativeLuminance < 0.18;
+}
+
 // Group color scheme for visual variety
 export const groupColors: Record<string, string> = {
   'A': '#FF6B6B', // Red
