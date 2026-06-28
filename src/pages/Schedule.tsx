@@ -166,7 +166,10 @@ export function Schedule() {
     const shouldShowMatches = !isPastDay || isPastDayExpanded;
 
     return (
-      <section key={group.dateKey} className="py-3 sm:py-4">
+      <section
+        key={group.dateKey}
+        className={`py-3 sm:py-4 ${isPastDay ? 'rounded-xl bg-amber-500/[0.025] px-2 ring-1 ring-amber-300/10' : ''}`}
+      >
         <DateHeader
           date={group.date}
           isToday={isToday}
@@ -178,16 +181,16 @@ export function Schedule() {
           <button
             type="button"
             onClick={() => togglePastDate(group.dateKey)}
-            className="mt-3 w-full rounded-lg border border-dark-border bg-dark-surface/80 px-4 py-3 text-left transition-all hover:border-primary/50 hover:bg-dark-elevated"
+            className="mt-3 w-full rounded-lg border border-amber-300/20 bg-gradient-to-br from-amber-500/[0.07] via-dark-surface/85 to-dark-surface/80 px-4 py-3 text-left transition-all hover:border-amber-300/35 hover:bg-dark-elevated"
             aria-expanded={isPastDayExpanded}
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="font-semibold text-gray-300">
+              <span className="font-semibold text-amber-50/90">
                 {isPastDayExpanded
                   ? 'Hide old matches'
                   : `Show ${group.matches.length} old ${group.matches.length === 1 ? 'match' : 'matches'}`}
               </span>
-              <span className="text-xs font-semibold text-primary">
+              <span className="text-xs font-semibold text-amber-300/90">
                 {isPastDayExpanded ? 'Collapse' : 'Expand'}
               </span>
             </div>
@@ -205,7 +208,7 @@ export function Schedule() {
         )}
 
         {shouldShowMatches && (
-          <div className="schedule-day-grid mt-3">
+          <div className={`schedule-day-grid mt-3 ${isPastDay ? 'rounded-lg bg-amber-500/[0.025] p-1.5' : ''}`}>
             {group.matches.map((fixture) => (
               <ScheduleMatchCard
                 key={fixture.id}
@@ -240,55 +243,32 @@ export function Schedule() {
           </div>
         ) : (
           <>
-            {groupStageFixtures.length > 0 && (
-              <section className="mt-4 rounded-xl border border-primary/20 bg-gradient-to-br from-primary/10 via-dark-surface to-dark-surface p-4">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <div className="text-sm font-bold uppercase tracking-wide text-primary">Group stage results</div>
-                    <h2 className="mt-1 text-lg font-bold text-white">Fill all group-stage scores</h2>
-                    <p className="mt-1 text-sm text-gray-400">
-                      Populate all {groupStageFixtures.length} group-stage matches with completed results.
-                      {missingGroupStageScoreCount > 0
-                        ? ` ${missingGroupStageScoreCount} still need scores.`
-                        : ' Your group-stage scores are already complete.'}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleFillGroupStageScores}
-                    disabled={isFillingGroupStageScores || userData.loading}
-                    className="btn-primary whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {isFillingGroupStageScores ? 'Filling scores...' : 'Fill group scores'}
-                  </button>
-                </div>
-              </section>
-            )}
+            {currentAndFutureGroups.map(renderScheduleGroup)}
 
             {pastGroups.length > 0 && (
-              <section className="py-3 sm:py-4">
+              <section className="pt-3 sm:pt-4">
                 <button
                   type="button"
                   onClick={() => setShowPastArchive((current) => !current)}
-                  className={`w-full rounded-xl border px-4 py-4 text-left transition-all hover:border-primary/50 hover:bg-dark-elevated ${
+                  className={`w-full rounded-lg border px-3 py-3 text-left transition-all hover:border-primary/50 hover:bg-dark-elevated ${
                     pastArchiveMissingScoreCount > 0 || pastArchiveUnwatchedCount > 0
-                      ? 'border-amber-300/20 bg-gradient-to-br from-amber-500/[0.05] via-dark-surface to-sky-500/[0.04]'
+                      ? 'border-amber-300/15 bg-gradient-to-br from-amber-500/[0.035] via-dark-surface to-sky-500/[0.025]'
                       : 'border-dark-border bg-dark-surface'
                   }`}
                   aria-expanded={showPastArchive}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
-                      <div className="text-sm font-bold uppercase tracking-wide text-gray-400">Past matches</div>
-                      <div className="mt-1 text-lg font-bold text-white">
+                      <div className="text-xs font-bold uppercase tracking-wide text-gray-500">Past matches</div>
+                      <div className="mt-0.5 text-sm font-bold text-white sm:text-base">
                         {showPastArchive ? 'Hide match archive' : `${pastArchiveMatchCount} old matches hidden`}
                       </div>
                     </div>
-                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
                       {showPastArchive ? 'Collapse archive' : 'Open archive'}
                     </span>
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-500">
+                  <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-500">
                     <span>{pastGroups.length} past match {pastGroups.length === 1 ? 'day' : 'days'}</span>
                     {pastArchiveMissingScoreCount > 0 && (
                       <span className="font-semibold text-amber-300/80">
@@ -308,7 +288,26 @@ export function Schedule() {
               </section>
             )}
 
-            {currentAndFutureGroups.map(renderScheduleGroup)}
+            {groupStageFixtures.length > 0 && missingGroupStageScoreCount > 0 && (
+              <section className="mt-3 rounded-lg border border-primary/15 bg-dark-surface/70 px-3 py-3">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wide text-primary/80">Group stage results</div>
+                    <p className="mt-0.5 text-sm text-gray-400">
+                      {missingGroupStageScoreCount} of {groupStageFixtures.length} group-stage scores still need results.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleFillGroupStageScores}
+                    disabled={isFillingGroupStageScores || userData.loading}
+                    className="btn-primary whitespace-nowrap px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {isFillingGroupStageScores ? 'Filling...' : 'Fill group scores'}
+                  </button>
+                </div>
+              </section>
+            )}
           </>
         )}
       </div>

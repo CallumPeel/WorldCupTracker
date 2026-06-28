@@ -2,7 +2,7 @@ import type { Fixture, MatchScore } from '../types';
 import { useCountdown } from '../hooks/useCountdown';
 import { formatCountdown, formatFullLocalDate, getLocalTimeOnly } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
-import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
+import { getTeamDisplayName, getTeamFullName, getTeamSecondaryLabel } from '../utils/teamDisplay';
 import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
 
 interface ScheduleMatchCardProps {
@@ -40,6 +40,8 @@ export function ScheduleMatchCard({
   const awayName = getTeamDisplayName(fixture.awayTeam, 'compact');
   const homeFullName = getTeamFullName(fixture.homeTeam);
   const awayFullName = getTeamFullName(fixture.awayTeam);
+  const homeSecondaryLabel = getTeamSecondaryLabel(fixture.homeTeam);
+  const awaySecondaryLabel = getTeamSecondaryLabel(fixture.awayTeam);
 
   return (
     <div 
@@ -103,7 +105,7 @@ export function ScheduleMatchCard({
           <CountryFlag countryCode={fixture.homeTeam.code} size="md" className="flex-shrink-0" />
           <div className="flex flex-col min-w-0">
             <span className="font-bold text-sm sm:text-base truncate" title={homeFullName}>{homeName}</span>
-            <span className="text-xs text-gray-500">{fixture.homeTeam.code}</span>
+            {homeSecondaryLabel && <span className="max-w-full truncate text-xs text-gray-500">{homeSecondaryLabel}</span>}
           </div>
         </div>
 
@@ -145,7 +147,7 @@ export function ScheduleMatchCard({
           <CountryFlag countryCode={fixture.awayTeam.code} size="md" className="flex-shrink-0" />
           <div className="flex flex-col items-end min-w-0">
             <span className="font-bold text-sm sm:text-base truncate" title={awayFullName}>{awayName}</span>
-            <span className="text-xs text-gray-500">{fixture.awayTeam.code}</span>
+            {awaySecondaryLabel && <span className="max-w-full truncate text-xs text-gray-500">{awaySecondaryLabel}</span>}
           </div>
         </div>
       </div>

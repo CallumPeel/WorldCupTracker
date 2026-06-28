@@ -24,6 +24,12 @@ export function getTeamFullName(team: Team): string {
   return getReadablePlaceholderName(team) ?? team.name;
 }
 
+export function getTeamSecondaryLabel(team: Team): string | undefined {
+  if (isPlaceholderTeam(team)) return 'TBD';
+
+  return team.code;
+}
+
 function getPlaceholderDisplayName(team: Team, variant: TeamDisplayVariant): string | undefined {
   const groupSlot = parseGroupQualificationSlot(team.code) ?? parseGroupQualificationSlot(team.name);
   if (groupSlot) {
@@ -33,7 +39,12 @@ function getPlaceholderDisplayName(team: Team, variant: TeamDisplayVariant): str
 
   const matchSlot = parseMatchQualificationSlot(team.code) ?? parseMatchQualificationSlot(team.name);
   if (matchSlot) {
-    return variant === 'full' ? `Winner Match ${matchSlot.matchNumber}` : `W Match ${matchSlot.matchNumber}`;
+    const prefix = matchSlot.outcome === 'winner' ? 'Winner' : 'Loser';
+    const compactPrefix = matchSlot.outcome === 'winner' ? 'W' : 'L';
+
+    return variant === 'full'
+      ? `${prefix} Match ${matchSlot.matchNumber}`
+      : `${compactPrefix} Match ${matchSlot.matchNumber}`;
   }
 
   return undefined;
@@ -41,6 +52,15 @@ function getPlaceholderDisplayName(team: Team, variant: TeamDisplayVariant): str
 
 function getReadablePlaceholderName(team: Team): string | undefined {
   return getPlaceholderDisplayName(team, 'full');
+}
+
+function isPlaceholderTeam(team: Team): boolean {
+  return Boolean(
+    parseGroupQualificationSlot(team.code) ||
+    parseGroupQualificationSlot(team.name) ||
+    parseMatchQualificationSlot(team.code) ||
+    parseMatchQualificationSlot(team.name)
+  );
 }
 
 interface GroupQualificationSlot {
@@ -68,11 +88,13 @@ function parseGroupQualificationSlot(value: string): GroupQualificationSlot | un
   };
 }
 
-function parseMatchQualificationSlot(value: string): { matchNumber: number } | undefined {
-  const match = value.trim().match(/^WINNER_MATCH_(\d+)$|^Winner Match (\d+)$/i);
+function parseMatchQualificationSlot(value: string): { outcome: 'winner' | 'loser'; matchNumber: number } | undefined {
+  const match = value.trim().match(/^(WINNER|LOSER)_MATCH_(\d+)$|^(Winner|Loser) Match (\d+)$/i);
   if (!match) return undefined;
 
-  return { matchNumber: Number(match[1] ?? match[2]) };
+  const outcome = (match[1] ?? match[3]).toLowerCase() === 'winner' ? 'winner' : 'loser';
+
+  return { outcome, matchNumber: Number(match[2] ?? match[4]) };
 }
 
 function formatGroupQualificationLabel(
