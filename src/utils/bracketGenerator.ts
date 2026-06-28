@@ -70,8 +70,8 @@ function createKnockoutRound(
 
   const matches: KnockoutMatch[] = fixtures.map((fixture) => {
     const score = scores.find((s) => s.fixtureId === fixture.id);
-    const resolvedHome = resolveFixtureTeam(fixture.homeTeam, resolverContext);
-    const resolvedAway = resolveFixtureTeam(fixture.awayTeam, resolverContext);
+    const resolvedHome = resolveFixtureTeam(fixture.homeTeam, resolverContext, fixture.matchNumber);
+    const resolvedAway = resolveFixtureTeam(fixture.awayTeam, resolverContext, fixture.matchNumber);
     const resolvedFixture = {
       ...fixture,
       homeTeam: resolvedHome.team ?? fixture.homeTeam,

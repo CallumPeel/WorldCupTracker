@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { ScoreEntry } from '../components/ScoreEntry';
 import { UltraCompactMatchRow } from '../components/UltraCompactMatchRow';
 import { TournamentStats } from '../components/TournamentStats';
@@ -12,31 +13,67 @@ import { getGroupColor, getStageColor, getTeamColors } from '../utils/teamColors
 import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
 import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
 import { resolveFixtures } from '../utils/fixtureResolution';
+import { fetchGroupStageResultScores } from '../utils/groupStageResults';
 import type { Fixture } from '../types';
 
 export function Home() {
   const { fixtures, loading, error } = useFixtures();
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
+  const [isFillingGroupStageScores, setIsFillingGroupStageScores] = useState(false);
   const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
   const resolvedFixtures = useMemo(() => resolveFixtures(fixtures, userData.scores), [fixtures, userData.scores]);
+  const groupStageFixtures = fixtures.filter((fixture) => fixture.stage === 'GROUP_STAGE');
+  const groupStageFixtureIds = new Set(groupStageFixtures.map((fixture) => fixture.id));
+  const enteredGroupStageScoreCount = userData.scores.filter((score) => groupStageFixtureIds.has(score.fixtureId)).length;
+  const missingGroupStageScoreCount = Math.max(groupStageFixtures.length - enteredGroupStageScoreCount, 0);
+  const hasIncompleteGroupStageScores = missingGroupStageScoreCount > 0;
 
-  const { nextMatch, upcomingFive } = useMemo(() => {
+  const { nextMatch, upcomingFive, shouldPromptForGroupScores } = useMemo(() => {
     const now = new Date();
+    const fixturesForUpcoming = hasIncompleteGroupStageScores ? fixtures : resolvedFixtures;
 
-    const upcomingUnwatched = resolvedFixtures
+    const upcomingUnwatched = fixturesForUpcoming
       .filter((fixture) => {
         const fixtureDate = new Date(fixture.date);
         const hasScore = userData.getScoreForFixture(fixture.id);
         return fixtureDate > now && !hasScore;
       })
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const firstUpcoming = upcomingUnwatched[0] || null;
+    const shouldPromptForGroupScores = Boolean(
+      hasIncompleteGroupStageScores && firstUpcoming && firstUpcoming.stage !== 'GROUP_STAGE'
+    );
 
     return {
-      nextMatch: upcomingUnwatched[0] || null,
-      upcomingFive: upcomingUnwatched.slice(0, 5),
+      nextMatch: shouldPromptForGroupScores ? null : firstUpcoming,
+      upcomingFive: shouldPromptForGroupScores ? [] : upcomingUnwatched.slice(0, 5),
+      shouldPromptForGroupScores,
     };
-  }, [resolvedFixtures, userData]);
+  }, [fixtures, hasIncompleteGroupStageScores, resolvedFixtures, userData]);
+
+  const handleFillGroupStageScores = async () => {
+    const confirmationMessage = enteredGroupStageScoreCount > 0
+      ? `This will overwrite ${enteredGroupStageScoreCount} existing group-stage score${enteredGroupStageScoreCount === 1 ? '' : 's'} with the completed results. Continue?`
+      : 'Fill all completed group-stage scores from the results file?';
+
+    if (!confirm(confirmationMessage)) {
+      return;
+    }
+
+    setIsFillingGroupStageScores(true);
+
+    try {
+      const scores = await fetchGroupStageResultScores();
+      await userData.addScores(scores);
+      alert(`Added ${scores.length} group-stage scores.`);
+    } catch (error) {
+      console.error('Error filling group stage scores:', error);
+      alert(error instanceof Error ? error.message : 'Failed to fill group stage scores');
+    } finally {
+      setIsFillingGroupStageScores(false);
+    }
+  };
 
   if (loading && !userData.loading) {
     return (
@@ -76,6 +113,16 @@ export function Home() {
 
       <div className="page-shell page-stack">
         <div className="home-dashboard-grid">
+          {shouldPromptForGroupScores && (
+            <GroupScoresPrompt
+              missingScoreCount={missingGroupStageScoreCount}
+              totalGroupStageCount={groupStageFixtures.length}
+              enteredGroupStageScoreCount={enteredGroupStageScoreCount}
+              isFilling={isFillingGroupStageScores}
+              onFillScores={handleFillGroupStageScores}
+            />
+          )}
+
           {nextMatch && <NextMatchCard fixture={nextMatch} favoriteTeamCodes={favoriteTeamCodes} onClick={() => setSelectedFixture(nextMatch)} />}
 
           {upcomingFive.length > 0 && (
@@ -107,7 +154,7 @@ export function Home() {
         </div>
 
         {!nextMatch && fixtures.length > 0 && (
-          <div className="text-center py-12 border border-dark-border rounded-xl bg-dark-surface/80">
+          <div className={`text-center py-12 border border-dark-border rounded-xl bg-dark-surface/80 ${shouldPromptForGroupScores ? 'hidden' : ''}`}>
             <div className="text-6xl mb-4">🏆</div>
             <h3 className="text-xl font-bold mb-2">All matches watched!</h3>
             <p className="text-gray-400">Check the Schedule to review fixtures</p>
@@ -129,6 +176,70 @@ export function Home() {
         />
       )}
     </div>
+  );
+}
+
+function GroupScoresPrompt({
+  missingScoreCount,
+  totalGroupStageCount,
+  enteredGroupStageScoreCount,
+  isFilling,
+  onFillScores,
+}: {
+  missingScoreCount: number;
+  totalGroupStageCount: number;
+  enteredGroupStageScoreCount: number;
+  isFilling: boolean;
+  onFillScores: () => void;
+}) {
+  return (
+    <section className="next-match-hero relative overflow-hidden border border-amber-300/40 bg-gradient-to-br from-amber-500/10 via-dark-surface to-primary/10">
+      <div className="absolute inset-0 opacity-80 pointer-events-none">
+        <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
+        <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+      </div>
+
+      <div className="relative z-10 flex h-full flex-col justify-between gap-8">
+        <div>
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-amber-300 shadow-[0_0_18px_rgba(252,211,77,0.9)]" />
+              <span className="text-xs sm:text-sm font-black text-white uppercase tracking-[0.28em]">Action needed</span>
+            </div>
+            <span className="rounded-full bg-amber-300 px-3 py-1 text-xs font-black uppercase tracking-wider text-black">
+              Group scores incomplete
+            </span>
+          </div>
+
+          <h2 className="max-w-4xl text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Update group scores before showing the next knockout match
+          </h2>
+          <p className="mt-4 max-w-3xl text-base font-semibold text-gray-300 sm:text-lg">
+            Knockout teams depend on the final group standings. You have entered {enteredGroupStageScoreCount}/{totalGroupStageCount} group-stage scores, with {missingScoreCount} still missing.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+          <div className="text-xs font-black uppercase tracking-[0.25em] text-gray-400">Recommended</div>
+          <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <button
+              type="button"
+              onClick={onFillScores}
+              disabled={isFilling}
+              className="btn-primary justify-center disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isFilling ? 'Filling scores...' : 'Fill all group scores'}
+            </button>
+            <Link
+              to="/schedule"
+              className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-center text-xs sm:text-sm font-black uppercase tracking-wider text-white transition-colors hover:bg-white/15"
+            >
+              Add manually in Schedule
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
