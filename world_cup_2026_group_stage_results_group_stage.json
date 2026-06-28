@@ -1,0 +1,4962 @@
+{
+  "competition": "FIFA World Cup 2026",
+  "stage": "GROUP_STAGE",
+  "matchCount": 72,
+  "sourceNotes": [
+    "Scores came from the provided world_cup_2026_group_stage_results JSON.",
+    "Fixture IDs, match numbers, teams, dates, and venues came from fixtures(3).json.",
+    "Team-name differences were normalised: Türkiye/Turkiye, Curaçao/Curacao, Côte d'Ivoire/Cote d’Ivoire, Congo DR/DR Congo, IR Iran/Iran.",
+    "Discipline/fair-play values are null because they were not present in the provided result data."
+  ],
+  "tiebreakerSupport": {
+    "captured": [
+      "points",
+      "goalDifference",
+      "goalsFor",
+      "matchResult"
+    ],
+    "notCaptured": [
+      "fairPlayDiscipline",
+      "fifaRankingOrDrawingOfLots"
+    ],
+    "note": "The included scores are enough to calculate normal group tables. Add discipline values only if an official tie requires fair-play comparison."
+  },
+  "matches": [
+    {
+      "fixtureId": 1,
+      "matchNumber": 1,
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "date": "2026-06-11T19:00:00Z",
+      "homeTeam": {
+        "id": 101,
+        "name": "Mexico",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 102,
+        "name": "South Africa",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "group": "A"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "MEX",
+        "draw": false
+      },
+      "venue": {
+        "id": 1,
+        "name": "Estadio Azteca",
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Mexico",
+        "awayTeam": "South Africa",
+        "homeScore": 2,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 2,
+      "matchNumber": 2,
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "date": "2026-06-12T02:00:00Z",
+      "homeTeam": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 104,
+        "name": "Czechia",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "group": "A"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "KOR",
+        "draw": false
+      },
+      "venue": {
+        "id": 2,
+        "name": "Estadio Akron",
+        "city": "Guadalajara",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Korea Republic",
+        "awayTeam": "Czechia",
+        "homeScore": 2,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 3,
+      "matchNumber": 3,
+      "stage": "GROUP_STAGE",
+      "group": "B",
+      "date": "2026-06-12T19:00:00Z",
+      "homeTeam": {
+        "id": 105,
+        "name": "Canada",
+        "code": "CAN",
+        "flag": "🇨🇦",
+        "group": "B"
+      },
+      "awayTeam": {
+        "id": 106,
+        "name": "Bosnia and Herzegovina",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "group": "B"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 3,
+        "name": "BMO Field",
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Canada",
+        "awayTeam": "Bosnia and Herzegovina",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 4,
+      "matchNumber": 4,
+      "stage": "GROUP_STAGE",
+      "group": "D",
+      "date": "2026-06-13T01:00:00Z",
+      "homeTeam": {
+        "id": 113,
+        "name": "USA",
+        "code": "USA",
+        "flag": "🇺🇸",
+        "group": "D"
+      },
+      "awayTeam": {
+        "id": 114,
+        "name": "Paraguay",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "group": "D"
+      },
+      "score": {
+        "home": 4,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "USA",
+        "draw": false
+      },
+      "venue": {
+        "id": 4,
+        "name": "SoFi Stadium",
+        "city": "Los Angeles",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "USA",
+        "awayTeam": "Paraguay",
+        "homeScore": 4,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 5,
+      "matchNumber": 5,
+      "stage": "GROUP_STAGE",
+      "group": "C",
+      "date": "2026-06-14T01:00:00Z",
+      "homeTeam": {
+        "id": 111,
+        "name": "Haiti",
+        "code": "HAI",
+        "flag": "🇭🇹",
+        "group": "C"
+      },
+      "awayTeam": {
+        "id": 112,
+        "name": "Scotland",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "group": "C"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "SCO",
+        "draw": false
+      },
+      "venue": {
+        "id": 7,
+        "name": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Haiti",
+        "awayTeam": "Scotland",
+        "homeScore": 0,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 6,
+      "matchNumber": 6,
+      "stage": "GROUP_STAGE",
+      "group": "D",
+      "date": "2026-06-14T04:00:00Z",
+      "homeTeam": {
+        "id": 115,
+        "name": "Australia",
+        "code": "AUS",
+        "flag": "🇦🇺",
+        "group": "D"
+      },
+      "awayTeam": {
+        "id": 116,
+        "name": "Turkiye",
+        "code": "TUR",
+        "flag": "🇹🇷",
+        "group": "D"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "AUS",
+        "draw": false
+      },
+      "venue": {
+        "id": 8,
+        "name": "BC Place",
+        "city": "Vancouver",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Australia",
+        "awayTeam": "Türkiye",
+        "homeScore": 2,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 7,
+      "matchNumber": 7,
+      "stage": "GROUP_STAGE",
+      "group": "C",
+      "date": "2026-06-13T22:00:00Z",
+      "homeTeam": {
+        "id": 109,
+        "name": "Brazil",
+        "code": "BRA",
+        "flag": "🇧🇷",
+        "group": "C"
+      },
+      "awayTeam": {
+        "id": 110,
+        "name": "Morocco",
+        "code": "MAR",
+        "flag": "🇲🇦",
+        "group": "C"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 6,
+        "name": "MetLife Stadium",
+        "city": "East Rutherford (New York)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Brazil",
+        "awayTeam": "Morocco",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 8,
+      "matchNumber": 8,
+      "stage": "GROUP_STAGE",
+      "group": "B",
+      "date": "2026-06-13T19:00:00Z",
+      "homeTeam": {
+        "id": 107,
+        "name": "Qatar",
+        "code": "QAT",
+        "flag": "🇶🇦",
+        "group": "B"
+      },
+      "awayTeam": {
+        "id": 108,
+        "name": "Switzerland",
+        "code": "SUI",
+        "flag": "🇨🇭",
+        "group": "B"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 5,
+        "name": "Levi’s Stadium",
+        "city": "Santa Clara (San Francisco)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Qatar",
+        "awayTeam": "Switzerland",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 9,
+      "matchNumber": 9,
+      "stage": "GROUP_STAGE",
+      "group": "E",
+      "date": "2026-06-14T23:00:00Z",
+      "homeTeam": {
+        "id": 119,
+        "name": "Cote d’Ivoire",
+        "code": "CIV",
+        "flag": "🇨🇮",
+        "group": "E"
+      },
+      "awayTeam": {
+        "id": 120,
+        "name": "Ecuador",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "group": "E"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "CIV",
+        "draw": false
+      },
+      "venue": {
+        "id": 11,
+        "name": "Lincoln Financial Field",
+        "city": "Philadelphia",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Côte d'Ivoire",
+        "awayTeam": "Ecuador",
+        "homeScore": 1,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 10,
+      "matchNumber": 10,
+      "stage": "GROUP_STAGE",
+      "group": "E",
+      "date": "2026-06-14T17:00:00Z",
+      "homeTeam": {
+        "id": 117,
+        "name": "Germany",
+        "code": "GER",
+        "flag": "🇩🇪",
+        "group": "E"
+      },
+      "awayTeam": {
+        "id": 118,
+        "name": "Curacao",
+        "code": "CUW",
+        "flag": "🇨🇼",
+        "group": "E"
+      },
+      "score": {
+        "home": 7,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "GER",
+        "draw": false
+      },
+      "venue": {
+        "id": 9,
+        "name": "NRG Stadium",
+        "city": "Houston",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Germany",
+        "awayTeam": "Curaçao",
+        "homeScore": 7,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 11,
+      "matchNumber": 11,
+      "stage": "GROUP_STAGE",
+      "group": "F",
+      "date": "2026-06-14T20:00:00Z",
+      "homeTeam": {
+        "id": 121,
+        "name": "Netherlands",
+        "code": "NED",
+        "flag": "🇳🇱",
+        "group": "F"
+      },
+      "awayTeam": {
+        "id": 122,
+        "name": "Japan",
+        "code": "JPN",
+        "flag": "🇯🇵",
+        "group": "F"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 10,
+        "name": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Netherlands",
+        "awayTeam": "Japan",
+        "homeScore": 2,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 12,
+      "matchNumber": 12,
+      "stage": "GROUP_STAGE",
+      "group": "F",
+      "date": "2026-06-15T02:00:00Z",
+      "homeTeam": {
+        "id": 123,
+        "name": "Sweden",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "group": "F"
+      },
+      "awayTeam": {
+        "id": 124,
+        "name": "Tunisia",
+        "code": "TUN",
+        "flag": "🇹🇳",
+        "group": "F"
+      },
+      "score": {
+        "home": 5,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "SWE",
+        "draw": false
+      },
+      "venue": {
+        "id": 12,
+        "name": "Estadio BBVA",
+        "city": "Monterrey",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Sweden",
+        "awayTeam": "Tunisia",
+        "homeScore": 5,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 13,
+      "matchNumber": 13,
+      "stage": "GROUP_STAGE",
+      "group": "H",
+      "date": "2026-06-15T22:00:00Z",
+      "homeTeam": {
+        "id": 131,
+        "name": "Saudi Arabia",
+        "code": "KSA",
+        "flag": "🇸🇦",
+        "group": "H"
+      },
+      "awayTeam": {
+        "id": 132,
+        "name": "Uruguay",
+        "code": "URU",
+        "flag": "🇺🇾",
+        "group": "H"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 15,
+        "name": "Hard Rock Stadium",
+        "city": "Miami",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Saudi Arabia",
+        "awayTeam": "Uruguay",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 14,
+      "matchNumber": 14,
+      "stage": "GROUP_STAGE",
+      "group": "H",
+      "date": "2026-06-15T16:00:00Z",
+      "homeTeam": {
+        "id": 129,
+        "name": "Spain",
+        "code": "ESP",
+        "flag": "🇪🇸",
+        "group": "H"
+      },
+      "awayTeam": {
+        "id": 130,
+        "name": "Cabo Verde",
+        "code": "CPV",
+        "flag": "🇨🇻",
+        "group": "H"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 13,
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Spain",
+        "awayTeam": "Cabo Verde",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 15,
+      "matchNumber": 15,
+      "stage": "GROUP_STAGE",
+      "group": "G",
+      "date": "2026-06-16T01:00:00Z",
+      "homeTeam": {
+        "id": 127,
+        "name": "Iran",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "group": "G"
+      },
+      "awayTeam": {
+        "id": 128,
+        "name": "New Zealand",
+        "code": "NZL",
+        "flag": "🇳🇿",
+        "group": "G"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 4,
+        "name": "SoFi Stadium",
+        "city": "Los Angeles",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "IR Iran",
+        "awayTeam": "New Zealand",
+        "homeScore": 2,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 16,
+      "matchNumber": 16,
+      "stage": "GROUP_STAGE",
+      "group": "G",
+      "date": "2026-06-15T19:00:00Z",
+      "homeTeam": {
+        "id": 125,
+        "name": "Belgium",
+        "code": "BEL",
+        "flag": "🇧🇪",
+        "group": "G"
+      },
+      "awayTeam": {
+        "id": 126,
+        "name": "Egypt",
+        "code": "EGY",
+        "flag": "🇪🇬",
+        "group": "G"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 14,
+        "name": "Lumen Field",
+        "city": "Seattle",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Belgium",
+        "awayTeam": "Egypt",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 17,
+      "matchNumber": 17,
+      "stage": "GROUP_STAGE",
+      "group": "I",
+      "date": "2026-06-16T19:00:00Z",
+      "homeTeam": {
+        "id": 133,
+        "name": "France",
+        "code": "FRA",
+        "flag": "🇫🇷",
+        "group": "I"
+      },
+      "awayTeam": {
+        "id": 134,
+        "name": "Senegal",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "group": "I"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "FRA",
+        "draw": false
+      },
+      "venue": {
+        "id": 6,
+        "name": "MetLife Stadium",
+        "city": "East Rutherford (New York)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "France",
+        "awayTeam": "Senegal",
+        "homeScore": 3,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 18,
+      "matchNumber": 18,
+      "stage": "GROUP_STAGE",
+      "group": "I",
+      "date": "2026-06-16T22:00:00Z",
+      "homeTeam": {
+        "id": 135,
+        "name": "Iraq",
+        "code": "IRQ",
+        "flag": "🇮🇶",
+        "group": "I"
+      },
+      "awayTeam": {
+        "id": 136,
+        "name": "Norway",
+        "code": "NOR",
+        "flag": "🇳🇴",
+        "group": "I"
+      },
+      "score": {
+        "home": 1,
+        "away": 4
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "NOR",
+        "draw": false
+      },
+      "venue": {
+        "id": 7,
+        "name": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Iraq",
+        "awayTeam": "Norway",
+        "homeScore": 1,
+        "awayScore": 4,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 19,
+      "matchNumber": 19,
+      "stage": "GROUP_STAGE",
+      "group": "J",
+      "date": "2026-06-17T01:00:00Z",
+      "homeTeam": {
+        "id": 137,
+        "name": "Argentina",
+        "code": "ARG",
+        "flag": "🇦🇷",
+        "group": "J"
+      },
+      "awayTeam": {
+        "id": 138,
+        "name": "Algeria",
+        "code": "ALG",
+        "flag": "🇩🇿",
+        "group": "J"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ARG",
+        "draw": false
+      },
+      "venue": {
+        "id": 16,
+        "name": "Arrowhead Stadium",
+        "city": "Kansas City",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Argentina",
+        "awayTeam": "Algeria",
+        "homeScore": 3,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 20,
+      "matchNumber": 20,
+      "stage": "GROUP_STAGE",
+      "group": "J",
+      "date": "2026-06-17T04:00:00Z",
+      "homeTeam": {
+        "id": 139,
+        "name": "Austria",
+        "code": "AUT",
+        "flag": "🇦🇹",
+        "group": "J"
+      },
+      "awayTeam": {
+        "id": 140,
+        "name": "Jordan",
+        "code": "JOR",
+        "flag": "🇯🇴",
+        "group": "J"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "AUT",
+        "draw": false
+      },
+      "venue": {
+        "id": 5,
+        "name": "Levi’s Stadium",
+        "city": "Santa Clara (San Francisco)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Austria",
+        "awayTeam": "Jordan",
+        "homeScore": 3,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 21,
+      "matchNumber": 21,
+      "stage": "GROUP_STAGE",
+      "group": "L",
+      "date": "2026-06-17T23:00:00Z",
+      "homeTeam": {
+        "id": 147,
+        "name": "Ghana",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "group": "L"
+      },
+      "awayTeam": {
+        "id": 148,
+        "name": "Panama",
+        "code": "PAN",
+        "flag": "🇵🇦",
+        "group": "L"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "GHA",
+        "draw": false
+      },
+      "venue": {
+        "id": 3,
+        "name": "BMO Field",
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Ghana",
+        "awayTeam": "Panama",
+        "homeScore": 1,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 22,
+      "matchNumber": 22,
+      "stage": "GROUP_STAGE",
+      "group": "L",
+      "date": "2026-06-17T20:00:00Z",
+      "homeTeam": {
+        "id": 145,
+        "name": "England",
+        "code": "ENG",
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "group": "L"
+      },
+      "awayTeam": {
+        "id": 146,
+        "name": "Croatia",
+        "code": "CRO",
+        "flag": "🇭🇷",
+        "group": "L"
+      },
+      "score": {
+        "home": 4,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ENG",
+        "draw": false
+      },
+      "venue": {
+        "id": 10,
+        "name": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "England",
+        "awayTeam": "Croatia",
+        "homeScore": 4,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 23,
+      "matchNumber": 23,
+      "stage": "GROUP_STAGE",
+      "group": "K",
+      "date": "2026-06-17T17:00:00Z",
+      "homeTeam": {
+        "id": 141,
+        "name": "Portugal",
+        "code": "POR",
+        "flag": "🇵🇹",
+        "group": "K"
+      },
+      "awayTeam": {
+        "id": 142,
+        "name": "DR Congo",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "group": "K"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 9,
+        "name": "NRG Stadium",
+        "city": "Houston",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Portugal",
+        "awayTeam": "Congo DR",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 24,
+      "matchNumber": 24,
+      "stage": "GROUP_STAGE",
+      "group": "K",
+      "date": "2026-06-18T02:00:00Z",
+      "homeTeam": {
+        "id": 143,
+        "name": "Uzbekistan",
+        "code": "UZB",
+        "flag": "🇺🇿",
+        "group": "K"
+      },
+      "awayTeam": {
+        "id": 144,
+        "name": "Colombia",
+        "code": "COL",
+        "flag": "🇨🇴",
+        "group": "K"
+      },
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "COL",
+        "draw": false
+      },
+      "venue": {
+        "id": 1,
+        "name": "Estadio Azteca",
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Uzbekistan",
+        "awayTeam": "Colombia",
+        "homeScore": 1,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 25,
+      "matchNumber": 25,
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "date": "2026-06-18T16:00:00Z",
+      "homeTeam": {
+        "id": 104,
+        "name": "Czechia",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 102,
+        "name": "South Africa",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "group": "A"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 13,
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Czechia",
+        "awayTeam": "South Africa",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 26,
+      "matchNumber": 26,
+      "stage": "GROUP_STAGE",
+      "group": "B",
+      "date": "2026-06-18T19:00:00Z",
+      "homeTeam": {
+        "id": 108,
+        "name": "Switzerland",
+        "code": "SUI",
+        "flag": "🇨🇭",
+        "group": "B"
+      },
+      "awayTeam": {
+        "id": 106,
+        "name": "Bosnia and Herzegovina",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "group": "B"
+      },
+      "score": {
+        "home": 4,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "SUI",
+        "draw": false
+      },
+      "venue": {
+        "id": 4,
+        "name": "SoFi Stadium",
+        "city": "Los Angeles",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Switzerland",
+        "awayTeam": "Bosnia and Herzegovina",
+        "homeScore": 4,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 27,
+      "matchNumber": 27,
+      "stage": "GROUP_STAGE",
+      "group": "B",
+      "date": "2026-06-18T22:00:00Z",
+      "homeTeam": {
+        "id": 105,
+        "name": "Canada",
+        "code": "CAN",
+        "flag": "🇨🇦",
+        "group": "B"
+      },
+      "awayTeam": {
+        "id": 107,
+        "name": "Qatar",
+        "code": "QAT",
+        "flag": "🇶🇦",
+        "group": "B"
+      },
+      "score": {
+        "home": 6,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "CAN",
+        "draw": false
+      },
+      "venue": {
+        "id": 8,
+        "name": "BC Place",
+        "city": "Vancouver",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Canada",
+        "awayTeam": "Qatar",
+        "homeScore": 6,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 28,
+      "matchNumber": 28,
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "date": "2026-06-19T01:00:00Z",
+      "homeTeam": {
+        "id": 101,
+        "name": "Mexico",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "MEX",
+        "draw": false
+      },
+      "venue": {
+        "id": 2,
+        "name": "Estadio Akron",
+        "city": "Guadalajara",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Mexico",
+        "awayTeam": "Korea Republic",
+        "homeScore": 1,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 29,
+      "matchNumber": 29,
+      "stage": "GROUP_STAGE",
+      "group": "C",
+      "date": "2026-06-20T00:30:00Z",
+      "homeTeam": {
+        "id": 109,
+        "name": "Brazil",
+        "code": "BRA",
+        "flag": "🇧🇷",
+        "group": "C"
+      },
+      "awayTeam": {
+        "id": 111,
+        "name": "Haiti",
+        "code": "HAI",
+        "flag": "🇭🇹",
+        "group": "C"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "BRA",
+        "draw": false
+      },
+      "venue": {
+        "id": 11,
+        "name": "Lincoln Financial Field",
+        "city": "Philadelphia",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Brazil",
+        "awayTeam": "Haiti",
+        "homeScore": 3,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 30,
+      "matchNumber": 30,
+      "stage": "GROUP_STAGE",
+      "group": "C",
+      "date": "2026-06-19T22:00:00Z",
+      "homeTeam": {
+        "id": 112,
+        "name": "Scotland",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "group": "C"
+      },
+      "awayTeam": {
+        "id": 110,
+        "name": "Morocco",
+        "code": "MAR",
+        "flag": "🇲🇦",
+        "group": "C"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "MAR",
+        "draw": false
+      },
+      "venue": {
+        "id": 7,
+        "name": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Scotland",
+        "awayTeam": "Morocco",
+        "homeScore": 0,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 31,
+      "matchNumber": 31,
+      "stage": "GROUP_STAGE",
+      "group": "D",
+      "date": "2026-06-20T03:00:00Z",
+      "homeTeam": {
+        "id": 116,
+        "name": "Turkiye",
+        "code": "TUR",
+        "flag": "🇹🇷",
+        "group": "D"
+      },
+      "awayTeam": {
+        "id": 114,
+        "name": "Paraguay",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "group": "D"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "PAR",
+        "draw": false
+      },
+      "venue": {
+        "id": 5,
+        "name": "Levi’s Stadium",
+        "city": "Santa Clara (San Francisco)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Türkiye",
+        "awayTeam": "Paraguay",
+        "homeScore": 0,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 32,
+      "matchNumber": 32,
+      "stage": "GROUP_STAGE",
+      "group": "D",
+      "date": "2026-06-19T19:00:00Z",
+      "homeTeam": {
+        "id": 113,
+        "name": "USA",
+        "code": "USA",
+        "flag": "🇺🇸",
+        "group": "D"
+      },
+      "awayTeam": {
+        "id": 115,
+        "name": "Australia",
+        "code": "AUS",
+        "flag": "🇦🇺",
+        "group": "D"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "USA",
+        "draw": false
+      },
+      "venue": {
+        "id": 14,
+        "name": "Lumen Field",
+        "city": "Seattle",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "USA",
+        "awayTeam": "Australia",
+        "homeScore": 2,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 33,
+      "matchNumber": 33,
+      "stage": "GROUP_STAGE",
+      "group": "E",
+      "date": "2026-06-20T20:00:00Z",
+      "homeTeam": {
+        "id": 117,
+        "name": "Germany",
+        "code": "GER",
+        "flag": "🇩🇪",
+        "group": "E"
+      },
+      "awayTeam": {
+        "id": 119,
+        "name": "Cote d’Ivoire",
+        "code": "CIV",
+        "flag": "🇨🇮",
+        "group": "E"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "GER",
+        "draw": false
+      },
+      "venue": {
+        "id": 3,
+        "name": "BMO Field",
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Germany",
+        "awayTeam": "Côte d'Ivoire",
+        "homeScore": 2,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 34,
+      "matchNumber": 34,
+      "stage": "GROUP_STAGE",
+      "group": "E",
+      "date": "2026-06-21T00:00:00Z",
+      "homeTeam": {
+        "id": 120,
+        "name": "Ecuador",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "group": "E"
+      },
+      "awayTeam": {
+        "id": 118,
+        "name": "Curacao",
+        "code": "CUW",
+        "flag": "🇨🇼",
+        "group": "E"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 16,
+        "name": "Arrowhead Stadium",
+        "city": "Kansas City",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Ecuador",
+        "awayTeam": "Curaçao",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 35,
+      "matchNumber": 35,
+      "stage": "GROUP_STAGE",
+      "group": "F",
+      "date": "2026-06-20T17:00:00Z",
+      "homeTeam": {
+        "id": 121,
+        "name": "Netherlands",
+        "code": "NED",
+        "flag": "🇳🇱",
+        "group": "F"
+      },
+      "awayTeam": {
+        "id": 123,
+        "name": "Sweden",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "group": "F"
+      },
+      "score": {
+        "home": 5,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "NED",
+        "draw": false
+      },
+      "venue": {
+        "id": 9,
+        "name": "NRG Stadium",
+        "city": "Houston",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Netherlands",
+        "awayTeam": "Sweden",
+        "homeScore": 5,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 36,
+      "matchNumber": 36,
+      "stage": "GROUP_STAGE",
+      "group": "F",
+      "date": "2026-06-21T04:00:00Z",
+      "homeTeam": {
+        "id": 124,
+        "name": "Tunisia",
+        "code": "TUN",
+        "flag": "🇹🇳",
+        "group": "F"
+      },
+      "awayTeam": {
+        "id": 122,
+        "name": "Japan",
+        "code": "JPN",
+        "flag": "🇯🇵",
+        "group": "F"
+      },
+      "score": {
+        "home": 0,
+        "away": 4
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "JPN",
+        "draw": false
+      },
+      "venue": {
+        "id": 12,
+        "name": "Estadio BBVA",
+        "city": "Monterrey",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Tunisia",
+        "awayTeam": "Japan",
+        "homeScore": 0,
+        "awayScore": 4,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 37,
+      "matchNumber": 37,
+      "stage": "GROUP_STAGE",
+      "group": "H",
+      "date": "2026-06-21T22:00:00Z",
+      "homeTeam": {
+        "id": 132,
+        "name": "Uruguay",
+        "code": "URU",
+        "flag": "🇺🇾",
+        "group": "H"
+      },
+      "awayTeam": {
+        "id": 130,
+        "name": "Cabo Verde",
+        "code": "CPV",
+        "flag": "🇨🇻",
+        "group": "H"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 15,
+        "name": "Hard Rock Stadium",
+        "city": "Miami",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Uruguay",
+        "awayTeam": "Cabo Verde",
+        "homeScore": 2,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 38,
+      "matchNumber": 38,
+      "stage": "GROUP_STAGE",
+      "group": "H",
+      "date": "2026-06-21T16:00:00Z",
+      "homeTeam": {
+        "id": 129,
+        "name": "Spain",
+        "code": "ESP",
+        "flag": "🇪🇸",
+        "group": "H"
+      },
+      "awayTeam": {
+        "id": 131,
+        "name": "Saudi Arabia",
+        "code": "KSA",
+        "flag": "🇸🇦",
+        "group": "H"
+      },
+      "score": {
+        "home": 4,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ESP",
+        "draw": false
+      },
+      "venue": {
+        "id": 13,
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Spain",
+        "awayTeam": "Saudi Arabia",
+        "homeScore": 4,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 39,
+      "matchNumber": 39,
+      "stage": "GROUP_STAGE",
+      "group": "G",
+      "date": "2026-06-21T19:00:00Z",
+      "homeTeam": {
+        "id": 125,
+        "name": "Belgium",
+        "code": "BEL",
+        "flag": "🇧🇪",
+        "group": "G"
+      },
+      "awayTeam": {
+        "id": 127,
+        "name": "Iran",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "group": "G"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 4,
+        "name": "SoFi Stadium",
+        "city": "Los Angeles",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Belgium",
+        "awayTeam": "IR Iran",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 40,
+      "matchNumber": 40,
+      "stage": "GROUP_STAGE",
+      "group": "G",
+      "date": "2026-06-22T01:00:00Z",
+      "homeTeam": {
+        "id": 128,
+        "name": "New Zealand",
+        "code": "NZL",
+        "flag": "🇳🇿",
+        "group": "G"
+      },
+      "awayTeam": {
+        "id": 126,
+        "name": "Egypt",
+        "code": "EGY",
+        "flag": "🇪🇬",
+        "group": "G"
+      },
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "EGY",
+        "draw": false
+      },
+      "venue": {
+        "id": 8,
+        "name": "BC Place",
+        "city": "Vancouver",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "New Zealand",
+        "awayTeam": "Egypt",
+        "homeScore": 1,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 41,
+      "matchNumber": 41,
+      "stage": "GROUP_STAGE",
+      "group": "I",
+      "date": "2026-06-23T00:00:00Z",
+      "homeTeam": {
+        "id": 136,
+        "name": "Norway",
+        "code": "NOR",
+        "flag": "🇳🇴",
+        "group": "I"
+      },
+      "awayTeam": {
+        "id": 134,
+        "name": "Senegal",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "group": "I"
+      },
+      "score": {
+        "home": 3,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "NOR",
+        "draw": false
+      },
+      "venue": {
+        "id": 6,
+        "name": "MetLife Stadium",
+        "city": "East Rutherford (New York)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Norway",
+        "awayTeam": "Senegal",
+        "homeScore": 3,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 42,
+      "matchNumber": 42,
+      "stage": "GROUP_STAGE",
+      "group": "I",
+      "date": "2026-06-22T21:00:00Z",
+      "homeTeam": {
+        "id": 133,
+        "name": "France",
+        "code": "FRA",
+        "flag": "🇫🇷",
+        "group": "I"
+      },
+      "awayTeam": {
+        "id": 135,
+        "name": "Iraq",
+        "code": "IRQ",
+        "flag": "🇮🇶",
+        "group": "I"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "FRA",
+        "draw": false
+      },
+      "venue": {
+        "id": 11,
+        "name": "Lincoln Financial Field",
+        "city": "Philadelphia",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "France",
+        "awayTeam": "Iraq",
+        "homeScore": 3,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 43,
+      "matchNumber": 43,
+      "stage": "GROUP_STAGE",
+      "group": "J",
+      "date": "2026-06-22T17:00:00Z",
+      "homeTeam": {
+        "id": 137,
+        "name": "Argentina",
+        "code": "ARG",
+        "flag": "🇦🇷",
+        "group": "J"
+      },
+      "awayTeam": {
+        "id": 139,
+        "name": "Austria",
+        "code": "AUT",
+        "flag": "🇦🇹",
+        "group": "J"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ARG",
+        "draw": false
+      },
+      "venue": {
+        "id": 10,
+        "name": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Argentina",
+        "awayTeam": "Austria",
+        "homeScore": 2,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 44,
+      "matchNumber": 44,
+      "stage": "GROUP_STAGE",
+      "group": "J",
+      "date": "2026-06-23T03:00:00Z",
+      "homeTeam": {
+        "id": 140,
+        "name": "Jordan",
+        "code": "JOR",
+        "flag": "🇯🇴",
+        "group": "J"
+      },
+      "awayTeam": {
+        "id": 138,
+        "name": "Algeria",
+        "code": "ALG",
+        "flag": "🇩🇿",
+        "group": "J"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ALG",
+        "draw": false
+      },
+      "venue": {
+        "id": 5,
+        "name": "Levi’s Stadium",
+        "city": "Santa Clara (San Francisco)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Jordan",
+        "awayTeam": "Algeria",
+        "homeScore": 1,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 45,
+      "matchNumber": 45,
+      "stage": "GROUP_STAGE",
+      "group": "L",
+      "date": "2026-06-23T20:00:00Z",
+      "homeTeam": {
+        "id": 145,
+        "name": "England",
+        "code": "ENG",
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "group": "L"
+      },
+      "awayTeam": {
+        "id": 147,
+        "name": "Ghana",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "group": "L"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 7,
+        "name": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "England",
+        "awayTeam": "Ghana",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 46,
+      "matchNumber": 46,
+      "stage": "GROUP_STAGE",
+      "group": "L",
+      "date": "2026-06-23T23:00:00Z",
+      "homeTeam": {
+        "id": 148,
+        "name": "Panama",
+        "code": "PAN",
+        "flag": "🇵🇦",
+        "group": "L"
+      },
+      "awayTeam": {
+        "id": 146,
+        "name": "Croatia",
+        "code": "CRO",
+        "flag": "🇭🇷",
+        "group": "L"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "CRO",
+        "draw": false
+      },
+      "venue": {
+        "id": 3,
+        "name": "BMO Field",
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Panama",
+        "awayTeam": "Croatia",
+        "homeScore": 0,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 47,
+      "matchNumber": 47,
+      "stage": "GROUP_STAGE",
+      "group": "K",
+      "date": "2026-06-23T17:00:00Z",
+      "homeTeam": {
+        "id": 141,
+        "name": "Portugal",
+        "code": "POR",
+        "flag": "🇵🇹",
+        "group": "K"
+      },
+      "awayTeam": {
+        "id": 143,
+        "name": "Uzbekistan",
+        "code": "UZB",
+        "flag": "🇺🇿",
+        "group": "K"
+      },
+      "score": {
+        "home": 5,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "POR",
+        "draw": false
+      },
+      "venue": {
+        "id": 9,
+        "name": "NRG Stadium",
+        "city": "Houston",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Portugal",
+        "awayTeam": "Uzbekistan",
+        "homeScore": 5,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 48,
+      "matchNumber": 48,
+      "stage": "GROUP_STAGE",
+      "group": "K",
+      "date": "2026-06-24T02:00:00Z",
+      "homeTeam": {
+        "id": 144,
+        "name": "Colombia",
+        "code": "COL",
+        "flag": "🇨🇴",
+        "group": "K"
+      },
+      "awayTeam": {
+        "id": 142,
+        "name": "DR Congo",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "group": "K"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "COL",
+        "draw": false
+      },
+      "venue": {
+        "id": 2,
+        "name": "Estadio Akron",
+        "city": "Guadalajara",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Colombia",
+        "awayTeam": "Congo DR",
+        "homeScore": 1,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 49,
+      "matchNumber": 49,
+      "stage": "GROUP_STAGE",
+      "group": "C",
+      "date": "2026-06-24T22:00:00Z",
+      "homeTeam": {
+        "id": 112,
+        "name": "Scotland",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "group": "C"
+      },
+      "awayTeam": {
+        "id": 109,
+        "name": "Brazil",
+        "code": "BRA",
+        "flag": "🇧🇷",
+        "group": "C"
+      },
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "BRA",
+        "draw": false
+      },
+      "venue": {
+        "id": 15,
+        "name": "Hard Rock Stadium",
+        "city": "Miami",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Scotland",
+        "awayTeam": "Brazil",
+        "homeScore": 0,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 50,
+      "matchNumber": 50,
+      "stage": "GROUP_STAGE",
+      "group": "C",
+      "date": "2026-06-24T22:00:00Z",
+      "homeTeam": {
+        "id": 110,
+        "name": "Morocco",
+        "code": "MAR",
+        "flag": "🇲🇦",
+        "group": "C"
+      },
+      "awayTeam": {
+        "id": 111,
+        "name": "Haiti",
+        "code": "HAI",
+        "flag": "🇭🇹",
+        "group": "C"
+      },
+      "score": {
+        "home": 4,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "MAR",
+        "draw": false
+      },
+      "venue": {
+        "id": 13,
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Morocco",
+        "awayTeam": "Haiti",
+        "homeScore": 4,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 51,
+      "matchNumber": 51,
+      "stage": "GROUP_STAGE",
+      "group": "B",
+      "date": "2026-06-24T19:00:00Z",
+      "homeTeam": {
+        "id": 108,
+        "name": "Switzerland",
+        "code": "SUI",
+        "flag": "🇨🇭",
+        "group": "B"
+      },
+      "awayTeam": {
+        "id": 105,
+        "name": "Canada",
+        "code": "CAN",
+        "flag": "🇨🇦",
+        "group": "B"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "SUI",
+        "draw": false
+      },
+      "venue": {
+        "id": 8,
+        "name": "BC Place",
+        "city": "Vancouver",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Switzerland",
+        "awayTeam": "Canada",
+        "homeScore": 2,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 52,
+      "matchNumber": 52,
+      "stage": "GROUP_STAGE",
+      "group": "B",
+      "date": "2026-06-24T19:00:00Z",
+      "homeTeam": {
+        "id": 106,
+        "name": "Bosnia and Herzegovina",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "group": "B"
+      },
+      "awayTeam": {
+        "id": 107,
+        "name": "Qatar",
+        "code": "QAT",
+        "flag": "🇶🇦",
+        "group": "B"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "BIH",
+        "draw": false
+      },
+      "venue": {
+        "id": 14,
+        "name": "Lumen Field",
+        "city": "Seattle",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Bosnia and Herzegovina",
+        "awayTeam": "Qatar",
+        "homeScore": 3,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 53,
+      "matchNumber": 53,
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "date": "2026-06-25T01:00:00Z",
+      "homeTeam": {
+        "id": 104,
+        "name": "Czechia",
+        "code": "CZE",
+        "flag": "🇨🇿",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 101,
+        "name": "Mexico",
+        "code": "MEX",
+        "flag": "🇲🇽",
+        "group": "A"
+      },
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "MEX",
+        "draw": false
+      },
+      "venue": {
+        "id": 1,
+        "name": "Estadio Azteca",
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Czechia",
+        "awayTeam": "Mexico",
+        "homeScore": 0,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 54,
+      "matchNumber": 54,
+      "stage": "GROUP_STAGE",
+      "group": "A",
+      "date": "2026-06-25T01:00:00Z",
+      "homeTeam": {
+        "id": 102,
+        "name": "South Africa",
+        "code": "RSA",
+        "flag": "🇿🇦",
+        "group": "A"
+      },
+      "awayTeam": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "RSA",
+        "draw": false
+      },
+      "venue": {
+        "id": 12,
+        "name": "Estadio BBVA",
+        "city": "Monterrey",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "South Africa",
+        "awayTeam": "Korea Republic",
+        "homeScore": 1,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 55,
+      "matchNumber": 55,
+      "stage": "GROUP_STAGE",
+      "group": "E",
+      "date": "2026-06-25T20:00:00Z",
+      "homeTeam": {
+        "id": 118,
+        "name": "Curacao",
+        "code": "CUW",
+        "flag": "🇨🇼",
+        "group": "E"
+      },
+      "awayTeam": {
+        "id": 119,
+        "name": "Cote d’Ivoire",
+        "code": "CIV",
+        "flag": "🇨🇮",
+        "group": "E"
+      },
+      "score": {
+        "home": 0,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "CIV",
+        "draw": false
+      },
+      "venue": {
+        "id": 11,
+        "name": "Lincoln Financial Field",
+        "city": "Philadelphia",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Curaçao",
+        "awayTeam": "Côte d'Ivoire",
+        "homeScore": 0,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 56,
+      "matchNumber": 56,
+      "stage": "GROUP_STAGE",
+      "group": "E",
+      "date": "2026-06-25T20:00:00Z",
+      "homeTeam": {
+        "id": 120,
+        "name": "Ecuador",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "group": "E"
+      },
+      "awayTeam": {
+        "id": 117,
+        "name": "Germany",
+        "code": "GER",
+        "flag": "🇩🇪",
+        "group": "E"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ECU",
+        "draw": false
+      },
+      "venue": {
+        "id": 6,
+        "name": "MetLife Stadium",
+        "city": "East Rutherford (New York)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Ecuador",
+        "awayTeam": "Germany",
+        "homeScore": 2,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 57,
+      "matchNumber": 57,
+      "stage": "GROUP_STAGE",
+      "group": "F",
+      "date": "2026-06-25T23:00:00Z",
+      "homeTeam": {
+        "id": 122,
+        "name": "Japan",
+        "code": "JPN",
+        "flag": "🇯🇵",
+        "group": "F"
+      },
+      "awayTeam": {
+        "id": 123,
+        "name": "Sweden",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "group": "F"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 10,
+        "name": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Japan",
+        "awayTeam": "Sweden",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 58,
+      "matchNumber": 58,
+      "stage": "GROUP_STAGE",
+      "group": "F",
+      "date": "2026-06-25T23:00:00Z",
+      "homeTeam": {
+        "id": 124,
+        "name": "Tunisia",
+        "code": "TUN",
+        "flag": "🇹🇳",
+        "group": "F"
+      },
+      "awayTeam": {
+        "id": 121,
+        "name": "Netherlands",
+        "code": "NED",
+        "flag": "🇳🇱",
+        "group": "F"
+      },
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "NED",
+        "draw": false
+      },
+      "venue": {
+        "id": 16,
+        "name": "Arrowhead Stadium",
+        "city": "Kansas City",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Tunisia",
+        "awayTeam": "Netherlands",
+        "homeScore": 1,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 59,
+      "matchNumber": 59,
+      "stage": "GROUP_STAGE",
+      "group": "D",
+      "date": "2026-06-26T02:00:00Z",
+      "homeTeam": {
+        "id": 116,
+        "name": "Turkiye",
+        "code": "TUR",
+        "flag": "🇹🇷",
+        "group": "D"
+      },
+      "awayTeam": {
+        "id": 113,
+        "name": "USA",
+        "code": "USA",
+        "flag": "🇺🇸",
+        "group": "D"
+      },
+      "score": {
+        "home": 3,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "TUR",
+        "draw": false
+      },
+      "venue": {
+        "id": 4,
+        "name": "SoFi Stadium",
+        "city": "Los Angeles",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Türkiye",
+        "awayTeam": "USA",
+        "homeScore": 3,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 60,
+      "matchNumber": 60,
+      "stage": "GROUP_STAGE",
+      "group": "D",
+      "date": "2026-06-26T02:00:00Z",
+      "homeTeam": {
+        "id": 114,
+        "name": "Paraguay",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "group": "D"
+      },
+      "awayTeam": {
+        "id": 115,
+        "name": "Australia",
+        "code": "AUS",
+        "flag": "🇦🇺",
+        "group": "D"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 5,
+        "name": "Levi’s Stadium",
+        "city": "Santa Clara (San Francisco)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Paraguay",
+        "awayTeam": "Australia",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 61,
+      "matchNumber": 61,
+      "stage": "GROUP_STAGE",
+      "group": "I",
+      "date": "2026-06-26T19:00:00Z",
+      "homeTeam": {
+        "id": 136,
+        "name": "Norway",
+        "code": "NOR",
+        "flag": "🇳🇴",
+        "group": "I"
+      },
+      "awayTeam": {
+        "id": 133,
+        "name": "France",
+        "code": "FRA",
+        "flag": "🇫🇷",
+        "group": "I"
+      },
+      "score": {
+        "home": 1,
+        "away": 4
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "FRA",
+        "draw": false
+      },
+      "venue": {
+        "id": 7,
+        "name": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Norway",
+        "awayTeam": "France",
+        "homeScore": 1,
+        "awayScore": 4,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 62,
+      "matchNumber": 62,
+      "stage": "GROUP_STAGE",
+      "group": "I",
+      "date": "2026-06-26T19:00:00Z",
+      "homeTeam": {
+        "id": 134,
+        "name": "Senegal",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "group": "I"
+      },
+      "awayTeam": {
+        "id": 135,
+        "name": "Iraq",
+        "code": "IRQ",
+        "flag": "🇮🇶",
+        "group": "I"
+      },
+      "score": {
+        "home": 5,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "SEN",
+        "draw": false
+      },
+      "venue": {
+        "id": 3,
+        "name": "BMO Field",
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Senegal",
+        "awayTeam": "Iraq",
+        "homeScore": 5,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 63,
+      "matchNumber": 63,
+      "stage": "GROUP_STAGE",
+      "group": "G",
+      "date": "2026-06-27T03:00:00Z",
+      "homeTeam": {
+        "id": 126,
+        "name": "Egypt",
+        "code": "EGY",
+        "flag": "🇪🇬",
+        "group": "G"
+      },
+      "awayTeam": {
+        "id": 127,
+        "name": "Iran",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "group": "G"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 14,
+        "name": "Lumen Field",
+        "city": "Seattle",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Egypt",
+        "awayTeam": "IR Iran",
+        "homeScore": 1,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 64,
+      "matchNumber": 64,
+      "stage": "GROUP_STAGE",
+      "group": "G",
+      "date": "2026-06-27T03:00:00Z",
+      "homeTeam": {
+        "id": 128,
+        "name": "New Zealand",
+        "code": "NZL",
+        "flag": "🇳🇿",
+        "group": "G"
+      },
+      "awayTeam": {
+        "id": 125,
+        "name": "Belgium",
+        "code": "BEL",
+        "flag": "🇧🇪",
+        "group": "G"
+      },
+      "score": {
+        "home": 1,
+        "away": 5
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "BEL",
+        "draw": false
+      },
+      "venue": {
+        "id": 8,
+        "name": "BC Place",
+        "city": "Vancouver",
+        "country": "Canada"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "New Zealand",
+        "awayTeam": "Belgium",
+        "homeScore": 1,
+        "awayScore": 5,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 65,
+      "matchNumber": 65,
+      "stage": "GROUP_STAGE",
+      "group": "H",
+      "date": "2026-06-27T00:00:00Z",
+      "homeTeam": {
+        "id": 130,
+        "name": "Cabo Verde",
+        "code": "CPV",
+        "flag": "🇨🇻",
+        "group": "H"
+      },
+      "awayTeam": {
+        "id": 131,
+        "name": "Saudi Arabia",
+        "code": "KSA",
+        "flag": "🇸🇦",
+        "group": "H"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 9,
+        "name": "NRG Stadium",
+        "city": "Houston",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Cabo Verde",
+        "awayTeam": "Saudi Arabia",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 66,
+      "matchNumber": 66,
+      "stage": "GROUP_STAGE",
+      "group": "H",
+      "date": "2026-06-27T00:00:00Z",
+      "homeTeam": {
+        "id": 132,
+        "name": "Uruguay",
+        "code": "URU",
+        "flag": "🇺🇾",
+        "group": "H"
+      },
+      "awayTeam": {
+        "id": 129,
+        "name": "Spain",
+        "code": "ESP",
+        "flag": "🇪🇸",
+        "group": "H"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ESP",
+        "draw": false
+      },
+      "venue": {
+        "id": 2,
+        "name": "Estadio Akron",
+        "city": "Guadalajara",
+        "country": "Mexico"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Uruguay",
+        "awayTeam": "Spain",
+        "homeScore": 0,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 67,
+      "matchNumber": 67,
+      "stage": "GROUP_STAGE",
+      "group": "L",
+      "date": "2026-06-27T21:00:00Z",
+      "homeTeam": {
+        "id": 148,
+        "name": "Panama",
+        "code": "PAN",
+        "flag": "🇵🇦",
+        "group": "L"
+      },
+      "awayTeam": {
+        "id": 145,
+        "name": "England",
+        "code": "ENG",
+        "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "group": "L"
+      },
+      "score": {
+        "home": 0,
+        "away": 2
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ENG",
+        "draw": false
+      },
+      "venue": {
+        "id": 6,
+        "name": "MetLife Stadium",
+        "city": "East Rutherford (New York)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Panama",
+        "awayTeam": "England",
+        "homeScore": 0,
+        "awayScore": 2,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 68,
+      "matchNumber": 68,
+      "stage": "GROUP_STAGE",
+      "group": "L",
+      "date": "2026-06-27T21:00:00Z",
+      "homeTeam": {
+        "id": 146,
+        "name": "Croatia",
+        "code": "CRO",
+        "flag": "🇭🇷",
+        "group": "L"
+      },
+      "awayTeam": {
+        "id": 147,
+        "name": "Ghana",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "group": "L"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "CRO",
+        "draw": false
+      },
+      "venue": {
+        "id": 11,
+        "name": "Lincoln Financial Field",
+        "city": "Philadelphia",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Croatia",
+        "awayTeam": "Ghana",
+        "homeScore": 2,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 69,
+      "matchNumber": 69,
+      "stage": "GROUP_STAGE",
+      "group": "J",
+      "date": "2026-06-28T02:00:00Z",
+      "homeTeam": {
+        "id": 138,
+        "name": "Algeria",
+        "code": "ALG",
+        "flag": "🇩🇿",
+        "group": "J"
+      },
+      "awayTeam": {
+        "id": 139,
+        "name": "Austria",
+        "code": "AUT",
+        "flag": "🇦🇹",
+        "group": "J"
+      },
+      "score": {
+        "home": 3,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 16,
+        "name": "Arrowhead Stadium",
+        "city": "Kansas City",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Algeria",
+        "awayTeam": "Austria",
+        "homeScore": 3,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 70,
+      "matchNumber": 70,
+      "stage": "GROUP_STAGE",
+      "group": "J",
+      "date": "2026-06-28T02:00:00Z",
+      "homeTeam": {
+        "id": 140,
+        "name": "Jordan",
+        "code": "JOR",
+        "flag": "🇯🇴",
+        "group": "J"
+      },
+      "awayTeam": {
+        "id": 137,
+        "name": "Argentina",
+        "code": "ARG",
+        "flag": "🇦🇷",
+        "group": "J"
+      },
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "ARG",
+        "draw": false
+      },
+      "venue": {
+        "id": 10,
+        "name": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Jordan",
+        "awayTeam": "Argentina",
+        "homeScore": 1,
+        "awayScore": 3,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 71,
+      "matchNumber": 71,
+      "stage": "GROUP_STAGE",
+      "group": "K",
+      "date": "2026-06-27T23:30:00Z",
+      "homeTeam": {
+        "id": 144,
+        "name": "Colombia",
+        "code": "COL",
+        "flag": "🇨🇴",
+        "group": "K"
+      },
+      "awayTeam": {
+        "id": 141,
+        "name": "Portugal",
+        "code": "POR",
+        "flag": "🇵🇹",
+        "group": "K"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": null,
+        "draw": true
+      },
+      "venue": {
+        "id": 15,
+        "name": "Hard Rock Stadium",
+        "city": "Miami",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Colombia",
+        "awayTeam": "Portugal",
+        "homeScore": 0,
+        "awayScore": 0,
+        "status": "FT"
+      }
+    },
+    {
+      "fixtureId": 72,
+      "matchNumber": 72,
+      "stage": "GROUP_STAGE",
+      "group": "K",
+      "date": "2026-06-27T23:30:00Z",
+      "homeTeam": {
+        "id": 142,
+        "name": "DR Congo",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "group": "K"
+      },
+      "awayTeam": {
+        "id": 143,
+        "name": "Uzbekistan",
+        "code": "UZB",
+        "flag": "🇺🇿",
+        "group": "K"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "status": "FINISHED",
+      "result": {
+        "winnerTeamCode": "COD",
+        "draw": false
+      },
+      "venue": {
+        "id": 13,
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "country": "United States"
+      },
+      "discipline": {
+        "homeYellowCards": null,
+        "awayYellowCards": null,
+        "homeSecondYellowRedCards": null,
+        "awaySecondYellowRedCards": null,
+        "homeStraightRedCards": null,
+        "awayStraightRedCards": null,
+        "notes": "Not included in provided FIFA/source JSON. Leave null unless you add official fair-play data."
+      },
+      "sourceValue": {
+        "homeTeam": "Congo DR",
+        "awayTeam": "Uzbekistan",
+        "homeScore": 3,
+        "awayScore": 1,
+        "status": "FT"
+      }
+    }
+  ],
+  "groupStandings": {
+    "A": [
+      {
+        "team": {
+          "id": 101,
+          "name": "Mexico",
+          "code": "MEX",
+          "flag": "🇲🇽",
+          "group": "A"
+        },
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 6,
+        "goalsAgainst": 0,
+        "goalDifference": 6,
+        "points": 9,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 102,
+          "name": "South Africa",
+          "code": "RSA",
+          "flag": "🇿🇦",
+          "group": "A"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 3,
+        "goalDifference": -1,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 103,
+          "name": "Korea Republic",
+          "code": "KOR",
+          "flag": "🇰🇷",
+          "group": "A"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 2,
+        "goalsAgainst": 3,
+        "goalDifference": -1,
+        "points": 3,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 104,
+          "name": "Czechia",
+          "code": "CZE",
+          "flag": "🇨🇿",
+          "group": "A"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2,
+        "goalsFor": 2,
+        "goalsAgainst": 6,
+        "goalDifference": -4,
+        "points": 1,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "B": [
+      {
+        "team": {
+          "id": 108,
+          "name": "Switzerland",
+          "code": "SUI",
+          "flag": "🇨🇭",
+          "group": "B"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 7,
+        "goalsAgainst": 3,
+        "goalDifference": 4,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 105,
+          "name": "Canada",
+          "code": "CAN",
+          "flag": "🇨🇦",
+          "group": "B"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 8,
+        "goalsAgainst": 3,
+        "goalDifference": 5,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 106,
+          "name": "Bosnia and Herzegovina",
+          "code": "BIH",
+          "flag": "🇧🇦",
+          "group": "B"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 5,
+        "goalsAgainst": 6,
+        "goalDifference": -1,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 107,
+          "name": "Qatar",
+          "code": "QAT",
+          "flag": "🇶🇦",
+          "group": "B"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2,
+        "goalsFor": 2,
+        "goalsAgainst": 10,
+        "goalDifference": -8,
+        "points": 1,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "C": [
+      {
+        "team": {
+          "id": 109,
+          "name": "Brazil",
+          "code": "BRA",
+          "flag": "🇧🇷",
+          "group": "C"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 7,
+        "goalsAgainst": 1,
+        "goalDifference": 6,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 110,
+          "name": "Morocco",
+          "code": "MAR",
+          "flag": "🇲🇦",
+          "group": "C"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 6,
+        "goalsAgainst": 3,
+        "goalDifference": 3,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 112,
+          "name": "Scotland",
+          "code": "SCO",
+          "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+          "group": "C"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 1,
+        "goalsAgainst": 4,
+        "goalDifference": -3,
+        "points": 3,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 111,
+          "name": "Haiti",
+          "code": "HAI",
+          "flag": "🇭🇹",
+          "group": "C"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 2,
+        "goalsAgainst": 8,
+        "goalDifference": -6,
+        "points": 0,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "D": [
+      {
+        "team": {
+          "id": 113,
+          "name": "USA",
+          "code": "USA",
+          "flag": "🇺🇸",
+          "group": "D"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 8,
+        "goalsAgainst": 4,
+        "goalDifference": 4,
+        "points": 6,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 115,
+          "name": "Australia",
+          "code": "AUS",
+          "flag": "🇦🇺",
+          "group": "D"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDifference": 0,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 114,
+          "name": "Paraguay",
+          "code": "PAR",
+          "flag": "🇵🇾",
+          "group": "D"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 4,
+        "goalDifference": -2,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 116,
+          "name": "Turkiye",
+          "code": "TUR",
+          "flag": "🇹🇷",
+          "group": "D"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 3,
+        "goalsAgainst": 5,
+        "goalDifference": -2,
+        "points": 3,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "E": [
+      {
+        "team": {
+          "id": 117,
+          "name": "Germany",
+          "code": "GER",
+          "flag": "🇩🇪",
+          "group": "E"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 10,
+        "goalsAgainst": 4,
+        "goalDifference": 6,
+        "points": 6,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 119,
+          "name": "Cote d’Ivoire",
+          "code": "CIV",
+          "flag": "🇨🇮",
+          "group": "E"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 4,
+        "goalsAgainst": 2,
+        "goalDifference": 2,
+        "points": 6,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 120,
+          "name": "Ecuador",
+          "code": "ECU",
+          "flag": "🇪🇨",
+          "group": "E"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDifference": 0,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 118,
+          "name": "Curacao",
+          "code": "CUW",
+          "flag": "🇨🇼",
+          "group": "E"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2,
+        "goalsFor": 1,
+        "goalsAgainst": 9,
+        "goalDifference": -8,
+        "points": 1,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "F": [
+      {
+        "team": {
+          "id": 121,
+          "name": "Netherlands",
+          "code": "NED",
+          "flag": "🇳🇱",
+          "group": "F"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 10,
+        "goalsAgainst": 4,
+        "goalDifference": 6,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 122,
+          "name": "Japan",
+          "code": "JPN",
+          "flag": "🇯🇵",
+          "group": "F"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 7,
+        "goalsAgainst": 3,
+        "goalDifference": 4,
+        "points": 5,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 123,
+          "name": "Sweden",
+          "code": "SWE",
+          "flag": "🇸🇪",
+          "group": "F"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 7,
+        "goalsAgainst": 7,
+        "goalDifference": 0,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 124,
+          "name": "Tunisia",
+          "code": "TUN",
+          "flag": "🇹🇳",
+          "group": "F"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 2,
+        "goalsAgainst": 12,
+        "goalDifference": -10,
+        "points": 0,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "G": [
+      {
+        "team": {
+          "id": 125,
+          "name": "Belgium",
+          "code": "BEL",
+          "flag": "🇧🇪",
+          "group": "G"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 6,
+        "goalsAgainst": 2,
+        "goalDifference": 4,
+        "points": 5,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 126,
+          "name": "Egypt",
+          "code": "EGY",
+          "flag": "🇪🇬",
+          "group": "G"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 5,
+        "goalsAgainst": 3,
+        "goalDifference": 2,
+        "points": 5,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 127,
+          "name": "Iran",
+          "code": "IRN",
+          "flag": "🇮🇷",
+          "group": "G"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 3,
+        "lost": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 3,
+        "goalDifference": 0,
+        "points": 3,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 128,
+          "name": "New Zealand",
+          "code": "NZL",
+          "flag": "🇳🇿",
+          "group": "G"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2,
+        "goalsFor": 4,
+        "goalsAgainst": 10,
+        "goalDifference": -6,
+        "points": 1,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "H": [
+      {
+        "team": {
+          "id": 129,
+          "name": "Spain",
+          "code": "ESP",
+          "flag": "🇪🇸",
+          "group": "H"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 5,
+        "goalsAgainst": 0,
+        "goalDifference": 5,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 130,
+          "name": "Cabo Verde",
+          "code": "CPV",
+          "flag": "🇨🇻",
+          "group": "H"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 3,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDifference": 0,
+        "points": 3,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 132,
+          "name": "Uruguay",
+          "code": "URU",
+          "flag": "🇺🇾",
+          "group": "H"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1,
+        "goalsFor": 3,
+        "goalsAgainst": 4,
+        "goalDifference": -1,
+        "points": 2,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 131,
+          "name": "Saudi Arabia",
+          "code": "KSA",
+          "flag": "🇸🇦",
+          "group": "H"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 5,
+        "goalDifference": -4,
+        "points": 2,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "I": [
+      {
+        "team": {
+          "id": 133,
+          "name": "France",
+          "code": "FRA",
+          "flag": "🇫🇷",
+          "group": "I"
+        },
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 10,
+        "goalsAgainst": 2,
+        "goalDifference": 8,
+        "points": 9,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 136,
+          "name": "Norway",
+          "code": "NOR",
+          "flag": "🇳🇴",
+          "group": "I"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 8,
+        "goalsAgainst": 7,
+        "goalDifference": 1,
+        "points": 6,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 134,
+          "name": "Senegal",
+          "code": "SEN",
+          "flag": "🇸🇳",
+          "group": "I"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 8,
+        "goalsAgainst": 6,
+        "goalDifference": 2,
+        "points": 3,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 135,
+          "name": "Iraq",
+          "code": "IRQ",
+          "flag": "🇮🇶",
+          "group": "I"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 1,
+        "goalsAgainst": 12,
+        "goalDifference": -11,
+        "points": 0,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "J": [
+      {
+        "team": {
+          "id": 137,
+          "name": "Argentina",
+          "code": "ARG",
+          "flag": "🇦🇷",
+          "group": "J"
+        },
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 8,
+        "goalsAgainst": 1,
+        "goalDifference": 7,
+        "points": 9,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 139,
+          "name": "Austria",
+          "code": "AUT",
+          "flag": "🇦🇹",
+          "group": "J"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 6,
+        "goalsAgainst": 6,
+        "goalDifference": 0,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 138,
+          "name": "Algeria",
+          "code": "ALG",
+          "flag": "🇩🇿",
+          "group": "J"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 5,
+        "goalsAgainst": 7,
+        "goalDifference": -2,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 140,
+          "name": "Jordan",
+          "code": "JOR",
+          "flag": "🇯🇴",
+          "group": "J"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 3,
+        "goalsAgainst": 8,
+        "goalDifference": -5,
+        "points": 0,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "K": [
+      {
+        "team": {
+          "id": 144,
+          "name": "Colombia",
+          "code": "COL",
+          "flag": "🇨🇴",
+          "group": "K"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 4,
+        "goalsAgainst": 1,
+        "goalDifference": 3,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 141,
+          "name": "Portugal",
+          "code": "POR",
+          "flag": "🇵🇹",
+          "group": "K"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 6,
+        "goalsAgainst": 1,
+        "goalDifference": 5,
+        "points": 5,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 142,
+          "name": "DR Congo",
+          "code": "COD",
+          "flag": "🇨🇩",
+          "group": "K"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 4,
+        "goalsAgainst": 3,
+        "goalDifference": 1,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 143,
+          "name": "Uzbekistan",
+          "code": "UZB",
+          "flag": "🇺🇿",
+          "group": "K"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 2,
+        "goalsAgainst": 11,
+        "goalDifference": -9,
+        "points": 0,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ],
+    "L": [
+      {
+        "team": {
+          "id": 145,
+          "name": "England",
+          "code": "ENG",
+          "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+          "group": "L"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 6,
+        "goalsAgainst": 2,
+        "goalDifference": 4,
+        "points": 7,
+        "fairPlayPoints": null,
+        "rank": 1
+      },
+      {
+        "team": {
+          "id": 146,
+          "name": "Croatia",
+          "code": "CRO",
+          "flag": "🇭🇷",
+          "group": "L"
+        },
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 5,
+        "goalsAgainst": 5,
+        "goalDifference": 0,
+        "points": 6,
+        "fairPlayPoints": null,
+        "rank": 2
+      },
+      {
+        "team": {
+          "id": 147,
+          "name": "Ghana",
+          "code": "GHA",
+          "flag": "🇬🇭",
+          "group": "L"
+        },
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDifference": 0,
+        "points": 4,
+        "fairPlayPoints": null,
+        "rank": 3
+      },
+      {
+        "team": {
+          "id": 148,
+          "name": "Panama",
+          "code": "PAN",
+          "flag": "🇵🇦",
+          "group": "L"
+        },
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 0,
+        "goalsAgainst": 4,
+        "goalDifference": -4,
+        "points": 0,
+        "fairPlayPoints": null,
+        "rank": 4
+      }
+    ]
+  },
+  "thirdPlaceRanking": [
+    {
+      "group": "K",
+      "team": {
+        "id": 142,
+        "name": "DR Congo",
+        "code": "COD",
+        "flag": "🇨🇩",
+        "group": "K"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 3,
+      "goalDifference": 1,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 1
+    },
+    {
+      "group": "F",
+      "team": {
+        "id": 123,
+        "name": "Sweden",
+        "code": "SWE",
+        "flag": "🇸🇪",
+        "group": "F"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 7,
+      "goalsAgainst": 7,
+      "goalDifference": 0,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 2
+    },
+    {
+      "group": "L",
+      "team": {
+        "id": 147,
+        "name": "Ghana",
+        "code": "GHA",
+        "flag": "🇬🇭",
+        "group": "L"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 2,
+      "goalDifference": 0,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 3
+    },
+    {
+      "group": "E",
+      "team": {
+        "id": 120,
+        "name": "Ecuador",
+        "code": "ECU",
+        "flag": "🇪🇨",
+        "group": "E"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 2,
+      "goalDifference": 0,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 4
+    },
+    {
+      "group": "B",
+      "team": {
+        "id": 106,
+        "name": "Bosnia and Herzegovina",
+        "code": "BIH",
+        "flag": "🇧🇦",
+        "group": "B"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 5,
+      "goalsAgainst": 6,
+      "goalDifference": -1,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 5
+    },
+    {
+      "group": "J",
+      "team": {
+        "id": 138,
+        "name": "Algeria",
+        "code": "ALG",
+        "flag": "🇩🇿",
+        "group": "J"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 5,
+      "goalsAgainst": 7,
+      "goalDifference": -2,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 6
+    },
+    {
+      "group": "D",
+      "team": {
+        "id": 114,
+        "name": "Paraguay",
+        "code": "PAR",
+        "flag": "🇵🇾",
+        "group": "D"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 4,
+      "goalDifference": -2,
+      "points": 4,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 7
+    },
+    {
+      "group": "I",
+      "team": {
+        "id": 134,
+        "name": "Senegal",
+        "code": "SEN",
+        "flag": "🇸🇳",
+        "group": "I"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 8,
+      "goalsAgainst": 6,
+      "goalDifference": 2,
+      "points": 3,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 8
+    },
+    {
+      "group": "G",
+      "team": {
+        "id": 127,
+        "name": "Iran",
+        "code": "IRN",
+        "flag": "🇮🇷",
+        "group": "G"
+      },
+      "played": 3,
+      "won": 0,
+      "drawn": 3,
+      "lost": 0,
+      "goalsFor": 3,
+      "goalsAgainst": 3,
+      "goalDifference": 0,
+      "points": 3,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 9
+    },
+    {
+      "group": "A",
+      "team": {
+        "id": 103,
+        "name": "Korea Republic",
+        "code": "KOR",
+        "flag": "🇰🇷",
+        "group": "A"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 2,
+      "goalsAgainst": 3,
+      "goalDifference": -1,
+      "points": 3,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 10
+    },
+    {
+      "group": "C",
+      "team": {
+        "id": 112,
+        "name": "Scotland",
+        "code": "SCO",
+        "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "group": "C"
+      },
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 1,
+      "goalsAgainst": 4,
+      "goalDifference": -3,
+      "points": 3,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 11
+    },
+    {
+      "group": "H",
+      "team": {
+        "id": 132,
+        "name": "Uruguay",
+        "code": "URU",
+        "flag": "🇺🇾",
+        "group": "H"
+      },
+      "played": 3,
+      "won": 0,
+      "drawn": 2,
+      "lost": 1,
+      "goalsFor": 3,
+      "goalsAgainst": 4,
+      "goalDifference": -1,
+      "points": 2,
+      "fairPlayPoints": null,
+      "rank": 3,
+      "thirdPlaceRank": 12
+    }
+  ]
+}

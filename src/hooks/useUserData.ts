@@ -3,6 +3,7 @@ import type { MatchScore, MatchWatchStatus, MatchReminder, UserSettings } from '
 import {
   getAllScores,
   saveScore,
+  saveScores,
   deleteScore,
   getAllWatchStatus,
   toggleWatchStatus as toggleWatchStatusDB,
@@ -55,6 +56,15 @@ export function useUserData() {
     setScores((prev) => {
       const filtered = prev.filter((s) => s.fixtureId !== score.fixtureId);
       return [...filtered, score];
+    });
+  }, []);
+
+  const addScores = useCallback(async (newScores: MatchScore[]) => {
+    await saveScores(newScores);
+    setScores((prev) => {
+      const newFixtureIds = new Set(newScores.map((score) => score.fixtureId));
+      const preserved = prev.filter((score) => !newFixtureIds.has(score.fixtureId));
+      return [...preserved, ...newScores];
     });
   }, []);
 
@@ -116,6 +126,7 @@ export function useUserData() {
     settings,
     loading,
     addScore,
+    addScores,
     removeScore,
     getScoreForFixture,
     toggleWatchStatus,

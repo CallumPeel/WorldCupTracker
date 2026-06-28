@@ -4,6 +4,7 @@ import { ScheduleMatchCard } from '../components/ScheduleMatchCard';
 import { ScoreEntry } from '../components/ScoreEntry';
 import { useFixtures } from '../hooks/useFixtures';
 import { useUserData } from '../hooks/useUserData';
+import { fetchGroupStageResultScores } from '../utils/groupStageResults';
 import { getLocalDateFromKey, getLocalDateKey } from '../utils/timezone';
 import type { Fixture } from '../types';
 
@@ -28,6 +29,7 @@ export function Schedule() {
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
   const [showPastArchive, setShowPastArchive] = useState(false);
+  const [isFillingGroupStageScores, setIsFillingGroupStageScores] = useState(false);
   const [expandedPastDateKeys, setExpandedPastDateKeys] = useState<Set<string>>(new Set());
   const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
 
@@ -107,6 +109,34 @@ export function Schedule() {
     0
   );
   const pastArchiveUnwatchedCount = pastGroups.reduce((total, { unwatchedCount }) => total + unwatchedCount, 0);
+  const groupStageFixtures = fixtures.filter((fixture) => fixture.stage === 'GROUP_STAGE');
+  const groupStageFixtureIds = new Set(groupStageFixtures.map((fixture) => fixture.id));
+  const enteredGroupStageScoreCount = userData.scores.filter((score) => groupStageFixtureIds.has(score.fixtureId)).length;
+  const missingGroupStageScoreCount = Math.max(groupStageFixtures.length - enteredGroupStageScoreCount, 0);
+
+  const handleFillGroupStageScores = async () => {
+    const hasExistingGroupStageScores = enteredGroupStageScoreCount > 0;
+    const confirmationMessage = hasExistingGroupStageScores
+      ? `This will overwrite ${enteredGroupStageScoreCount} existing group-stage score${enteredGroupStageScoreCount === 1 ? '' : 's'} with the completed results. Continue?`
+      : 'Fill all completed group-stage scores from the results file?';
+
+    if (!confirm(confirmationMessage)) {
+      return;
+    }
+
+    setIsFillingGroupStageScores(true);
+
+    try {
+      const scores = await fetchGroupStageResultScores();
+      await userData.addScores(scores);
+      alert(`Added ${scores.length} group-stage scores.`);
+    } catch (error) {
+      console.error('Error filling group stage scores:', error);
+      alert(error instanceof Error ? error.message : 'Failed to fill group stage scores');
+    } finally {
+      setIsFillingGroupStageScores(false);
+    }
+  };
 
   const togglePastDate = (dateKey: string) => {
     setExpandedPastDateKeys((current) => {
@@ -208,6 +238,31 @@ export function Schedule() {
           </div>
         ) : (
           <>
+            {groupStageFixtures.length > 0 && (
+              <section className="mt-4 rounded-xl border border-primary/20 bg-gradient-to-br from-primary/10 via-dark-surface to-dark-surface p-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <div className="text-sm font-bold uppercase tracking-wide text-primary">Group stage results</div>
+                    <h2 className="mt-1 text-lg font-bold text-white">Fill all group-stage scores</h2>
+                    <p className="mt-1 text-sm text-gray-400">
+                      Use the completed results file to populate all {groupStageFixtures.length} group-stage matches.
+                      {missingGroupStageScoreCount > 0
+                        ? ` ${missingGroupStageScoreCount} still need scores.`
+                        : ' Your group-stage scores are already complete.'}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleFillGroupStageScores}
+                    disabled={isFillingGroupStageScores || userData.loading}
+                    className="btn-primary whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {isFillingGroupStageScores ? 'Filling scores...' : 'Fill group scores'}
+                  </button>
+                </div>
+              </section>
+            )}
+
             {pastGroups.length > 0 && (
               <section className="py-3 sm:py-4">
                 <button

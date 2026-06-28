@@ -56,6 +56,16 @@ export async function saveScore(score: MatchScore): Promise<void> {
   await db.put(STORES.SCORES, score);
 }
 
+export async function saveScores(scores: MatchScore[]): Promise<void> {
+  const db = await initDB();
+  const tx = db.transaction(STORES.SCORES, 'readwrite');
+
+  await Promise.all([
+    ...scores.map((score) => tx.store.put(score)),
+    tx.done,
+  ]);
+}
+
 export async function getScore(fixtureId: number): Promise<MatchScore | undefined> {
   const db = await initDB();
   return await db.get(STORES.SCORES, fixtureId);

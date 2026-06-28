@@ -1,5 +1,5 @@
 export const APP_VERSION = {
   "version": "0.0.0",
-  "buildTime": "2026-06-17T18:58:28.523Z",
-  "buildId": "0.0.0-2026-06-17T18:58:28.523Z"
+  "buildTime": "2026-06-28T07:18:10.391Z",
+  "buildId": "0.0.0-2026-06-28T07:18:10.391Z"
 } as const;
