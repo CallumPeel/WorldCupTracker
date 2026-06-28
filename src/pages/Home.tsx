@@ -11,6 +11,7 @@ import { formatCountdown, formatFullLocalDate, getFriendlyDateLabel, getLocalTim
 import { getGroupColor, getStageColor, getTeamColors } from '../utils/teamColors';
 import { getTeamDisplayName, getTeamFullName } from '../utils/teamDisplay';
 import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
+import { resolveFixtures } from '../utils/fixtureResolution';
 import type { Fixture } from '../types';
 
 export function Home() {
@@ -18,11 +19,12 @@ export function Home() {
   const userData = useUserData();
   const [selectedFixture, setSelectedFixture] = useState<Fixture | null>(null);
   const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
+  const resolvedFixtures = useMemo(() => resolveFixtures(fixtures, userData.scores), [fixtures, userData.scores]);
 
   const { nextMatch, upcomingFive } = useMemo(() => {
     const now = new Date();
 
-    const upcomingUnwatched = fixtures
+    const upcomingUnwatched = resolvedFixtures
       .filter((fixture) => {
         const fixtureDate = new Date(fixture.date);
         const hasScore = userData.getScoreForFixture(fixture.id);
@@ -34,7 +36,7 @@ export function Home() {
       nextMatch: upcomingUnwatched[0] || null,
       upcomingFive: upcomingUnwatched.slice(0, 5),
     };
-  }, [fixtures, userData]);
+  }, [resolvedFixtures, userData]);
 
   if (loading && !userData.loading) {
     return (

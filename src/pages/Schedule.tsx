@@ -6,6 +6,7 @@ import { useFixtures } from '../hooks/useFixtures';
 import { useUserData } from '../hooks/useUserData';
 import { fetchGroupStageResultScores } from '../utils/groupStageResults';
 import { getLocalDateFromKey, getLocalDateKey } from '../utils/timezone';
+import { resolveFixtures } from '../utils/fixtureResolution';
 import type { Fixture } from '../types';
 
 interface ScheduleDateGroup {
@@ -32,12 +33,13 @@ export function Schedule() {
   const [isFillingGroupStageScores, setIsFillingGroupStageScores] = useState(false);
   const [expandedPastDateKeys, setExpandedPastDateKeys] = useState<Set<string>>(new Set());
   const favoriteTeamCodes = userData.settings?.favoriteTeamCodes ?? [];
+  const resolvedFixtures = useMemo(() => resolveFixtures(fixtures, userData.scores), [fixtures, userData.scores]);
 
   // Group fixtures by date
   const groupedByDate = useMemo(() => {
     const groups = new Map<string, Fixture[]>();
     
-    fixtures.forEach((fixture) => {
+    resolvedFixtures.forEach((fixture) => {
       // Use the viewer's local calendar date as key (YYYY-MM-DD) to match displayed match dates.
       const dateKey = getLocalDateKey(fixture.date);
       
@@ -55,7 +57,7 @@ export function Schedule() {
         matches: matches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()),
       }))
       .sort((a, b) => a.date.getTime() - b.date.getTime());
-  }, [fixtures]);
+  }, [resolvedFixtures]);
 
   if (loading && !userData.loading) {
     return (

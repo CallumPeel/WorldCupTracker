@@ -3,6 +3,7 @@ import { useCountdown } from '../hooks/useCountdown';
 import { formatCountdown } from '../utils/timezone';
 import { CountryFlag } from './CountryFlag';
 import { getFavoriteTeamAccent, getMixedFavoriteTeamAccent } from '../utils/favoriteTeams';
+import { getTeamDisplayName } from '../utils/teamDisplay';
 
 interface UltraCompactMatchRowProps {
   fixture: Fixture;
@@ -21,6 +22,8 @@ export function UltraCompactMatchRow({ fixture, favoriteTeamCodes = [], onClick 
       : favoriteTeams[0]
         ? getFavoriteTeamAccent(favoriteTeams[0].code, favoriteTeams[0].name)
         : undefined;
+  const homeName = getTeamDisplayName(fixture.homeTeam, 'compact');
+  const awayName = getTeamDisplayName(fixture.awayTeam, 'compact');
 
   return (
     <button
@@ -60,9 +63,9 @@ export function UltraCompactMatchRow({ fixture, favoriteTeamCodes = [], onClick 
         {/* Teams */}
         <div className="flex items-center gap-1.5 flex-1 min-w-0">
           <CountryFlag countryCode={fixture.homeTeam.code} size="sm" className="flex-shrink-0" />
-          <span className="font-semibold truncate">{fixture.homeTeam.code}</span>
+          <span className="font-semibold truncate">{homeName}</span>
           <span className="text-gray-500">vs</span>
-          <span className="font-semibold truncate">{fixture.awayTeam.code}</span>
+          <span className="font-semibold truncate">{awayName}</span>
           <CountryFlag countryCode={fixture.awayTeam.code} size="sm" className="flex-shrink-0" />
         </div>
 
